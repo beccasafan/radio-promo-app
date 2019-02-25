@@ -14,9 +14,19 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
         this.state = {};
     }
 
+    formatCountry(country: any) {
+        if (!country.id) {
+            return country.text;
+        }
+
+        return (
+            <span>{country.name} - {country.stations} stations</span>
+        );
+    }
+
     render() {
         return (
-            <Select2 data={this.props.countries} />
+            <Select2 data={this.props.countries} templateResult={this.formatCountry} />
         );
     }
 }

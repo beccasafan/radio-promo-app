@@ -223,9 +223,18 @@ function (_super) {
     return _this;
   }
 
+  CountryDropdown.prototype.formatCountry = function (country) {
+    if (!country.id) {
+      return country.text;
+    }
+
+    return React.createElement("span", null, country.name, " - ", country.stations, " stations");
+  };
+
   CountryDropdown.prototype.render = function () {
     return React.createElement(select2_1.Select2, {
-      data: this.props.countries
+      data: this.props.countries,
+      templateResult: this.formatCountry
     });
   };
 
