@@ -6,9 +6,38 @@ interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
     select2(options?: any): any;
 }
 
+
+class ArrayAdapter {
+    constructor($element: JQuery<HTMLElement>, options: select2.Options) { }
+    addOptions(data: select2.DataFormat[]) { }
+}
+interface JQuery<TElement = HTMLElement> {
+    find(arg: any): this;
+    remove(selector?: string): this;
+    append(...contents: Array<JQuery.htmlString | JQuery.TypeOrArray<JQuery.Node | JQuery<JQuery.Node>>>): this;
+}
+
+export class CustomDataAdapter extends ArrayAdapter {
+    $element: JQuery<HTMLElement>;
+    constructor($element: JQuery<HTMLElement>, options: select2.Options) {
+        super($element, options);
+        this.$element = $element;
+    }
+
+    updateOptions(data: select2.DataFormat[]) {
+        this.$element.find("option").remove();
+        data.map(d => new Option(d.text, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
+    }
+
+}
+
 export class Select2 extends React.Component<any, object> {
     private el: HTMLElement;
     private $el: JQuery<HTMLElement>;
+
+    static defaultProps = {
+        dataAdapter: CustomDataAdapter
+    }
 
     constructor(props: any) {
         super(props);
@@ -26,6 +55,7 @@ export class Select2 extends React.Component<any, object> {
 
     componentDidUpdate(prevProps: any) {
         if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+            ($(this.el).data('select2') as any).dataAdapter.updateOptions(this.props);
             $(this.el).trigger("change");
         }
     }

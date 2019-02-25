@@ -362,6 +362,45 @@ var React = __webpack_require__(/*! react */ "react");
 
 var $ = __webpack_require__(/*! jquery */ "jquery");
 
+var ArrayAdapter =
+/** @class */
+function () {
+  function ArrayAdapter($element, options) {}
+
+  ArrayAdapter.prototype.addOptions = function (data) {};
+
+  return ArrayAdapter;
+}();
+
+var CustomDataAdapter =
+/** @class */
+function (_super) {
+  __extends(CustomDataAdapter, _super);
+
+  function CustomDataAdapter($element, options) {
+    var _this = _super.call(this, $element, options) || this;
+
+    _this.$element = $element;
+    return _this;
+  }
+
+  CustomDataAdapter.prototype.updateOptions = function (data) {
+    var _this = this;
+
+    this.$element.find("option").remove();
+    data.map(function (d) {
+      return new Option(d.text, d.id.toString(), null, d.selected);
+    }).forEach(function (d) {
+      return _this.$element.append(d);
+    });
+    ;
+  };
+
+  return CustomDataAdapter;
+}(ArrayAdapter);
+
+exports.CustomDataAdapter = CustomDataAdapter;
+
 var Select2 =
 /** @class */
 function (_super) {
@@ -385,6 +424,7 @@ function (_super) {
 
   Select2.prototype.componentDidUpdate = function (prevProps) {
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      $(this.el).data('select2').dataAdapter.updateOptions(this.props);
       $(this.el).trigger("change");
     }
   };
@@ -400,6 +440,9 @@ function (_super) {
     }));
   };
 
+  Select2.defaultProps = {
+    dataAdapter: CustomDataAdapter
+  };
   return Select2;
 }(React.Component);
 
