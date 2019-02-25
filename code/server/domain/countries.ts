@@ -15,7 +15,7 @@ export class Countries {
             counts[s.countryId] = (counts[s.countryId] || 0) + 1;
             return counts;
         }, {});
-        return countries.map(c => Object.assign({}, c, { stations: countByCountry[c.id] || 0 }));
+        return countries.map(c => Object.assign({}, c, { stations: countByCountry[c.id] || 0 }).filter(c => c.stations > 0));
     }
 
     public static load(): Country[] {
