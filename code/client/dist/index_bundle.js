@@ -305,7 +305,7 @@ ReactDOM.render(React.createElement(list_1.Countries, null), document.getElement
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"card-overlay":"card-overlay","cardOverlay":"card-overlay","test":"test"};
+module.exports = {"card-img-overlay":"card-img-overlay","cardImgOverlay":"card-img-overlay","test":"test"};
 
 /***/ }),
 
