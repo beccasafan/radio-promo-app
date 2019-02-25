@@ -17,26 +17,27 @@ interface JQuery<TElement = HTMLElement> {
     append(...contents: Array<JQuery.htmlString | JQuery.TypeOrArray<JQuery.Node | JQuery<JQuery.Node>>>): this;
 }
 
-export class CustomDataAdapter extends ArrayAdapter {
-    $element: JQuery<HTMLElement>;
-    constructor($element: JQuery<HTMLElement>, options: select2.Options) {
-        super($element, options);
-        this.$element = $element;
-    }
+(($.fn.select2.amd as any).define('select2/data/customDataAdapter', ['select2/data/array'], function (ArrayAdapter: typeof Function) {
+    class CustomDataAdapter extends ArrayAdapter {
+        $element: JQuery<HTMLElement>;
+        constructor($element: any, options: any) {
+            super($element, options);
+            this.$element = $element;
+        }
 
-    updateOptions(data: select2.DataFormat[]) {
-        this.$element.find("option").remove();
-        data.map(d => new Option(d.text, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
+        updateOptions(data: select2.DataFormat[]) {
+            this.$element.find("option").remove();
+            data.map(d => new Option(d.text, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
+        }
     }
-
-}
+}));
 
 export class Select2 extends React.Component<any, object> {
     private el: HTMLElement;
     private $el: JQuery<HTMLElement>;
 
-    static defaultProps = {
-        dataAdapter: CustomDataAdapter
+    public static defaultProps = {
+        dataAdapter: $.fn.select2.amd.require("select2/data/customDataAdapter")
     }
 
     constructor(props: any) {
@@ -68,3 +69,4 @@ export class Select2 extends React.Component<any, object> {
         )
     }
 }
+

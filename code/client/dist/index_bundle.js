@@ -372,34 +372,34 @@ function () {
   return ArrayAdapter;
 }();
 
-var CustomDataAdapter =
-/** @class */
-function (_super) {
-  __extends(CustomDataAdapter, _super);
+$.fn.select2.amd.define('select2/data/customDataAdapter', ['select2/data/array'], function (ArrayAdapter) {
+  var CustomDataAdapter =
+  /** @class */
+  function (_super) {
+    __extends(CustomDataAdapter, _super);
 
-  function CustomDataAdapter($element, options) {
-    var _this = _super.call(this, $element, options) || this;
+    function CustomDataAdapter($element, options) {
+      var _this = _super.call(this, $element, options) || this;
 
-    _this.$element = $element;
-    return _this;
-  }
+      _this.$element = $element;
+      return _this;
+    }
 
-  CustomDataAdapter.prototype.updateOptions = function (data) {
-    var _this = this;
+    CustomDataAdapter.prototype.updateOptions = function (data) {
+      var _this = this;
 
-    this.$element.find("option").remove();
-    data.map(function (d) {
-      return new Option(d.text, d.id.toString(), null, d.selected);
-    }).forEach(function (d) {
-      return _this.$element.append(d);
-    });
-    ;
-  };
+      this.$element.find("option").remove();
+      data.map(function (d) {
+        return new Option(d.text, d.id.toString(), null, d.selected);
+      }).forEach(function (d) {
+        return _this.$element.append(d);
+      });
+      ;
+    };
 
-  return CustomDataAdapter;
-}(ArrayAdapter);
-
-exports.CustomDataAdapter = CustomDataAdapter;
+    return CustomDataAdapter;
+  }(ArrayAdapter);
+});
 
 var Select2 =
 /** @class */
@@ -441,7 +441,7 @@ function (_super) {
   };
 
   Select2.defaultProps = {
-    dataAdapter: CustomDataAdapter
+    dataAdapter: $.fn.select2.amd.require("select2/data/customDataAdapter")
   };
   return Select2;
 }(React.Component);
