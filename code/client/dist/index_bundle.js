@@ -414,6 +414,7 @@ function (_super) {
   }
 
   Select2.prototype.componentDidMount = function () {
+    console.log("did mount");
     this.$el = $(this.el);
     this.$el.select2(this.props);
   };
@@ -423,6 +424,8 @@ function (_super) {
   };
 
   Select2.prototype.componentDidUpdate = function (prevProps) {
+    console.log("did update", $($(this.el).data("select2")));
+
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       $(this.el).data('select2').dataAdapter.updateOptions(this.props);
       $(this.el).trigger("change");
