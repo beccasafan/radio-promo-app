@@ -374,6 +374,12 @@ function (_super) {
     this.$el.select2('destroy');
   };
 
+  Select2.prototype.componentDidUpdate = function (prevProps) {
+    if (prevProps.children !== this.props.children) {
+      $(this.el).trigger("change");
+    }
+  };
+
   Select2.prototype.render = function () {
     var _this = this;
 

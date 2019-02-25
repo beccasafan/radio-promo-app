@@ -104,7 +104,7 @@ if (typeof Object.assign != 'function') {
   });
 }
 
-if (!Array.prototype.filter){
+/*if (!Array.prototype.filter){
   Array.prototype.filter = function(func: any, thisArg: any) {
     'use strict';
     if ( ! ((typeof func === 'function') && this) )
@@ -137,4 +137,4 @@ if (!Array.prototype.filter){
     res.length = c; // shrink down array to proper size
     return res;
   };
-}
+}*/
