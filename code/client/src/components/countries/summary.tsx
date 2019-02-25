@@ -29,7 +29,7 @@ export class Summary extends React.Component<SummaryProps, object> {
                     <div className="card-img-overlay">
                         <h5 className="card-title">{this.props.country.name}</h5>
                         <p className="card-text">{this.props.country.stations} stations</p>
-                        <a href="#" className={classNames("btn", "btn-primary", styles.test)}>View</a>
+                        <a href="#" className={classNames("btn", "btn-primary")}>View</a>
                     </div>
                 </div>
             </div>

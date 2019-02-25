@@ -220,10 +220,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var React = __webpack_require__(/*! react */ "react"); //import "../../styles/app.scss";
-
-
-var styles = __webpack_require__(/*! ./../../styles/app.scss */ "./code/client/src/styles/app.scss");
+var React = __webpack_require__(/*! react */ "react");
 
 var classnames_1 = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 
@@ -262,7 +259,7 @@ function (_super) {
       className: "card-text"
     }, this.props.country.stations, " stations"), React.createElement("a", {
       href: "#",
-      className: classnames_1.default("btn", "btn-primary", styles.test)
+      className: classnames_1.default("btn", "btn-primary")
     }, "View"))));
   };
 
@@ -294,18 +291,6 @@ var ReactDOM = __webpack_require__(/*! react-dom */ "react-dom");
 var list_1 = __webpack_require__(/*! ./components/countries/list */ "./code/client/src/components/countries/list.tsx");
 
 ReactDOM.render(React.createElement(list_1.Countries, null), document.getElementById("root"));
-
-/***/ }),
-
-/***/ "./code/client/src/styles/app.scss":
-/*!*****************************************!*\
-  !*** ./code/client/src/styles/app.scss ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-module.exports = {"card-img-overlay":"card-img-overlay","cardImgOverlay":"card-img-overlay","test":"test"};
 
 /***/ }),
 
