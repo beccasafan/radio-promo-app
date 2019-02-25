@@ -25,7 +25,7 @@ export class Select2 extends React.Component<any, object> {
     }
 
     componentDidUpdate(prevProps: any) {
-        if (prevProps.children !== this.props.children) {
+        if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
             $(this.el).trigger("change");
         }
     }

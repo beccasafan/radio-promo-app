@@ -375,7 +375,7 @@ function (_super) {
   };
 
   Select2.prototype.componentDidUpdate = function (prevProps) {
-    if (prevProps.children !== this.props.children) {
+    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       $(this.el).trigger("change");
     }
   };
