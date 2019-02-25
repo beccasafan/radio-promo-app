@@ -87,7 +87,7 @@ module.exports = {
                             modules: true,
                             namedExport: true,
                             camelCase: true,
-                            localIdentName: '[name]_[local][hash:base64:5]',
+                            localIdentName: '[local]', //'[name]_[local][hash:base64:5]',
                             banner: "// *** Generated File - Do not Edit ***"
                         }
                     },
@@ -96,8 +96,9 @@ module.exports = {
                         loader: "sass-loader",
                         options:
                         {
+                            localIdenTName: '[local]',
                             sourceMap: true,
-                            modules: true
+                            modules: false
                         }
                     }
                 ]
