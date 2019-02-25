@@ -234,7 +234,8 @@ function (_super) {
   CountryDropdown.prototype.render = function () {
     return React.createElement(select2_1.Select2, {
       data: this.props.countries,
-      templateResult: this.formatCountry
+      templateResult: this.formatCountry,
+      dataAdapter: $.fn.select2.amd.require("select2/data/customDataAdapter")
     });
   };
 
@@ -443,9 +444,6 @@ function (_super) {
     }));
   };
 
-  Select2.defaultProps = {
-    dataAdapter: $.fn.select2.amd.require("select2/data/customDataAdapter")
-  };
   return Select2;
 }(React.Component);
 

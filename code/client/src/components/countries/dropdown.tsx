@@ -26,7 +26,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
 
     render() {
         return (
-            <Select2 data={this.props.countries} templateResult={this.formatCountry} />
+            <Select2 data={this.props.countries} templateResult={this.formatCountry} dataAdapter={$.fn.select2.amd.require("select2/data/customDataAdapter")} />
         );
     }
 }

@@ -36,10 +36,6 @@ export class Select2 extends React.Component<any, object> {
     private el: HTMLElement;
     private $el: JQuery<HTMLElement>;
 
-    public static defaultProps = {
-        dataAdapter: $.fn.select2.amd.require("select2/data/customDataAdapter")
-    }
-
     constructor(props: any) {
         super(props);
         this.state = {};
@@ -48,6 +44,7 @@ export class Select2 extends React.Component<any, object> {
     componentDidMount() {
         console.log("did mount");
         this.$el = $(this.el);
+        
         this.$el.select2(this.props);
     }
 
