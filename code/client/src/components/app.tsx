@@ -41,7 +41,7 @@ export class App extends React.Component<object, AppState> {
         return (
             <div>
                 <Intro />
-                {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} />}
+                {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected.bind(this)} />}
 
                 {this.state.selectedCountry != null && <Stations stations={this.state.stations} />}
             </div>
