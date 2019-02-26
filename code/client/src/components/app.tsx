@@ -25,7 +25,8 @@ export class App extends React.Component<object, AppState> {
 
     componentDidMount() {
         google.script.run.withSuccessHandler((data: CountrySummary[]) => {
-            this.setState({ countries: data, selectedCountry: data.find(c => c.code === "US") });
+            this.setState({ countries: data });
+            this.countrySelected(data.find(c => c.code === "US"));
         }).getCountrySummaries();
     }
 
