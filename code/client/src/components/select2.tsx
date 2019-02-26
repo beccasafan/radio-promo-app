@@ -25,9 +25,9 @@ interface JQuery<TElement = HTMLElement> {
             this.$element = $element;
         }
 
-        updateOptions(data: select2.DataFormat[]) {
+        updateOptions(data: { data: select2.DataFormat[] }) {
             this.$element.find("option").remove();
-            data.map(d => new Option(d.text, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
+            data.data.map((d: any) => new Option(d.name, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
         }
     }
 

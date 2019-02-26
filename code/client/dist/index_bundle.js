@@ -393,8 +393,8 @@ $.fn.select2.amd.define('select2/data/customDataAdapter', ['select2/data/array']
       var _this = this;
 
       this.$element.find("option").remove();
-      data.map(function (d) {
-        return new Option(d.text, d.id.toString(), null, d.selected);
+      data.data.map(function (d) {
+        return new Option(d.name, d.id.toString(), null, d.selected);
       }).forEach(function (d) {
         return _this.$element.append(d);
       });
