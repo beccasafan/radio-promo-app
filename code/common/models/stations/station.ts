@@ -1,4 +1,4 @@
-import { Util } from "./../../common/util/util";
+import { Util } from "../../util/util";
 
 export class Station {
     public id: string;

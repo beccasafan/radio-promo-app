@@ -1,19 +1,22 @@
 import * as React from 'react';
 import { Select2 } from './../select2';
-import { CountrySummary } from '../../../../common/models/countrySummary';
+import { CountrySummary } from '../../../../common/models/countries/countrySummary';
 import * as ReactDOMServer from 'react-dom/server';
 import * as styles from "./../../styles/country.scss";
 
 export interface CountryDropdownProps {
     countries: CountrySummary[];
+    onChange: (country: CountrySummary) => void;
 }
 export interface CountryDropdownState {
-
+    selectedCountry: CountrySummary;
 }
 export class CountryDropdown extends React.Component<CountryDropdownProps, CountryDropdownState> {
     constructor(props: CountryDropdownProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            selectedCountry: null
+        };
     }
 
     formatCountry(country: CountrySummary) {
@@ -52,8 +55,9 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
         ));
     }
 
-    countrySelected(country: CountrySummary) {
-        console.log("Country Selected", country);
+    countrySelected(e: any) {
+        var country = e.params.data as CountrySummary;
+        this.props.onChange(country);
     }
 
     render() {

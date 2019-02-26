@@ -1,15 +1,16 @@
 
 import * as React from 'react';
 import { Util } from "../../../../common/util/util";
-import { Station } from "../../../../common/models/station";
+import { Summary } from "./summary";
+import { StationSummary } from '../../../../common/models/stations/stationSummary';
 
 declare var google: any;
 
 export interface StationsProps {
-    stations?: Station[]
+    stations?: StationSummary[]
 };
 export interface StationsState {
-    stations: Station[];
+    stations: StationSummary[];
 }
 
 export class Stations extends React.Component<StationsProps, StationsState> {
@@ -19,19 +20,27 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     componentDidMount() {
-        google.script.run.withSuccessHandler((data: Station[]) => {
+        google.script.run.withSuccessHandler((data: StationSummary[]) => {
             this.setState({ stations: data });
         }).getAllStations();
     }
 
     render() {
-        if (Util.isEmpty(this.state.stations)) {
+        if (this.props.stations == null) {
             return (
                 <div>Loading stations...</div>
             );
         }
         return (
-            <div>There are {this.state.stations.length} stations</div>
+            <div>
+                <div>There are {this.props.stations.length} stations</div>
+
+                {this.props.stations.map(s => 
+                    <div>
+                        <Summary station={s} />
+                    </div>
+                )}
+            </div>
         );
     }
 }

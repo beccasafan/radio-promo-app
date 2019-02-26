@@ -1,8 +1,8 @@
-///<reference path="../../common/models/station.ts" />
+///<reference path="../../common/models/stations/station.ts" />
 ///<reference path="../util/cache.ts" />
 ///<reference path="../util/constants.ts" />
 
-import { Station } from "./../../common/models/station";
+import { Station } from "../../common/models/stations/station";
 
 export class Stations {
     public static get(): Station[] {

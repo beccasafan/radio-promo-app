@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { Station }  from "../../../../common/models/station";
+import { StationSummary }  from "../../../../common/models/stations/stationSummary";
 import { Util } from '../../../../common/util/util';
 
-export class StationSummary extends React.Component<object, Station> {
-    constructor(props: object) {
+export interface StationSummaryProps {
+    station: StationSummary;
+}
+export interface StationSummaryState {
+
+}
+
+export class Summary extends React.Component<StationSummaryProps, StationSummaryState> {
+    constructor(props: StationSummaryProps) {
         super(props);
-        this.state = null;
+        this.state = {};
     }
 
     render() {
-        if (Util.isEmpty(this.state)) {
+        if (Util.isEmpty(this.props)) {
             return (
                 <div>Loading station...</div>
             );
@@ -17,7 +24,7 @@ export class StationSummary extends React.Component<object, Station> {
 
         return (
             <div className="station-summary">
-                {this.state.name}
+                {this.props.station.name}
             </div>
         )
     }

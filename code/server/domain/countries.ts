@@ -1,5 +1,5 @@
-import { Country } from "./../../common/models/country";
-import { CountrySummary} from "./../../common/models/countrySummary";
+import { Country } from "../../common/models/countries/country";
+import { CountrySummary} from "../../common/models/countries/countrySummary";
 import { Stations } from "./stations";
 
 export class Countries {
@@ -9,13 +9,11 @@ export class Countries {
 
     public static summarize(): CountrySummary[] {
         var countries = Countries.get();
-        var stations = Stations.get();
-
-        var countByCountry = stations.reduce((counts, s) => {
-            counts[s.countryId] = (counts[s.countryId] || 0) + 1;
-            return counts;
-        }, {});
-        return countries.map(c => Object.assign({}, c, { stations: countByCountry[c.id] || 0 })).filter(c => c.stations > 0);
+        
+        return countries.map(c => { 
+            var stations = Stations.getByCountry(c.id);
+            return Object.assign({}, c, { stations: (stations != null ? stations.length : 0) || 0 })
+        }).filter(c => c.stations > 0);
     }
 
     public static load(): Country[] {

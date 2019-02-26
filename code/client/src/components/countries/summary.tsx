@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { Util } from "../../../../common/util/util";
-import { CountrySummary } from "../../../../common/models/countrySummary";
+import { CountrySummary } from "../../../../common/models/countries/countrySummary";
 //import "../../styles/app.scss";
 import * as styles from './../../styles/app.scss';
 import classNames from 'classnames';

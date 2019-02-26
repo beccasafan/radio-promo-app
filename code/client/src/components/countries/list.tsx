@@ -1,9 +1,9 @@
 
 import * as React from 'react';
 import { Util } from "../../../../common/util/util";
-import { Country } from "../../../../common/models/country";
+import { Country } from "../../../../common/models/countries/country";
 import { Summary } from "./summary"
-import { CountrySummary } from '../../../../common/models/countrySummary';
+import { CountrySummary } from '../../../../common/models/countries/countrySummary';
 
 declare var google: any;
 
