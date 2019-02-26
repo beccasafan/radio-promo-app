@@ -373,6 +373,10 @@ function () {
 
   ArrayAdapter.prototype.addOptions = function (data) {};
 
+  ArrayAdapter.prototype.convertToOptions = function (data) {
+    return null;
+  };
+
   return ArrayAdapter;
 }();
 
@@ -390,15 +394,9 @@ $.fn.select2.amd.define('select2/data/customDataAdapter', ['select2/data/array']
     }
 
     CustomDataAdapter.prototype.updateOptions = function (data) {
-      var _this = this;
-
       this.$element.find("option").remove();
-      data.data.map(function (d) {
-        return new Option(d.name, d.id.toString(), null, d.selected);
-      }).forEach(function (d) {
-        return _this.$element.append(d);
-      });
-      ;
+      var base = this;
+      base.addOptions(base.convertToOptions(data));
     };
 
     return CustomDataAdapter;

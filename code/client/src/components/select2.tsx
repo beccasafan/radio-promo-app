@@ -10,6 +10,7 @@ interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
 class ArrayAdapter {
     constructor($element: JQuery<HTMLElement>, options: select2.Options) { }
     addOptions(data: select2.DataFormat[]) { }
+    convertToOptions(data: { data: select2.DataFormat[] }): select2.DataFormat[] { return null; }
 }
 interface JQuery<TElement = HTMLElement> {
     find(arg: any): this;
@@ -27,7 +28,8 @@ interface JQuery<TElement = HTMLElement> {
 
         updateOptions(data: { data: select2.DataFormat[] }) {
             this.$element.find("option").remove();
-            data.data.map((d: any) => new Option(d.name, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
+            const base: ArrayAdapter = (this as any) as ArrayAdapter;
+            base.addOptions(base.convertToOptions(data));
         }
     }
 
