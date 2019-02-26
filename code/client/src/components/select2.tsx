@@ -50,6 +50,8 @@ export class Select2 extends React.Component<any, object> {
         this.$el = $(this.el);
         
         this.$el.select2(this.props);
+
+        Object.keys(this.props.events).forEach(e => $(this.el).on("select2:select", this.props.events[e]));
     }
 
     componentWillUnmount() {
