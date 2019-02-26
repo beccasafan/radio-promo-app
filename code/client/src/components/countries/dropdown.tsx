@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Select2 } from './../select2';
 import { CountrySummary } from '../../../../common/models/countrySummary';
 import * as ReactDOMServer from 'react-dom/server';
+import * as styles from "./../../styles/country.scss";
 
 export interface CountryDropdownProps {
     countries: CountrySummary[];
@@ -26,7 +27,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
         }
 
         return $(ReactDOMServer.renderToStaticMarkup(
-            <span key={country.id}>
+            <span key={country.id} className={styles.countrySelector}>
                 <img className="mr3" src={`http://files.stevenskelton.ca/flag-icon/flag-icon/svg/country-4x3/${imageCode}.svg`} alt="Card image cap" />
                 <span>{country.name} - {country.stations} stations</span>
             </span>
