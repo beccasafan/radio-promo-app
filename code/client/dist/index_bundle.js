@@ -232,10 +232,13 @@ function (_super) {
   };
 
   CountryDropdown.prototype.render = function () {
+    var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
+
+    console.log("dropdown data adapter", dataAdapter);
     return React.createElement(select2_1.Select2, {
       data: this.props.countries,
       templateResult: this.formatCountry,
-      dataAdapter: $.fn.select2.amd.require("select2/data/customDataAdapter")
+      dataAdapter: dataAdapter
     });
   };
 
@@ -415,7 +418,7 @@ function (_super) {
   }
 
   Select2.prototype.componentDidMount = function () {
-    console.log("did mount", this.props.dataAdapter, this.props.dataAdapter.updateOptions);
+    console.log("did mount", this.props.dataAdapter);
     this.$el = $(this.el);
     this.$el.select2(this.props);
   };

@@ -42,7 +42,7 @@ export class Select2 extends React.Component<any, object> {
     }
 
     componentDidMount() {
-        console.log("did mount", this.props.dataAdapter, this.props.dataAdapter.updateOptions);
+        console.log("did mount", this.props.dataAdapter);
         this.$el = $(this.el);
         
         this.$el.select2(this.props);
