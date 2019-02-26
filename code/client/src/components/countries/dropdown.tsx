@@ -28,7 +28,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
 
         return $(ReactDOMServer.renderToStaticMarkup(
             <span key={country.id} className={styles.countrySelector}>
-                <img className="mr3" src={`http://files.stevenskelton.ca/flag-icon/flag-icon/svg/country-4x3/${imageCode}.svg`} alt="Card image cap" />
+                <img className="mr-3" src={`http://files.stevenskelton.ca/flag-icon/flag-icon/svg/country-4x3/${imageCode}.svg`} alt="Card image cap" />
                 <span>{country.name} - {country.stations} stations</span>
             </span>
         ));
@@ -38,7 +38,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
         var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         console.log("dropdown data adapter", dataAdapter);
         return (
-            <Select2 data={this.props.countries} templateResult={this.formatCountry} dataAdapter={dataAdapter} />
+            <Select2 width="100%;" data={this.props.countries} templateResult={this.formatCountry} dataAdapter={dataAdapter} />
         );
     }
 }
