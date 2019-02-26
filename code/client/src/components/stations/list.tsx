@@ -19,12 +19,6 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         this.state = { stations: [] };
     }
 
-    componentDidMount() {
-        google.script.run.withSuccessHandler((data: StationSummary[]) => {
-            this.setState({ stations: data });
-        }).getAllStations();
-    }
-
     render() {
         if (this.props.stations == null) {
             return (
