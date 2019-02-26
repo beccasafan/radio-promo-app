@@ -30,6 +30,8 @@ interface JQuery<TElement = HTMLElement> {
             data.map(d => new Option(d.text, d.id.toString(), null, d.selected)).forEach(d => this.$element.append(d));;
         }
     }
+
+    return CustomDataAdapter;
 }));
 
 export class Select2 extends React.Component<any, object> {

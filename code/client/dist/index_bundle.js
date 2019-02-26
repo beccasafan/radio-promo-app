@@ -403,6 +403,8 @@ $.fn.select2.amd.define('select2/data/customDataAdapter', ['select2/data/array']
 
     return CustomDataAdapter;
   }(ArrayAdapter);
+
+  return CustomDataAdapter;
 });
 
 var Select2 =
