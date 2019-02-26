@@ -25,12 +25,12 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             imageCode = "gb";
         }
 
-        return (
+        return $(ReactDOMServer.renderToStaticMarkup(
             <span key={country.id}>
                 <img className="card-img-top" src={`http://files.stevenskelton.ca/flag-icon/flag-icon/svg/country-4x3/${imageCode}.svg`} alt="Card image cap" />
                 <span>{country.name} - {country.stations} stations</span>
             </span>
-        );
+        ));
     }
 
     render() {
