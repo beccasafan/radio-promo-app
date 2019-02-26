@@ -415,7 +415,7 @@ function (_super) {
   }
 
   Select2.prototype.componentDidMount = function () {
-    console.log("did mount");
+    console.log("did mount", this.props.dataAdapter, this.props.dataAdapter.updateOptions);
     this.$el = $(this.el);
     this.$el.select2(this.props);
   };
@@ -428,7 +428,9 @@ function (_super) {
     console.log("did update", $($(this.el).data("select2")));
 
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
-      $(this.el).data('select2').dataAdapter.updateOptions(this.props);
+      var select2Data = $(this.el).data("select2");
+      var dataAdapter = select2Data.dataAdapter;
+      dataAdapter.updateOptions(this.props);
       $(this.el).trigger("change");
     }
   };

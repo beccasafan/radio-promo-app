@@ -42,7 +42,7 @@ export class Select2 extends React.Component<any, object> {
     }
 
     componentDidMount() {
-        console.log("did mount");
+        console.log("did mount", this.props.dataAdapter, this.props.dataAdapter.updateOptions);
         this.$el = $(this.el);
         
         this.$el.select2(this.props);
@@ -55,7 +55,9 @@ export class Select2 extends React.Component<any, object> {
     componentDidUpdate(prevProps: any) {
         console.log("did update", $($(this.el).data("select2") as any));
         if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
-            ($(this.el).data('select2') as any).dataAdapter.updateOptions(this.props);
+            var select2Data: any = $(this.el).data("select2");
+            var dataAdapter = select2Data.dataAdapter;
+            dataAdapter.updateOptions(this.props);
             $(this.el).trigger("change");
         }
     }
