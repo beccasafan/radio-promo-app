@@ -396,7 +396,7 @@ $.fn.select2.amd.define('select2/data/customDataAdapter', ['select2/data/array']
     CustomDataAdapter.prototype.updateOptions = function (data) {
       this.$element.find("option").remove();
       var base = this;
-      base.addOptions(base.convertToOptions(data));
+      base.addOptions(base.convertToOptions(data.data));
     };
 
     return CustomDataAdapter;
