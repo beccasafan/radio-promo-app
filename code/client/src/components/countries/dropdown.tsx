@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Select2 } from './../select2';
 import { CountrySummary } from '../../../../common/models/countrySummary';
+import * as ReactDOMServer from 'react-dom/server';
 
 export interface CountryDropdownProps {
     countries: CountrySummary[];
@@ -19,7 +20,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             return country.text;
         }
 
-        return (
+        return ReactDOMServer.renderToStaticMarkup(
             <span>{country.name} - {country.stations} stations</span>
         );
     }
