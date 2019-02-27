@@ -30,10 +30,8 @@ export class Stations extends React.Component<StationsProps, StationsState> {
                 <div>There are {this.props.stations.length} stations</div>
 
                 <div className="card-deck">
-                    {this.props.stations.map(s => 
-                        <div>
-                            <Summary station={s} />
-                        </div>
+                    {this.props.stations.map(s =>
+                        <Summary station={s} />
                     )}
                 </div>
             </div>
