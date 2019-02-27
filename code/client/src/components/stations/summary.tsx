@@ -23,8 +23,8 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         }
 
         return (
-            <div className="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex flex-wrap">
-                <div className="card">
+            <div className="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div className="card d-flex flex-wrap">
                     <div className="card-header">{this.props.station.code}</div>
                     <div className="card-body">
                         <h5 className="card-title">{this.props.station.name}</h5>
