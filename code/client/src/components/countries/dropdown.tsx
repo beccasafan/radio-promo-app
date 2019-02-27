@@ -74,11 +74,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
                 templateSelection={this.formatCountrySelection}
                 dataAdapter={dataAdapter}
                 events={events}
-                adaptContainerCssClass="adaptContainerCssClass"
-                adaptDropdownCssClass="adaptDropdownCssClass"
                 containerCssClass="containerCssClass"
-                dropdownCssClass="dropdownCssClass"
-                theme="theme-for-select2"
             />
         );
     }
