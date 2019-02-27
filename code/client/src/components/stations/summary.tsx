@@ -32,7 +32,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                         {!Util.isEmpty(this.props.station.parentGroup) && <p className="card-text">{this.props.station.parentGroup}</p>}
                     </div>
                     <div className="card-footer">
-                        <div className="row">
+                        <div className="row no-gutters">
                             <div className="col"><a href="#"><i className="fas fa-eye"></i></a></div>
                             <div className="col">{this.props.station.website && <a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i></a>}</div>
                             <div className="col">{this.props.station.twitter && <a href={`https://twitter.com/${this.props.station.twitter}`} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
