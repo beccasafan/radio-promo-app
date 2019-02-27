@@ -29,11 +29,13 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             <div>
                 <div>There are {this.props.stations.length} stations</div>
 
-                {this.props.stations.map(s => 
-                    <div>
-                        <Summary station={s} />
-                    </div>
-                )}
+                <div className="card-deck">
+                    {this.props.stations.map(s => 
+                        <div>
+                            <Summary station={s} />
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }

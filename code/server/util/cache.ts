@@ -15,11 +15,11 @@ class CacheWrapper {
         while (index < json.length) {
             var chunkKey = key + "_" + index;
             chunks.push(chunkKey);
-            this.cache.put(chunkKey, json.substr(index, chunkSize));
+            this.cache.put(chunkKey, json.substr(index, chunkSize), 21600);
             index += chunkSize;
         }
 
-        this.cache.put(key, JSON.stringify(chunks));
+        this.cache.put(key, JSON.stringify(chunks), 21600);
 
         return chunks;
     }

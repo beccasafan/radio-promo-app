@@ -33,6 +33,6 @@ export class Station {
         }
     }
 
-    public isValid = (): boolean => this.id != null && !this.deleted;
+    public isValid = (): boolean => this.id != null && !this.deleted && this.active;
  
 }
