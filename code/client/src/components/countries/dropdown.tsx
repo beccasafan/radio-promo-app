@@ -77,7 +77,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
                 adaptContainerCssClass="adaptContainerCssClass"
                 adaptDropdownCssClass="adaptDropdownCssClass"
                 containerCssClass="containerCssClass"
-                dropdownCssClass="dropdownCssClass"
+                theme="theme-for-select2"
             />
         );
     }
