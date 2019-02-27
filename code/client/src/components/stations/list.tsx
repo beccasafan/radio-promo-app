@@ -29,7 +29,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             <div>
                 <div>There are {this.props.stations.length} stations</div>
 
-                <div className="row">
+                <div className="row d-flex align-items-stretch">
                     {this.props.stations.map(s =>
                         <Summary station={s} />
                     )}
