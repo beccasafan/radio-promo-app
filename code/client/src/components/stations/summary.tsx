@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StationSummary } from "../../../../common/models/stations/stationSummary";
 import { Util } from '../../../../common/util/util';
+import * as styles from "./../../styles/station.scss";
+import classNames from 'classnames';
 
 export interface StationSummaryProps {
     station: StationSummary;
@@ -23,7 +25,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         }
 
         return (
-            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3">
+            <div className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
                 <div className="card h-100">
                     <div className="card-header">{this.props.station.code}</div>
                     <div className="card-body">
@@ -31,6 +33,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                         <p className="card-text">{this.props.station.location}</p>
                         {!Util.isEmpty(this.props.station.parentGroup) && <p className="card-text">{this.props.station.parentGroup}</p>}
                         {!Util.isEmpty(this.props.station.note) && <p className="card-text">{this.props.station.note}</p>}
+                        <a href="#" className="btn btn-link">View</a>
                     </div>
                     <div className="card-footer">
                         <div className="row no-gutters">
