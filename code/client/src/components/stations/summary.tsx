@@ -30,6 +30,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                         <h5 className="card-title">{this.props.station.name}</h5>
                         <p className="card-text">{this.props.station.location}</p>
                         {!Util.isEmpty(this.props.station.parentGroup) && <p className="card-text">{this.props.station.parentGroup}</p>}
+                        {!Util.isEmpty(this.props.station.note) && <p className="card-text">{this.props.station.note}</p>}
                     </div>
                     <div className="card-footer">
                         <div className="row no-gutters">

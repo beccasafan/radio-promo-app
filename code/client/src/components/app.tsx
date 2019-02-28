@@ -4,6 +4,7 @@ import { CountryDropdown } from './countries/dropdown';
 import { CountrySummary } from '../../../common/models/countries/countrySummary';
 import { Stations } from "./stations/list";
 import { StationSummary } from '../../../common/models/stations/stationSummary';
+import * as styles from "./../styles/app.scss";
 
 declare var google: any;
 
@@ -40,7 +41,7 @@ export class App extends React.Component<object, AppState> {
 
     render() {
         return (
-            <div>
+            <div className={styles.app}>
                 <Intro />
                 {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected.bind(this)} />}
 
