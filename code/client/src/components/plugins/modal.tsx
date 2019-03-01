@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { ModalEventHandler } from 'bootstrap';
 
 export interface ModalProps {
     id: string;
     children: React.ReactNode;
     open: boolean;
+    handleClose: (e: ModalEventHandler<HTMLDivElement>) => void;
 }
 
 export interface ModalState {
@@ -22,6 +24,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     componentDidMount() {
         this.$el = $(this.el) as JQuery<HTMLDivElement>;
         this.$el.modal({});
+        this.$el.on("hidden.bs.modal", (e) => this.props.handleClose(e));
     }
 
     componentWillUnmount() {
@@ -29,7 +32,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     }
 
     componentDidUpdate(prevProps: any) {
-        if (prevProps != this.props) {
+        if (prevProps.open != this.props.open) {
             if (this.props == null || !this.props.open) {
                 this.$el.modal("hide");
             } else if (this.props != null && this.props.open) {

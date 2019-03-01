@@ -13,7 +13,7 @@ export interface StationDetailProps {
 }
 
 export interface StationDetailState {
-
+    open: boolean;
 }
 
 export class Detail extends React.Component<StationDetailProps, StationDetailState> {
@@ -21,13 +21,25 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
         super(props);
 
         this.state = {
-
+            open: false
         };
+
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+    componentDidUpdate(prevProps: StationDetailProps) {
+        if ((prevProps.station == null) != (this.props.station == null)) {
+            this.setState({ open: this.props.station != null });
+        }
+    }
+
+    handleClose(e: bootstrap.ModalEventHandler<HTMLDivElement>) {
+        this.setState({ open: false });
     }
 
     render() {
         return (
-            <Modal id="station-detail" open={this.props.station != null}>
+            <Modal id="station-detail" open={this.state.open} handleClose={this.handleClose}>
                 <ModalHeader>
                     <h5 className="modal-title" id="station-detail-header">{this.props.station.name}</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
