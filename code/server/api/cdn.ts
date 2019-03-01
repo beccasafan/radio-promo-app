@@ -1,21 +1,11 @@
 export class CdnApi {
     public static doGet(e: any): GoogleAppsScript.HTML.HtmlOutput|GoogleAppsScript.Content.TextOutput {
         var file = e.parameter.file.toLowerCase();
+        var template = HtmlService.createTemplateFromFile(`client/dist/${file}`);
+        (template as any).baseUrl = ScriptApp.getService().getUrl();
+        var output = template.evaluate();
+        output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
 
-        if (file.indexOf("js") > 0) {
-            var content = HtmlService.createHtmlOutputFromFile(`client/dist/${file}`).getContent();
-            var output = ContentService.createTextOutput(content);
-            output.setMimeType(ContentService.MimeType.JAVASCRIPT);
-
-            return output;
-        } else if (file.indexOf(".css") > 0) {
-            var content = HtmlService.createHtmlOutputFromFile(`client/dist/${file}`).getContent();
-            var output = ContentService.createTextOutput(content);
-            output.setMimeType(ContentService.MimeType.TEXT);
-        } else {
-            var template: any = HtmlService.createTemplateFromFile(`client/dist/${file}`);
-            template.baseUrl = ScriptApp.getService().getUrl();
-            return template.evaluate();
-        }
+        return output;
     }
 }
