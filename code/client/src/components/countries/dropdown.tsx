@@ -17,6 +17,8 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
         this.state = {
             selectedCountry: null
         };
+
+        this.countrySelected = this.countrySelected.bind(this);
     }
 
     formatCountry(country: CountrySummary) {
@@ -63,7 +65,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
     render() {
         var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         var events = {
-            "select2:select": this.countrySelected.bind(this)
+            "select2:select": this.countrySelected
         };
 
         return (

@@ -28,6 +28,9 @@ export class App extends React.Component<object, AppState> {
             selectedStation: null,
             selectedStationDetails: null
         };
+
+        this.countrySelected = this.countrySelected.bind(this);
+        this.stationSelected = this.stationSelected.bind(this);
     }
 
     componentDidMount() {
@@ -57,9 +60,9 @@ export class App extends React.Component<object, AppState> {
         return (
             <div className={styles.app}>
                 <Intro />
-                {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected.bind(this)} />}
+                {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} />}
 
-                {this.state.selectedCountry && <Stations stations={this.state.stations} />}
+                {this.state.selectedCountry && <Stations stations={this.state.stations} onSelect={this.stationSelected} />}
 
                 {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} />}
             </div>

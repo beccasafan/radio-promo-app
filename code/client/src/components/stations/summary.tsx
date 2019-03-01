@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 export interface StationSummaryProps {
     station: StationSummary;
+    onSelect: (station: StationSummary) => void;
 }
 export interface StationSummaryState {
 
@@ -15,6 +16,10 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
     constructor(props: StationSummaryProps) {
         super(props);
         this.state = {};
+    }
+
+    open() {
+        this.props.onSelect(this.props.station);
     }
 
     render() {
@@ -29,7 +34,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                 <div className="card h-100">
                     <div className="card-header">{this.props.station.code}</div>
                     <div className="card-body">
-                        <h5 className="card-title">{this.props.station.name}</h5>
+                        <h5 className="card-title" onClick={this.open}>{this.props.station.name}</h5>
                         <p className="card-text">{this.props.station.location}</p>
                         {!Util.isEmpty(this.props.station.parentGroup) && <p className="card-text">{this.props.station.parentGroup}</p>}
                         {!Util.isEmpty(this.props.station.note) && <p className="card-text">{this.props.station.note}</p>}

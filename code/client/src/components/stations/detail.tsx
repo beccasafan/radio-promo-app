@@ -17,9 +17,6 @@ export interface StationDetailState {
 }
 
 export class Detail extends React.Component<StationDetailProps, StationDetailState> {
-    private el: HTMLElement;
-    private $el: JQuery<HTMLDivElement>;
-
     constructor(props: StationDetailProps) {
         super(props);
 
@@ -28,28 +25,9 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
         };
     }
 
-    componentDidMount() {
-        this.$el = $(this.el) as JQuery<HTMLDivElement>;
-        this.$el.modal({});
-    }
-
-    componentWillUnmount() {
-        this.$el.modal("dispose");
-    }
-
-    componentDidUpdate(prevProps: any) {
-        if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
-            if (this.props == null) {
-                this.$el.modal("hide");
-            } else {
-                this.$el.modal("show");
-            }
-        }
-    }
-
     render() {
         return (
-            <Modal id="station-detail">
+            <Modal id="station-detail" open={this.props.station != null}>
                 <ModalHeader>
                     <h5 className="modal-title" id="station-detail-header">{this.props.station.name}</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">

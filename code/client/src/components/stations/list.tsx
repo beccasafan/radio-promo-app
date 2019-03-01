@@ -8,6 +8,7 @@ declare var google: any;
 
 export interface StationsProps {
     stations?: StationSummary[]
+    onSelect: (station: StationSummary) => void;
 };
 export interface StationsState {
     stations: StationSummary[];
@@ -31,7 +32,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
                 <div className="row">
                     {this.props.stations.map(s =>
-                        <Summary station={s} />
+                        <Summary station={s} onSelect={this.props.onSelect} />
                     )}
                 </div>
             </div>
