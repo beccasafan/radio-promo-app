@@ -53,7 +53,7 @@ export class App extends React.Component<object, AppState> {
 
         google.script.run.withSuccessHandler((data: StationDetail) => {
             this.setState({ selectedStationDetails: data});
-        }).getStationByCode(station.code);
+        }).getStation(station.code);
     }
 
     render() {
