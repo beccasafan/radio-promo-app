@@ -19,3 +19,7 @@ export class StationApi {
 function getStationsByCountry(country: string) {
     return Stations.getByCountry(country);
 }
+
+function getStation(code: string) {
+    return Stations.getByCode(code);
+}

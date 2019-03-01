@@ -46,11 +46,8 @@ export class Select2 extends React.Component<any, object> {
     }
 
     componentDidMount() {
-        console.log("did mount", this.props.dataAdapter);
         this.$el = $(this.el);
-        
         this.$el.select2(this.props);
-
         Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => { console.log("listened for " + key); this.props.events[key](e) }));
     }
 
@@ -59,7 +56,6 @@ export class Select2 extends React.Component<any, object> {
     }
 
     componentDidUpdate(prevProps: any) {
-        console.log("did update", $($(this.el).data("select2") as any));
         if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
             var select2Data: any = $(this.el).data("select2");
             var dataAdapter = select2Data.dataAdapter;

@@ -1,8 +1,7 @@
-///<reference path="../../common/models/stations/station.ts" />
-///<reference path="../util/cache.ts" />
-///<reference path="../util/constants.ts" />
-
 import { Station } from "../../common/models/stations/station";
+import { StationDetail } from "../../common/models/stations/stationDetail";
+import { CacheWrapper } from "../util/cache";
+import { CacheConstants } from "../util/constants";
 
 export class Stations {
     public static get(): Station[] {
@@ -24,10 +23,17 @@ export class Stations {
         return stationsInCountry;
     }
 
+    public static getByCode(code: string): StationDetail {
+        var station = Stations.get().find(s => s.code === code) as StationDetail;
+
+        return station;
+    }
+
     public static load(): Station[] {
+        console.log("resetting stations");
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Station").getDataRange().getValues().slice(1);
         var stations = data.map(s => new Station(s)).filter(s => s.isValid());
-
+        console.log("loaded " + stations.length + " stations");
         var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Stations, stations);
 
         return stations;

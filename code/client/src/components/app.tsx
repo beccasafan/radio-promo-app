@@ -5,6 +5,8 @@ import { CountrySummary } from '../../../common/models/countries/countrySummary'
 import { Stations } from "./stations/list";
 import { StationSummary } from '../../../common/models/stations/stationSummary';
 import * as styles from "./../styles/app.scss";
+import { Detail } from './stations/detail';
+import { StationDetail } from '../../../common/models/stations/stationDetail';
 
 declare var google: any;
 
@@ -12,6 +14,8 @@ export interface AppState {
     countries: CountrySummary[];
     selectedCountry: CountrySummary;
     stations: StationSummary[];
+    selectedStation: StationSummary;
+    selectedStationDetails: StationDetail;
 }
 
 export class App extends React.Component<object, AppState> {
@@ -20,7 +24,9 @@ export class App extends React.Component<object, AppState> {
         this.state = {
             countries: null,
             selectedCountry: null,
-            stations: null
+            stations: null,
+            selectedStation: null,
+            selectedStationDetails: null
         };
     }
 
@@ -39,13 +45,23 @@ export class App extends React.Component<object, AppState> {
         }).getStationsByCountry(country.id);
     }
 
+    stationSelected(station: StationSummary) {
+        this.setState({selectedStation: station});
+
+        google.script.run.withSuccessHandler((data: StationDetail) => {
+            this.setState({ selectedStationDetails: data});
+        }).getStationByCode(station.code);
+    }
+
     render() {
         return (
             <div className={styles.app}>
                 <Intro />
                 {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected.bind(this)} />}
 
-                {this.state.selectedCountry != null && <Stations stations={this.state.stations} />}
+                {this.state.selectedCountry && <Stations stations={this.state.stations} />}
+
+                {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} />}
             </div>
         );
     }

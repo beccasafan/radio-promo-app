@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Select2 } from './../select2';
+import { Select2 } from './../plugins/select2';
 import { CountrySummary } from '../../../../common/models/countries/countrySummary';
-import * as ReactDOMServer from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import * as styles from "./../../styles/country.scss";
 
 export interface CountryDropdownProps {
@@ -29,7 +29,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             imageCode = "gb";
         }
 
-        return $(ReactDOMServer.renderToStaticMarkup(
+        return $(renderToStaticMarkup(
             <span key={country.id} className={styles.countrySelector}>
                 <img className="mr-3" src={`http://files.stevenskelton.ca/flag-icon/flag-icon/svg/country-4x3/${imageCode}.svg`} alt="Card image cap" />
                 <span>{country.name} - {country.stations} stations</span>
@@ -47,7 +47,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             imageCode = "gb";
         }
 
-        return $(ReactDOMServer.renderToStaticMarkup(
+        return $(renderToStaticMarkup(
             <span key={country.id} className={styles.countrySelector}>
                 <img className="mr-3" src={`http://files.stevenskelton.ca/flag-icon/flag-icon/svg/country-4x3/${imageCode}.svg`} alt="Card image cap" />
                 <span>{country.name}</span>

@@ -1,4 +1,4 @@
-class CacheWrapper {
+export class CacheWrapper {
     public static ScriptCache = new CacheWrapper(CacheService.getScriptCache());
     private static MaxLength: number = 1024 * 90;
 
