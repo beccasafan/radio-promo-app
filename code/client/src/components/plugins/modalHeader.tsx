@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 export interface ModalHeaderProps {
-
+    children: React.ReactNode
 }
 
 export const ModalHeader: React.FunctionComponent<ModalHeaderProps> = (props: ModalHeaderProps) => {
     return (
         <div className="modal-header">
-            {this.props.children}
+            {props.children}
         </div>
     );
 };
