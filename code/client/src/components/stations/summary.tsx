@@ -16,6 +16,8 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
     constructor(props: StationSummaryProps) {
         super(props);
         this.state = {};
+
+        this.open = this.open.bind(this);
     }
 
     open() {
