@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { ModalEventHandler } from 'bootstrap';
+import { Util } from '../../../../common/util/util';
 
 export interface ModalProps {
-    id: string;
     children: React.ReactNode;
-    open: boolean;
+    contentKey: string;
     handleClose: (e: ModalEventHandler<HTMLDivElement>) => void;
 }
 
 export interface ModalState {
-    open: boolean;
 }
 
 export class Modal extends React.Component<ModalProps, ModalState> {
@@ -33,10 +32,10 @@ export class Modal extends React.Component<ModalProps, ModalState> {
 
     componentDidUpdate(prevProps: any) {
         console.log("modal", prevProps, this.props);
-        if (prevProps.open != this.props.open) {
-            if (this.props == null || !this.props.open) {
+        if (prevProps.contentKey != this.props.contentKey) {
+            if (this.props == null || Util.isEmpty(this.props.contentKey)) {
                 this.$el.modal("hide");
-            } else if (this.props != null && this.props.open) {
+            } else if (this.props != null && !Util.isEmpty(this.props.contentKey)) {
                 this.$el.modal("show");
             }
         }

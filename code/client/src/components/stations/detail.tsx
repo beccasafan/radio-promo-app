@@ -10,10 +10,10 @@ import { ModalFooter } from '../plugins/modalFooter';
 export interface StationDetailProps {
     station: StationSummary;
     detail: StationDetail;
+    handleClose: (e: bootstrap.ModalEventHandler<HTMLDivElement>) => void;
 }
 
 export interface StationDetailState {
-    open: boolean;
 }
 
 export class Detail extends React.Component<StationDetailProps, StationDetailState> {
@@ -21,28 +21,18 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
         super(props);
 
         this.state = {
-            open: false
         };
 
         this.handleClose = this.handleClose.bind(this);
     }
 
-    componentDidUpdate(prevProps: StationDetailProps) {
-        console.log("detail did update", prevProps, this.props);
-        if ((prevProps.station == null) != (this.props.station == null)) {
-            const shouldBeOpen = this.props.station != null;
-            console.log("Detail shouldBeOpen:", shouldBeOpen);
-            this.setState({ open: shouldBeOpen });
-        }
-    }
-
     handleClose(e: bootstrap.ModalEventHandler<HTMLDivElement>) {
-        this.setState({ open: false });
+        this.props.handleClose(e);
     }
 
     render() {
         return (
-            <Modal id="station-detail" open={this.state.open} handleClose={this.handleClose}>
+            <Modal contentKey={this.props.station != null ? this.props.station.id : null } handleClose={this.handleClose}>
                 <ModalHeader>
                     <h5 className="modal-title" id="station-detail-header">{this.props.station.name}</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">

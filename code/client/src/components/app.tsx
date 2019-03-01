@@ -7,6 +7,7 @@ import { StationSummary } from '../../../common/models/stations/stationSummary';
 import * as styles from "./../styles/app.scss";
 import { Detail } from './stations/detail';
 import { StationDetail } from '../../../common/models/stations/stationDetail';
+import { ModalEventHandler } from 'bootstrap';
 
 declare var google: any;
 
@@ -31,6 +32,7 @@ export class App extends React.Component<object, AppState> {
 
         this.countrySelected = this.countrySelected.bind(this);
         this.stationSelected = this.stationSelected.bind(this);
+        this.stationUnselected = this.stationUnselected.bind(this);
     }
 
     componentDidMount() {
@@ -49,11 +51,15 @@ export class App extends React.Component<object, AppState> {
     }
 
     stationSelected(station: StationSummary) {
-        this.setState({selectedStation: station});
+        this.setState({ selectedStation: station });
 
         google.script.run.withSuccessHandler((data: StationDetail) => {
-            this.setState({ selectedStationDetails: data});
+            this.setState({ selectedStationDetails: data });
         }).getStation(station.code);
+    }
+
+    stationUnselected(e: ModalEventHandler<HTMLDivElement>) {
+        this.setState({ selectedStation: null });
     }
 
     render() {
@@ -64,7 +70,7 @@ export class App extends React.Component<object, AppState> {
 
                 {this.state.selectedCountry && <Stations stations={this.state.stations} onSelect={this.stationSelected} />}
 
-                {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} />}
+                {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
             </div>
         );
     }
