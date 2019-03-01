@@ -40,8 +40,18 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                     </button>
                 </ModalHeader>
                 <ModalBody>
-                    {this.props.detail && <span>{this.props.detail.note}</span>}
-                    {this.props.detail == null && <span>Loading...</span>}
+                    {this.props.detail && this.props.detail.location && <p>{this.props.detail.location}</p>}
+                    {this.props.detail && this.props.detail.parentGroup && <p>{this.props.detail.parentGroup}</p>}
+                    {this.props.detail && this.props.detail.note && <p>{this.props.detail.note}</p>}
+                    {this.props.detail && this.props.detail.website && <p>{this.props.detail.website}</p>}
+                    {this.props.detail && this.props.detail.twitter && <p>{this.props.detail.twitter}</p>}
+                    {this.props.detail && this.props.detail.instagram && <p>{this.props.detail.instagram}</p>}
+                    {this.props.detail && this.props.detail.facebook && <p>{this.props.detail.facebook}</p>}
+                    {this.props.detail && this.props.detail.email && <p>{this.props.detail.email}</p>}
+                    {this.props.detail && this.props.detail.text && <p>{this.props.detail.text}</p>}
+                    {this.props.detail && this.props.detail.phone && <p>{this.props.detail.phone}</p>}
+
+                    {this.props.detail == null && <p>Loading...</p>}
                 </ModalBody>
                 <ModalFooter>
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

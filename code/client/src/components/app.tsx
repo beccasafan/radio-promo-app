@@ -59,7 +59,7 @@ export class App extends React.Component<object, AppState> {
     }
 
     stationUnselected(e: ModalEventHandler<HTMLDivElement>) {
-        this.setState({ selectedStation: null });
+        this.setState({ selectedStation: null, selectedStationDetails: null });
     }
 
     render() {
