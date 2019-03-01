@@ -29,7 +29,9 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
 
     componentDidUpdate(prevProps: StationDetailProps) {
         if ((prevProps.station == null) != (this.props.station == null)) {
-            this.setState({ open: this.props.station != null });
+            const shouldBeOpen = this.props.station != null;
+            console.log("Detail shouldBeOpen:", shouldBeOpen);
+            this.setState({ open: shouldBeOpen });
         }
     }
 

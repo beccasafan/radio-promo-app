@@ -32,6 +32,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     }
 
     componentDidUpdate(prevProps: any) {
+        console.log("modal", prevProps, this.props);
         if (prevProps.open != this.props.open) {
             if (this.props == null || !this.props.open) {
                 this.$el.modal("hide");
