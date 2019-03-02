@@ -2,6 +2,7 @@ import { CdnApi } from "../api/cdn";
 import { StationApi } from "../api/station";
 import { CountryApi } from "../api/country";
 import { CacheApi } from "./cache";
+import { TalentApi } from "./talent";
 
 function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Content.TextOutput {
     var item = e.parameter.item.toLowerCase();
@@ -15,6 +16,8 @@ function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Cont
             return CountryApi.doGet(e);
         case "station":
             return StationApi.doGet(e);
+        case "talent":
+            return TalentApi.doGet(e);
     }
 }
 

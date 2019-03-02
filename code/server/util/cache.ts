@@ -9,6 +9,7 @@ export class CacheWrapper {
     }
 
     public put(key: string, value: any): any {
+        console.log("cache putting", key);
         var json = JSON.stringify(value);
 
         var chunkSize = Math.floor(CacheWrapper.MaxLength / 2);
@@ -25,11 +26,13 @@ export class CacheWrapper {
         chunks[key] = JSON.stringify(chunkKeys);
         this.cache.putAll(chunks, CacheWrapper.CacheDuration);
 
+        console.log("cache put", chunkKeys);
         return chunkKeys;
 
     }
 
     public get<T>(key: string): T {
+        console.log("cache getting", key);
         var json = this.cache.get(key);
         if (json != null) {
             var chunkKeys = JSON.parse(json);
@@ -37,16 +40,19 @@ export class CacheWrapper {
 
             var chunkData = chunkKeys.map(chunkKey => chunks[chunkKey]);
             if (chunkData.every(datum => datum != null)) {
+                console.log("cache got", chunkKeys);
                 return JSON.parse(chunkData.join(""));
             }
         }
     }
 
     public remove(key: string): void {
+        console.log("cache removing", key);
         var json = this.cache.get(key);
         if (json != null) {
             var chunks = JSON.parse(json) as string[];
             chunks.push(key);
+            console.log("cache removed", chunks);
             this.cache.removeAll(chunks);
         }
     }
