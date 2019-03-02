@@ -21,7 +21,7 @@ export class Stations {
             var stations = Stations.loadByCountry(countryId);
 
             stationsInCountry = stations.map(s => {
-                var talent = Talents.getByStation(station.id);
+                var talent = Talents.getByStation(s.id);
                 var station = Object.assign({}, s, { talent: talent != null ? talent.length : 0});
                 return station;
             });
@@ -45,6 +45,20 @@ export class Stations {
 
         return stationsInCountry;
     }
+
+    
+    public static cacheByCountry(countryId: string, data: StationSummary[]) {
+        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, data);
+
+        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.StationsByCountry) || [];
+        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+
+        if (!countryIsCached) {
+            cachedCountries.push(countryId);
+            CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
+        }
+    }
+
 
     public static getByCode(code: string): StationDetail {
         var station = Stations.get().find(s => s.code === code) as StationDetail;

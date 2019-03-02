@@ -33,7 +33,13 @@ export class Talents {
     public static loadByStation(stationId: string): Talent[] {
         var talentInStation = Talents.get().filter(t => t.stationId === stationId);
 
-        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByStation}_${stationId}`, talentInStation);
+        Talents.cacheByStation(stationId, talentInStation);
+
+        return talentInStation;
+    }
+
+    public static cacheByStation(stationId: string, data: Talent[]) {
+        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByStation}_${stationId}`, data);
 
         var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByStation) || [];
         var stationIsCached = cachedStations.find(s => s === stationId) != null;
@@ -42,8 +48,6 @@ export class Talents {
             cachedStations.push(stationId);
             CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, cachedStations);
         }
-
-        return talentInStation;
     }
 
     public static clear() {

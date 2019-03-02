@@ -22,7 +22,27 @@ export class Cache {
 
         var talent = Talents.load();
 
-        countries.forEach(c => Stations.loadByCountry(c.id));
-        stations.forEach(s => Talents.loadByStation(s.id));
+        var talentByStation = talent.reduce((talentByStation, talent) => {
+            var stationGroup = talentByStation[talent.stationId] || [];
+            stationGroup.push(talent);
+            talentByStation[talent.stationId] = stationGroup;
+            return talentByStation;
+        }, {});
+
+        Object.keys(talentByStation).forEach(s => Talents.cacheByStation(s, talentByStation[s]));
+
+        var stationsByCountry = stations.reduce((stationsByCountry, s) => {
+            var countryGroup = stationsByCountry[s.countryId] || [];
+
+            var talentCount = talentByStation[s.id];
+
+            var station = Object.assign({}, station, { talent: talentCount });
+
+            countryGroup.push(station);
+            stationsByCountry[station.countryId] = countryGroup;
+            return stationsByCountry;
+        }, {});
+
+        Object.keys(stationsByCountry).forEach(c => Stations.cacheByCountry(c, stationsByCountry[c]));
     }
 }
