@@ -1,5 +1,5 @@
 import { Country } from "../../common/models/countries/country";
-import { CountrySummary} from "../../common/models/countries/countrySummary";
+import { CountrySummary } from "../../common/models/countries/countrySummary";
 import { Stations } from "./stations";
 import { CacheWrapper } from "../util/cache";
 import { CacheConstants } from "../util/constants";
@@ -10,12 +10,20 @@ export class Countries {
     }
 
     public static summarize(): CountrySummary[] {
+        return CacheWrapper.ScriptCache.get<CountrySummary[]>(CacheConstants.CountrySummaries) || Countries.loadSummaries();
+    }
+
+    public static loadSummaries(): CountrySummary[] {
         var countries = Countries.get();
-        
-        return countries.map(c => { 
+
+        var summaries = countries.map(c => {
             var stations = Stations.getByCountry(c.id);
             return Object.assign({}, c, { stations: (stations != null ? stations.length : 0) || 0 })
         }).filter(c => c.stations > 0);
+
+        CacheWrapper.ScriptCache.put(CacheConstants.CountrySummaries, summaries);
+
+        return summaries;
     }
 
     public static load(): Country[] {
@@ -25,5 +33,10 @@ export class Countries {
         var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Countries, countries);
 
         return countries;
+    }
+
+    public static clear(): void {
+        CacheWrapper.ScriptCache.remove(CacheConstants.Countries);
+        CacheWrapper.ScriptCache.remove(CacheConstants.CountrySummaries);
     }
 }

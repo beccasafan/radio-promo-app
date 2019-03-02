@@ -19,6 +19,15 @@ export class Stations {
             ;
 
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, stationsInCountry);
+
+        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.StationsByCountry) || [];
+        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+
+        if (!countryIsCached) {
+            cachedCountries.push(countryId);
+        }
+
+        CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
         
         return stationsInCountry;
     }
@@ -30,12 +39,21 @@ export class Stations {
     }
 
     public static load(): Station[] {
-        console.log("resetting stations");
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Station").getDataRange().getValues().slice(1);
         var stations = data.map(s => new Station(s)).filter(s => s.isValid());
-        console.log("loaded " + stations.length + " stations");
+
         var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Stations, stations);
 
         return stations;
+    }
+
+    public static clear() {
+        CacheWrapper.ScriptCache.remove(CacheConstants.Stations);
+
+        var stationsByCountry = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.StationsByCountry);
+        if (stationsByCountry != null) {
+            stationsByCountry.forEach(c => CacheWrapper.ScriptCache.remove(`${CacheConstants.StationsByCountry}_${c}`));
+            CacheWrapper.ScriptCache.remove(CacheConstants.StationsByCountry);
+        }
     }
 }

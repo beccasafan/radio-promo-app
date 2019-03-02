@@ -1,20 +1,18 @@
-///<reference path="../../common/models/station.ts" />
-///<reference path="../util/cache.ts" />
-///<reference path="../util/constants.ts" />
-
 import { Language } from "./../../common/models/language";
+import { CacheWrapper } from "../util/cache";
+import { CacheConstants } from "../util/constants";
 
 export class Languages {
     public static get(): Language[] {
-        return CacheWrapper.ScriptCache.get<Language[]>(CacheConstants.Stations) || Languages.load();
+        return CacheWrapper.ScriptCache.get<Language[]>(CacheConstants.Languages) || Languages.load();
     }
     
     public static load(): Language[] {
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Language").getDataRange().getValues().slice(1);
-        var stations = data.map(s => new Language(s)).filter(s => s.isValid());
+        var languages = data.map(s => new Language(s)).filter(s => s.isValid());
         
-        var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Languages, stations);
+        var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Languages, languages);
         
-        return stations;
+        return languages;
     }
 }
