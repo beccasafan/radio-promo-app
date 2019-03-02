@@ -13,3 +13,7 @@ export class TalentApi {
         }
     }
 }
+
+function getTalentByStation(stationId) {
+    return Talents.getByStation(stationId);
+}

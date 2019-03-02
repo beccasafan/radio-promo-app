@@ -32,10 +32,11 @@ export class Talents {
 
     public static loadByStation(stationId: string): Talent[] {
         var talentInStation = Talents.get().filter(t => t.stationId === stationId);
-        var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.Talent) || [];
-        var stationIsCached = cachedStations.find(s => s === stationId) != null;
 
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByStation}_${stationId}`, talentInStation);
+
+        var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByStation) || [];
+        var stationIsCached = cachedStations.find(s => s === stationId) != null;
 
         if (!stationIsCached) {
             cachedStations.push(stationId);

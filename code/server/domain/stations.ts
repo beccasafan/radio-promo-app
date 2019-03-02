@@ -31,10 +31,7 @@ export class Stations {
     }
 
     public static loadByCountry(countryId: string): Station[] {
-        var stationsInCountry = Stations
-            .get()
-            .filter(s => s.countryId === countryId)
-            ;
+        var stationsInCountry = Stations.get().filter(s => s.countryId === countryId);
 
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, stationsInCountry);
 
