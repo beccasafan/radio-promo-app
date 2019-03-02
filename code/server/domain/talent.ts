@@ -35,6 +35,8 @@ export class Talents {
         var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.Talent) || [];
         var stationIsCached = cachedStations.find(s => s === stationId) != null;
 
+        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByStation}_${stationId}`, talentInStation);
+
         if (!stationIsCached) {
             cachedStations.push(stationId);
             CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, cachedStations);
