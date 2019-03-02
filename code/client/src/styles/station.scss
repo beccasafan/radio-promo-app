@@ -2,4 +2,13 @@
     .card-footer a {
         color: #727271;
     }
+    .card-body {
+        display: flex;
+        flex-direction: 1;
+
+        .btn {
+            align-self: flex-end;
+        }
+    }
+
 }

@@ -14,6 +14,12 @@
 .station .card-footer a {
   color: #727271; }
 
+.station .card-body {
+  display: flex;
+  flex-direction: 1; }
+  .station .card-body .btn {
+    align-self: flex-end; }
+
 .app {
   background-color: #f9faec; }
 
