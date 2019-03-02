@@ -14,10 +14,10 @@ export class Cache {
     }
 
     private static load() {
-        var countries = Countries.get();
+        var countries = Countries.load();
 
-        var stations = Stations.get();
+        var stations = Stations.load();
 
-        countries.forEach(c => Stations.getByCountry(c.code));
+        countries.forEach(c => Stations.loadByCountry(c.code));
     }
 }
