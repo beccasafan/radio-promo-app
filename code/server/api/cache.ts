@@ -7,6 +7,7 @@ export class CacheApi {
         
         switch (action) {
             case "reset":
+                Cache.reset();
                 return ContentService.createTextOutput("Done.");
         }
     }

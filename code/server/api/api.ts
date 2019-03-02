@@ -1,6 +1,7 @@
 import { CdnApi } from "../api/cdn";
 import { StationApi } from "../api/station";
 import { CountryApi } from "../api/country";
+import { CacheApi } from "./cache";
 
 function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Content.TextOutput {
     var item = e.parameter.item.toLowerCase();
