@@ -6,6 +6,8 @@ function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Cont
     var item = e.parameter.item.toLowerCase();
 
     switch (item) {
+        case "cache":
+            return CacheApi.doGet(e);
         case "cdn":
             return CdnApi.doGet(e);
         case "country":
