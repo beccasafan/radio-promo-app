@@ -16,9 +16,9 @@
 
 .station .card-body {
   display: flex;
-  flex-direction: 1; }
-  .station .card-body .btn {
-    align-self: flex-end; }
+  flex-direction: column; }
+  .station .card-body .card-grow {
+    flex: 1; }
 
 .app {
   background-color: #f9faec; }

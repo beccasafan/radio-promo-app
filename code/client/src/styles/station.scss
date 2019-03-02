@@ -4,10 +4,10 @@
     }
     .card-body {
         display: flex;
-        flex-direction: 1;
+        flex-direction: column;
 
-        .btn {
-            align-self: flex-end;
+        .card-grow {
+            flex: 1;
         }
     }
 
