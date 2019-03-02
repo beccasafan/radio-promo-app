@@ -18,6 +18,6 @@ export class Cache {
 
         var stations = Stations.load();
 
-        countries.forEach(c => Stations.loadByCountry(c.code));
+        countries.slice(0,3).forEach(c => Stations.loadByCountry(c.id));
     }
 }

@@ -5,11 +5,23 @@ import { CacheConstants } from "../util/constants";
 
 export class Stations {
     public static get(): Station[] {
-        return CacheWrapper.ScriptCache.get<Station[]>(CacheConstants.Stations) || Stations.load();
+        var stations = CacheWrapper.ScriptCache.get<Station[]>(CacheConstants.Stations);
+        if (stations == null) {
+            console.log("Stations not in cache");
+            stations = Stations.load();
+        }
+
+        return stations;
     }
 
     public static getByCountry(countryId: string): Station[] {
-        return CacheWrapper.ScriptCache.get<Station[]>(`${CacheConstants.StationsByCountry}_${countryId}`) || Stations.loadByCountry(countryId);
+        var stationsInCountry = CacheWrapper.ScriptCache.get<Station[]>(`${CacheConstants.StationsByCountry}_${countryId}`);
+        if (stationsInCountry == null) {
+            console.log("Stations by Country " + countryId + " not in cache");
+            Stations.loadByCountry(countryId);
+        }
+
+        return stationsInCountry;
     }
 
     public static loadByCountry(countryId: string): Station[] {
@@ -24,11 +36,11 @@ export class Stations {
         var countryIsCached = cachedCountries.find(c => c === countryId) != null;
 
         if (!countryIsCached) {
+            console.log("stations by country main key not cached " + countryId);
             cachedCountries.push(countryId);
+            CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
         }
 
-        CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
-        
         return stationsInCountry;
     }
 

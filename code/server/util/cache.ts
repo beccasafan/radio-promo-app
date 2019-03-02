@@ -31,6 +31,7 @@ export class CacheWrapper {
             cacheObject[key] = JSON.stringify(chunkKeys);
             this.cache.putAll(cacheObject, CacheWrapper.CacheDuration);
 
+            console.log("cache put", Object.keys(cacheObject));
             return chunkKeys;
         }
         catch (e) {
@@ -50,6 +51,7 @@ export class CacheWrapper {
 
                 var chunkData = chunkKeys.map(chunkKey => chunks[chunkKey]);
                 if (chunkData.every(datum => datum != null)) {
+                    console.log("cache got", chunkKeys);
                     return JSON.parse(chunkData.join(""));
                 }
             }
@@ -66,6 +68,7 @@ export class CacheWrapper {
         if (json != null) {
             var chunks = JSON.parse(json) as string[];
             chunks.push(key);
+            console.log("cache removed", chunks);
             this.cache.removeAll(chunks);
         }
     }
