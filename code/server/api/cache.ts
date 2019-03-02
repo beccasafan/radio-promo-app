@@ -12,3 +12,7 @@ export class CacheApi {
         }
     }
 }
+
+function reset() {
+    Cache.reset();
+}
