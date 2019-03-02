@@ -10,6 +10,7 @@ export class Cache {
 
     private static clear() {
         Countries.clear();
+        Stations.clear();
     }
 
     private static load() {

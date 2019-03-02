@@ -64,8 +64,8 @@ export class CacheWrapper {
         console.log("cache removing", key);
         var json = this.cache.get(key);
         if (json != null) {
-            var chunks = JSON.parse(json);
-            chunks.add(key);
+            var chunks = JSON.parse(json) as string[];
+            chunks.push(key);
             this.cache.removeAll(chunks);
         }
     }
