@@ -6,6 +6,10 @@
         display: flex;
         flex-direction: column;
 
+        .card-text:last-child {
+            margin-bottom: 1rem;
+        }
+
         .card-grow {
             flex: 1;
         }

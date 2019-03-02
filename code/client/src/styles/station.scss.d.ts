@@ -2,4 +2,5 @@
 export const station: string;
 export const cardFooter: string;
 export const cardBody: string;
+export const cardText: string;
 export const cardGrow: string;

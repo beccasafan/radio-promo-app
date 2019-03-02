@@ -17,6 +17,8 @@
 .station .card-body {
   display: flex;
   flex-direction: column; }
+  .station .card-body .card-text:last-child {
+    margin-bottom: 1rem; }
   .station .card-body .card-grow {
     flex: 1; }
 
