@@ -1,24 +1,30 @@
 import { Station } from "../../common/models/stations/station";
+import { StationSummary } from "../../common/models/stations/stationSummary";
 import { StationDetail } from "../../common/models/stations/stationDetail";
 import { CacheWrapper } from "../util/cache";
 import { CacheConstants } from "../util/constants";
+import { Talents } from "./talent";
 
 export class Stations {
     public static get(): Station[] {
         var stations = CacheWrapper.ScriptCache.get<Station[]>(CacheConstants.Stations);
         if (stations == null) {
-            console.log("Stations not in cache");
             stations = Stations.load();
         }
 
         return stations;
     }
 
-    public static getByCountry(countryId: string): Station[] {
-        var stationsInCountry = CacheWrapper.ScriptCache.get<Station[]>(`${CacheConstants.StationsByCountry}_${countryId}`);
+    public static getByCountry(countryId: string): StationSummary[] {
+        var stationsInCountry = CacheWrapper.ScriptCache.get<StationSummary[]>(`${CacheConstants.StationsByCountry}_${countryId}`);
         if (stationsInCountry == null) {
-            console.log("Stations by Country " + countryId + " not in cache");
-            Stations.loadByCountry(countryId);
+            var stations = Stations.loadByCountry(countryId);
+
+            stationsInCountry = stations.map(s => {
+                var talent = Talents.getByStation(station.id);
+                var station = Object.assign({}, s, { talent: talent != null ? talent.length : 0});
+                return station;
+            });
         }
 
         return stationsInCountry;
@@ -36,7 +42,6 @@ export class Stations {
         var countryIsCached = cachedCountries.find(c => c === countryId) != null;
 
         if (!countryIsCached) {
-            console.log("stations by country main key not cached " + countryId);
             cachedCountries.push(countryId);
             CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
         }

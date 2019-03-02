@@ -40,6 +40,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                         <p className="card-text">{this.props.station.location}</p>
                         <div className={styles.cardGrow}>
                             {!Util.isEmpty(this.props.station.parentGroup) && <p className="card-text">{this.props.station.parentGroup}</p>}
+                            {this.props.station.talent > 0 && <p className="card-text">{this.props.station.talen} talent</p>}
                             {!Util.isEmpty(this.props.station.note) && <p className="card-text">{this.props.station.note}</p>}
                         </div>
                         <a href="javascript:;" onClick={this.open} className="btn btn-outline-secondary btn-block">View</a>
