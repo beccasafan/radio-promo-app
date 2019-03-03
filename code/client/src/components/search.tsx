@@ -61,17 +61,20 @@ export class Search extends React.Component<SearchProps, SearchState> {
             "select2:select": this.formatSelected
         };
 
+        if (this.props.options == null) {
+            return (<div></div>);
+        }
         return (
             <div>
                 {this.props.options.formats && 
-                <Select2
-                    width="100%"
-                    data={this.props.options.formats.map(f => ({id: f.code, text: f.name })).filter((value, index, array)=>array.indexOf(value)==index)}
-                    //templateResult={this.formatFormat}
-                    //templateSelection={this.formatFormat}
-                    dataAdapter={dataAdapter}
-                    events={events}
-                />}
+                    <Select2
+                        width="100%"
+                        data={this.props.options.formats.map(f => ({id: f.code, text: f.name })).filter((value, index, array)=>array.indexOf(value)==index)}
+                        //templateResult={this.formatFormat}
+                        //templateSelection={this.formatFormat}
+                        dataAdapter={dataAdapter}
+                        events={events}
+                    />}
             </div>
         );
     }

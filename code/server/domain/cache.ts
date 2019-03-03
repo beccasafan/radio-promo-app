@@ -38,7 +38,7 @@ export class Cache {
 
         var formatSummaries: FormatSummary[] = formats.map(f => 
             {
-                var monitor = monitor.find(m => m.id === f.monitorId);
+                var monitor = monitors.find(m => m.id === f.monitorId);
                 return Object.assign({}, f, {countryId: monitor.countryId, monitor: monitor.name});
             }
         );
