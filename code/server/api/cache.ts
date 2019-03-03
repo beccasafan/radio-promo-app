@@ -10,7 +10,7 @@ export class CacheApi {
                 Cache.reset();
                 return ContentService.createTextOutput("Done.");
             case "peek":
-                Util.createJSONOutput(Cache.peek(e.parameter.key));
+                return Util.createJSONOutput(Cache.peek(e.parameter.key));
         }
     }
 }
