@@ -798,8 +798,6 @@ var React = __webpack_require__(/*! react */ "react");
 
 var select2_1 = __webpack_require__(/*! ./plugins/select2 */ "./code/client/src/components/plugins/select2.tsx");
 
-var server_1 = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-
 var Search =
 /** @class */
 function (_super) {
@@ -808,57 +806,38 @@ function (_super) {
   function Search(props) {
     var _this = _super.call(this, props) || this;
 
-    _this.state = {
-      selectedFormat: null
-    };
-    _this.formatSelected = _this.formatSelected.bind(_this);
+    _this.state = {};
+    _this.onFormatChange = _this.onFormatChange.bind(_this);
     return _this;
   }
 
-  Search.prototype.formatFormat = function (format) {
-    if (!format.id) {
-      return format.text;
-    }
-
-    return $(server_1.renderToStaticMarkup(React.createElement("span", {
-      key: format.id
-    }, React.createElement("span", null, format.monitor, " ", format.name))));
-  };
-
-  Search.prototype.formatSelected = function (e) {
-    this.setState({
+  Search.prototype.onFormatChange = function (e) {
+    this.props.onSearch({
       selectedFormat: e.params.data.id
     });
-    this.search();
-  };
-
-  Search.prototype.search = function () {
-    this.props.onSearch(this.state);
   };
 
   Search.prototype.render = function () {
     var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
 
     var events = {
-      "select2:select": this.formatSelected
+      "select2:select": this.onFormatChange
     };
 
     if (this.props.options == null) {
       return React.createElement("div", null);
     }
 
+    var uniqueFormats = this.props.options.formats.reduce(function (uniqueFormats, f) {
+      if (uniqueFormats[f.name] != null) {
+        uniqueFormats[f.name] = {};
+      }
+
+      return uniqueFormats;
+    }, {});
     return React.createElement("div", null, this.props.options.formats && React.createElement(select2_1.Select2, {
       width: "100%",
-      data: this.props.options.formats.map(function (f) {
-        return {
-          id: f.code,
-          text: f.name
-        };
-      }).filter(function (value, index, array) {
-        return array.indexOf(value) == index;
-      }),
-      //templateResult={this.formatFormat}
-      //templateSelection={this.formatFormat}
+      data: uniqueFormats,
       dataAdapter: dataAdapter,
       events: events
     }));
@@ -1033,32 +1012,26 @@ function (_super) {
     var _this = _super.call(this, props) || this;
 
     _this.state = {
-      visibleStations: _this.props.stations
+      selectedFormat: null,
+      visibleStations: null
     };
     _this.onSearch = _this.onSearch.bind(_this);
     return _this;
   }
 
-  Stations.prototype.componentDidUpdate = function (prevProps) {
-    if (prevProps.stations != this.props.stations) {
-      this.setState({
-        visibleStations: this.props.stations
-      });
-    }
-  };
-
-  Stations.prototype.onSearch = function (search) {
+  Stations.prototype.onSearch = function (values) {
     var _this = this;
 
-    this.setState({
-      visibleStations: this.props.stations.filter(function (s) {
-        var format = _this.props.search.formats.find(function (f) {
-          return f.id === s.props.station.formatId;
-        });
+    var visibleStations = this.props.stations.filter(function (s) {
+      var format = _this.props.search.formats.find(function (f) {
+        return f.id === s.props.station.formatId;
+      });
 
-        var visibleByFormat = search.selectedFormat === format.code;
-        return visibleByFormat;
-      })
+      var visibleByFormat = values.selectedFormat === format.code;
+      return visibleByFormat;
+    });
+    this.setState({
+      visibleStations: visibleStations
     });
   };
 

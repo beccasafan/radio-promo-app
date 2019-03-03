@@ -9,59 +9,48 @@ export interface SearchProps {
     options: SearchOptions;
     onSearch: (parameters: SearchState) => void;
 }
+
 export interface SearchState {
-    selectedFormat: string;
+
 }
 
 export class Search extends React.Component<SearchProps, SearchState> {
     constructor(props: SearchProps) {
         super(props);
 
-        this.state = {
-            selectedFormat: null
-        };
+        this.state = { };
 
-        this.formatSelected = this.formatSelected.bind(this);
+        this.onFormatChange = this.onFormatChange.bind(this);
     }
 
-    formatFormat(format: FormatSummary) {
-        if (!format.id) {
-            return format.text;
-        }
-
-        return $(renderToStaticMarkup(
-            <span key={format.id}>
-                <span>{format.monitor} {format.name}</span>
-            </span>
-        ));
-    }
-
-    formatSelected(e: any) {
-        this.setState({selectedFormat: e.params.data.id as string });
-        this.search();
-    }
-
-    search() {
-        this.props.onSearch(this.state);
+    onFormatChange(e: any) {
+        this.props.onSearch({selectedFormat: e.params.data.id as string});
     }
 
     render() {
         var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         var events = {
-            "select2:select": this.formatSelected
+            "select2:select": this.onFormatChange
         };
 
         if (this.props.options == null) {
             return (<div></div>);
         }
+
+        const uniqueFormats = this.props.options.formats.reduce((uniqueFormats, f) => {
+            if (uniqueFormats[f.name] != null) {
+                uniqueFormats[f.name] = {};
+            }
+
+            return uniqueFormats;
+        }, {} as {[key:string]: any;});
+
         return (
             <div>
                 {this.props.options.formats && 
                     <Select2
                         width="100%"
-                        data={this.props.options.formats.map(f => ({id: f.code, text: f.name })).filter((value, index, array)=>array.indexOf(value)==index)}
-                        //templateResult={this.formatFormat}
-                        //templateSelection={this.formatFormat}
+                        data={uniqueFormats}
                         dataAdapter={dataAdapter}
                         events={events}
                     />}
