@@ -38,7 +38,7 @@ export class Cache {
 
             var talentCount = talentByStation[s.id];
 
-            var station = Object.assign({}, station, { talent: talentCount });
+            var station = Object.assign({}, s, { talent: talentCount });
 
             countryGroup.push(station);
             stationsByCountry[station.countryId] = countryGroup;
