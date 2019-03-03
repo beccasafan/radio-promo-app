@@ -1040,9 +1040,11 @@ function (_super) {
   }
 
   Stations.prototype.componentDidUpdate = function (prevProps) {
-    this.setState({
-      visibleStations: this.props.stations
-    });
+    if (prevProps.stations != this.props.stations) {
+      this.setState({
+        visibleStations: this.props.stations
+      });
+    }
   };
 
   Stations.prototype.onSearch = function (search) {

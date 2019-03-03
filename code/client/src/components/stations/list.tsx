@@ -27,7 +27,9 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     componentDidUpdate(prevProps: any) {
-        this.setState({visibleStations: this.props.stations});
+        if (prevProps.stations != this.props.stations) {
+            this.setState({visibleStations: this.props.stations});
+        }
     }
 
     onSearch(search: SearchState) {
