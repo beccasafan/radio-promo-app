@@ -32,7 +32,7 @@ export class Cache {
 
         var stationsByCountry = stations.reduce((stationsByCountry, s) => {
             var countryGroup = stationsByCountry[s.countryId] || [];
-            var station = Object.assign({}, s, { talent: talentByStation[s.id].length });
+            var station = Object.assign({}, s, { talent: (talentByStation[s.id] || []).length });
 
             countryGroup.push(station);
             stationsByCountry[station.countryId] = countryGroup;
