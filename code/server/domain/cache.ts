@@ -7,7 +7,6 @@ import { CacheConstants } from "../util/constants";
 export class Cache {
     public static reset() {
         Cache.clear();
-
         Cache.load();
     }
 
@@ -19,9 +18,7 @@ export class Cache {
 
     private static load() {
         var countries = Countries.load();
-
         var stations = Stations.load();
-
         var talent = Talents.load();
 
         var talentByStation = talent.reduce((talentByStation, talent) => {
@@ -35,10 +32,7 @@ export class Cache {
 
         var stationsByCountry = stations.reduce((stationsByCountry, s) => {
             var countryGroup = stationsByCountry[s.countryId] || [];
-
-            var talentCount = talentByStation[s.id];
-
-            var station = Object.assign({}, s, { talent: talentCount });
+            var station = Object.assign({}, s, { talent: talentByStation[s.id].length });
 
             countryGroup.push(station);
             stationsByCountry[station.countryId] = countryGroup;
