@@ -7,7 +7,7 @@ import { StationSummary } from '../../../common/models/stations/stationSummary';
 
 export interface SearchProps {
     options: SearchOptions;
-    stations: JSX.Element[];
+    onSearch: (parameters: SearchState) => void;
 }
 export interface SearchState {
     selectedFormat: string;
@@ -42,19 +42,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
     }
 
     search() {
-        const visibleItems: JSX.Element[] = [];
-        const hiddenItems: JSX.Element[] = []
-        if (this.state.selectedFormat != null) {
-            this.props.stations.forEach(s => {
-                var format = this.props.options.formats.find(f => f.id === s.props.station.formatId);
-                var isVisible = this.state.selectedFormat === format.code;
-
-                (isVisible ? visibleItems : hiddenItems).push(s);
-            });
-
-            visibleItems.forEach(i => i.props.visible = true);
-            hiddenItems.forEach(i => i.props.visible = false);
-        }
+        this.props.onSearch(this.state);
     }
 
     render() {
