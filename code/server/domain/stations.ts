@@ -49,7 +49,7 @@ export class Stations {
         return stationsInCountry;
     }
 
-    
+
     public static cacheByCountry(countryId: string, data: StationSummary[]) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, data);
 
@@ -64,9 +64,11 @@ export class Stations {
 
 
     public static getByCode(code: string): StationDetail {
-        var station = Stations.get().find(s => s.code === code) as StationDetail;
-
-        return station;
+        var station = Stations.get().find(s => s.code === code);
+        var talent = Talents.getByStation(station.id);
+        var syndicatedTalent = SyndicatedShows.getByStation(station.id);
+        var detail = Object.assign({}, station, { talent: talent, syndicatedTalent: syndicatedTalent });
+        return detail;
     }
 
     public static load(cache: boolean = true): Station[] {

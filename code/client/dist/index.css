@@ -22,6 +22,9 @@
   .station .card-body .card-grow {
     flex: 1; }
 
+.talent a {
+  color: #727271; }
+
 .app {
   background-color: #f9faec; }
 
