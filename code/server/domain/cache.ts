@@ -50,4 +50,8 @@ export class Cache {
         console.log("talent by station", talentByStation);
         console.log("stations by country", stationsByCountry);
     }
+
+    public static peek(key: string) {
+        return CacheWrapper.ScriptCache.get(key);
+    }
 }

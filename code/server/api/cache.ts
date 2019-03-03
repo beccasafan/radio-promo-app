@@ -9,10 +9,16 @@ export class CacheApi {
             case "reset":
                 Cache.reset();
                 return ContentService.createTextOutput("Done.");
+            case "peek":
+                Util.createJSONOutput(Cache.peek(e.parameter.key));
         }
     }
 }
 
 function reset() {
     Cache.reset();
+}
+
+function peek(key) {
+    return Cache.peek(key);
 }
