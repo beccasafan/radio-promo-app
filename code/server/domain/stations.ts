@@ -66,7 +66,7 @@ export class Stations {
     public static getByCode(code: string): StationDetail {
         var station = Stations.get().find(s => s.code === code);
         var talent = Talents.getByStation(station.id);
-        var syndicatedTalent = SyndicatedShows.getByStation(station.id);
+        var syndicatedTalent = SyndicatedShows.getByStation(station.id).map(t => Talents.getById(t.showId));
         var detail = Object.assign({}, station, { talent: talent, syndicatedTalent: syndicatedTalent });
         return detail;
     }

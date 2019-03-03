@@ -6,6 +6,7 @@ import * as bootstrap from 'bootstrap';
 import { ModalHeader } from '../plugins/modalHeader';
 import { ModalBody } from '../plugins/modalBody';
 import { ModalFooter } from '../plugins/modalFooter';
+import { Talent } from '../talent/talent';
 
 export interface StationDetailProps {
     station: StationSummary;
@@ -50,6 +51,9 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                     {this.props.detail && this.props.detail.email && <p>{this.props.detail.email}</p>}
                     {this.props.detail && this.props.detail.text && <p>{this.props.detail.text}</p>}
                     {this.props.detail && this.props.detail.phone && <p>{this.props.detail.phone}</p>}
+
+                    {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} />)}
+                    {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} />)}
 
                     {this.props.detail == null && <p>Loading...</p>}
                 </ModalBody>

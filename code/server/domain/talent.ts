@@ -21,6 +21,11 @@ export class Talents {
         return talentInStation;
     }
 
+    public static getById(id: string): Talent {
+        var talent = Talents.get().find(t => t.id === id);
+        return talent;
+    }
+
     public static load(cache: boolean = true): Talent[] {
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Talent").getDataRange().getValues().splice(1);
         var talent = data.map(t => new Talent(t)).filter(t => t.isValid());

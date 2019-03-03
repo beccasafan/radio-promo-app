@@ -4,5 +4,5 @@ import { SyndicatedTalent } from "../syndicated/syndicated";
 
 export class StationDetail extends Station {
     public talent: Talent[];
-    public syndicatedTalent: SyndicatedTalent[];
+    public syndicatedTalent: Talent[];
 }
