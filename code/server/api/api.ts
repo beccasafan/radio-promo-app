@@ -3,6 +3,10 @@ import { StationApi } from "../api/station";
 import { CountryApi } from "../api/country";
 import { CacheApi } from "./cache";
 import { TalentApi } from "./talent";
+import { Cache } from "../domain/cache";
+import { Countries } from "../domain/countries";
+import { Stations } from "../domain/stations";
+import { Talents } from "../domain/talent";
 
 function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Content.TextOutput {
     var item = e.parameter.item.toLowerCase();
@@ -23,4 +27,13 @@ function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Cont
 
 function doPost(e: any) {
 
+}
+
+function getServerObjects() {
+    return {
+        Cache: Cache,
+        Countries: Countries,
+        Stations: Stations,
+        Talent: Talents
+    };
 }

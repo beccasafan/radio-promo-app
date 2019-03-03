@@ -21,12 +21,14 @@ export class Talents {
         return talentInStation;
     }
 
-    public static load(): Talent[] {
+    public static load(cache: boolean = true): Talent[] {
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Talent").getDataRange().getValues().splice(1);
         var talent = data.map(t => new Talent(t)).filter(t => t.isValid());
 
-        var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Talent, talent);
-
+        if (cache) {
+            var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Talent, talent);
+        }
+        
         return talent;
     }
 

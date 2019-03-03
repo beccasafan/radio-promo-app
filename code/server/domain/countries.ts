@@ -26,11 +26,13 @@ export class Countries {
         return summaries;
     }
 
-    public static load(): Country[] {
+    public static load(cache: boolean = true): Country[] {
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Country").getDataRange().getValues().slice(1);
         var countries = data.map(c => new Country(c)).filter(c => c.isValid());
 
-        var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Countries, countries);
+        if (cache) {
+            var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Countries, countries);
+        }
 
         return countries;
     }

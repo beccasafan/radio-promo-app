@@ -1,6 +1,8 @@
 import { Countries } from "./countries";
 import { Stations } from "./stations";
 import { Talents } from "./talent";
+import { CacheWrapper } from "../util/cache";
+import { CacheConstants } from "../util/constants";
 
 export class Cache {
     public static reset() {
@@ -44,5 +46,8 @@ export class Cache {
         }, {});
 
         Object.keys(stationsByCountry).forEach(c => Stations.cacheByCountry(c, stationsByCountry[c]));
+
+        console.log("talent by station", talentByStation);
+        console.log("stations by country", stationsByCountry);
     }
 }

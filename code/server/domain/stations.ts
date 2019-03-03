@@ -66,12 +66,13 @@ export class Stations {
         return station;
     }
 
-    public static load(): Station[] {
+    public static load(cache: boolean = true): Station[] {
         var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Station").getDataRange().getValues().slice(1);
         var stations = data.map(s => new Station(s)).filter(s => s.isValid());
 
-        var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Stations, stations);
-
+        if (cache) {
+            var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Stations, stations);
+        }
         return stations;
     }
 
