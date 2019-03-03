@@ -21,7 +21,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
             selectedFormat: null
         };
 
-        this.search = this.search.bind(this);
+        this.formatSelected = this.formatSelected.bind(this);
     }
 
     formatFormat(format: FormatSummary) {
@@ -60,7 +60,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
     render() {
         var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         var events = {
-            "select2:select": this.search
+            "select2:select": this.formatSelected
         };
 
         if (this.props.options == null) {
