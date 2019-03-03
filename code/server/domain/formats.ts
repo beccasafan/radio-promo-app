@@ -36,7 +36,7 @@ export class Formats {
 
     public static loadByCountry(countryId: string): FormatSummary[] {
         var monitors = Monitors.get();
-        
+
         var formatsInCountry = Formats.get().filter(f => f.countryId === countryId).map(f => {
             var monitor = monitors.find(m => m.id === f.monitorId);
             return Object.assign({}, f, {countryId: monitor.countryId, monitor: monitor.name});
@@ -47,15 +47,15 @@ export class Formats {
         return formatsInCountry;
     }
 
-    public static cacheByCountry(stationId: string, data: FormatSummary[]) {
-        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByStation}_${stationId}`, data);
+    public static cacheByCountry(countryId: string, data: FormatSummary[]) {
+        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.FormatsByCountry}_${countryId}`, data);
 
-        var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByStation) || [];
-        var stationIsCached = cachedStations.find(s => s === stationId) != null;
+        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.FormatsByCountry) || [];
+        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
 
-        if (!stationIsCached) {
-            cachedStations.push(stationId);
-            CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, cachedStations);
+        if (!countryIsCached) {
+            cachedCountries.push(countryId);
+            CacheWrapper.ScriptCache.put(CacheConstants.FormatsByCountry, cachedCountries);
         }
     }
 

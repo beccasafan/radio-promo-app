@@ -55,7 +55,7 @@ export class App extends React.Component<object, AppState> {
 
         google.script.run.withSuccessHandler((data: SearchOptions) => {
             this.setState({ search: data })
-        }).getSearchOptions(country.Id);
+        }).getSearchOptions(country.id);
     }
 
     stationSelected(station: StationSummary) {
