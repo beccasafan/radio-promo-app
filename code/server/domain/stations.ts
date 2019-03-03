@@ -4,6 +4,8 @@ import { StationDetail } from "../../common/models/stations/stationDetail";
 import { CacheWrapper } from "../util/cache";
 import { CacheConstants } from "../util/constants";
 import { Talents } from "./talent";
+import { SyndicatedShows } from "./syndicated";
+import { SyndicatedTalent } from "../../common/models/syndicated/syndicated";
 
 export class Stations {
     public static get(): Station[] {
@@ -22,7 +24,8 @@ export class Stations {
 
             stationsInCountry = stations.map(s => {
                 var talent = Talents.getByStation(s.id);
-                var station = Object.assign({}, s, { talent: talent != null ? talent.length : 0});
+                var syndicatedTalent = SyndicatedShows.getByStation(s.id);
+                var station = Object.assign({}, s, { talent: talent != null ? talent.length : 0, syndicated: syndicatedTalent != null ? syndicatedTalent.length : 0 });
                 return station;
             });
         }
