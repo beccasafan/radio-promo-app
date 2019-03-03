@@ -20,4 +20,6 @@ export class SyndicatedTalent {
             }
         }
     }
+
+    public isValid = (): boolean => this.id != null && !this.deleted && this.active;
 }
