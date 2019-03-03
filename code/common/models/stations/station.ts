@@ -11,6 +11,7 @@ export class Station {
     public parentGroup: string;
     public website: string;
     public twitter: string;
+    public hashtag: string;
     public instagram: string;
     public facebook: string;
     public email: string;
@@ -22,7 +23,7 @@ export class Station {
     
     [key:string]: any; // Add index signature
     
-    public static columnMap: string[] = ["id", "countryId", "code", "name", "languageId", "formatId", "location", "parentGroup", "website", "twitter", "instagram", "facebook", "email", "text", "phone", "note", "active", "deleted"];
+    public static columnMap: string[] = ["id", "countryId", "code", "name", "languageId", "formatId", "location", "parentGroup", "website", "twitter", "hashtag", "instagram", "facebook", "email", "text", "phone", "note", "active", "deleted"];
 
     constructor(row: Object[]) {
         for (var i: number = 0; i < Station.columnMap.length; i++) {

@@ -6,13 +6,15 @@ import classNames from 'classnames';
 
 export interface StationSummaryProps {
     station: StationSummary;
+    visible: boolean;
     onSelect: (station: StationSummary) => void;
 }
 export interface StationSummaryState {
-
 }
 
+
 export class Summary extends React.Component<StationSummaryProps, StationSummaryState> {
+    static defaultProps: { visible: boolean; };
     constructor(props: StationSummaryProps) {
         super(props);
         this.state = {};
@@ -32,7 +34,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         }
 
         return (
-            <div className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
+            <div className={classNames(styles.station, this.props.visible ? "" : "d-none", "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
                 <div className="card h-100">
                     <div className="card-header" onClick={this.open}>{this.props.station.code}</div>
                     <div className="card-body">
@@ -65,3 +67,4 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
     }
 }
 
+Summary.defaultProps = { visible: true };

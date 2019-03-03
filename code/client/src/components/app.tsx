@@ -8,6 +8,8 @@ import * as styles from "./../styles/app.scss";
 import { Detail } from './stations/detail';
 import { StationDetail } from '../../../common/models/stations/stationDetail';
 import { ModalEventHandler } from 'bootstrap';
+import { SearchOptions } from '../../../common/models/search';
+import { Search } from './search';
 
 declare var google: any;
 
@@ -17,6 +19,7 @@ export interface AppState {
     stations: StationSummary[];
     selectedStation: StationSummary;
     selectedStationDetails: StationDetail;
+    search: SearchOptions;
 }
 
 export class App extends React.Component<object, AppState> {
@@ -27,7 +30,8 @@ export class App extends React.Component<object, AppState> {
             selectedCountry: null,
             stations: null,
             selectedStation: null,
-            selectedStationDetails: null
+            selectedStationDetails: null,
+            search: null
         };
 
         this.countrySelected = this.countrySelected.bind(this);
@@ -48,6 +52,10 @@ export class App extends React.Component<object, AppState> {
         google.script.run.withSuccessHandler((data: StationSummary[]) => {
             this.setState({ stations: data });
         }).getStationsByCountry(country.id);
+
+        google.script.run.withSuccessHandler((data: SearchOptions) => {
+            this.setState({ search: data })
+        }).getSearchOptions(country.Id);
     }
 
     stationSelected(station: StationSummary) {
@@ -66,9 +74,13 @@ export class App extends React.Component<object, AppState> {
         return (
             <div className={styles.app}>
                 <Intro />
-                {this.state.countries != null && <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} />}
+                {this.state.countries != null && (
+                    <div>
+                        <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} />
+                    </div>
+                )}
 
-                {this.state.selectedCountry && <Stations stations={this.state.stations} onSelect={this.stationSelected} />}
+                {this.state.selectedCountry && <Stations stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} />}
 
                 {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
             </div>

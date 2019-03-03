@@ -6,6 +6,7 @@ export class Talent {
     public name: string;
     public code: string;
     public twitter: string;
+    public hashtag: string;
     public instagram: string;
     public facebook: string;
     public email: string;
@@ -15,7 +16,7 @@ export class Talent {
 
     [key:string]: any; // Add index signature
 
-    public static columnMap: string[]  = ["id", "stationId", "name", "code", "twitter", "instagram", "facebook", "email", "note", "active", "deleted"];
+    public static columnMap: string[]  = ["id", "stationId", "name", "code", "twitter", "hashtag", "instagram", "facebook", "email", "note", "active", "deleted"];
 
     constructor(row: Object[]) {
         for (var i: number = 0; i < Talent.columnMap.length; i++) {
