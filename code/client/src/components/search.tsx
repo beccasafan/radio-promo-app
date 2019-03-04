@@ -66,10 +66,10 @@ export class Search extends React.Component<SearchProps, SearchState> {
                         data={[{ id: "", text: "" }].concat(uniqueFormats)}
                         events={events}
                         placeholder="All Formats"
-                    />}
+                    />
                 </div>
                 <div className={colClass}>
-                    <input type="text" className="form-control" value={this.state.parentGroup} onChange={this.onParentChange} />
+                    <input type="text" className="form-control" placeholder="" value={this.state.parentGroup} onChange={this.onParentChange} />
                 </div>
             </div>
         );
