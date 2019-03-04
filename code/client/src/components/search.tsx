@@ -113,7 +113,8 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
     render() {
         var events = {
-            "select2:select": this.onFormatChange
+            "select2:select": this.onFormatChange,
+            "select2:unselecting": this.onFormatChange
         };
 
         if (this.props.options == null) {
