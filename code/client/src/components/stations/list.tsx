@@ -40,10 +40,17 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
             var format = this.props.search.formats.find(f => f.id === station.formatId);
             return selectedFormat === format.code;
+        };
+        let matchesParentGroup = (station: StationSummary, selectedParentGroup: string) => {
+            if (selectedParentGroup == null) return true;
+
+            return station.parentGroup.indexOf(selectedParentGroup) > 0;
         }
-        var visibleStations = this.props.stations
-            .filter(s => matchesFormat(s, this.state.selectedFormat))
-        ;
+        var visibleStations = this.props.stations.filter(s => 
+            matchesFormat(s, this.state.selectedFormat) && 
+            matchesParentGroup(s, this.state.selectedParent)
+        );
+        
         return visibleStations;
     }
 

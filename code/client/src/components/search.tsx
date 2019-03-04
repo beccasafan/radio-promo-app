@@ -1,27 +1,43 @@
 import * as React from 'react'
-import { SearchOptions } from '../../../common/models/search';
+import { SearchOptions, SearchValues } from '../../../common/models/search';
 import { Select2 } from "./plugins/select2";
+import { throttle, debounce } from 'throttle-debounce';
 
 export interface SearchProps {
     options: SearchOptions;
-    onSearch: (parameters: SearchState) => void;
+    onSearch: (parameters: SearchValues) => void;
 }
 
 export interface SearchState {
-
+    parentGroup: string;
 }
 
 export class Search extends React.Component<SearchProps, SearchState> {
+    onParentChangeDebounced: (parameters: SearchValues) => void;
+    onParentChangeThrottled: (parameters: SearchValues) => void;
+
     constructor(props: SearchProps) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            parentGroup: null
+        };
 
         this.onFormatChange = this.onFormatChange.bind(this);
+        this.onParentChangeDebounced = debounce(500, this.props.onSearch);
+        this.onParentChangeThrottled = throttle(500, this.props.onSearch);
     }
 
     onFormatChange(e: any) {
         this.props.onSearch({ selectedFormat: e.params.data.id as string });
+    }
+
+    onParentChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ parentGroup: e.target.value }, () => {
+            var parentGroup = this.state.parentGroup;
+
+            parentGroup.length < 5 ? this.onParentChangeThrottled({ selectedParent: parentGroup }) : this.onParentChangeDebounced({ selectedParent: parentGroup });
+        });
     }
 
     render() {
@@ -41,15 +57,21 @@ export class Search extends React.Component<SearchProps, SearchState> {
             return uniqueFormats;
         }, []);
 
+        const colClass = "col md-6 lg-4";
+
         return (
-            <div>
-                {this.props.options.formats &&
+            <div className="row py-3 form-group">
+                <div className={colClass}>
                     <Select2
                         width="100%"
-                        data={[{id:"",text:""}].concat(uniqueFormats)}
+                        data={[{ id: "", text: "" }].concat(uniqueFormats)}
                         events={events}
-                        placeholder="Filter by format"
+                        placeholder="All Formats"
                     />}
+                </div>
+                <div className={colClass}>
+                    <input type="text" className="form-control" value={this.state.parentGroup} onChange={this.onParentChange} />
+                </div>
             </div>
         );
     }

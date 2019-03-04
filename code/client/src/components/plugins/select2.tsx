@@ -28,7 +28,7 @@ export class Select2 extends React.Component<any, object> {
     render() {
         return (
             <div>
-                <select className="select2" ref={el => this.el = el} />
+                <select className="select2 form-control" ref={el => this.el = el} />
             </div>
         )
     }
