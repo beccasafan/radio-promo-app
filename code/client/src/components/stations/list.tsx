@@ -47,6 +47,8 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     render() {
+        if (this.props.stations == null) return (<div>Loading...</div>);
+        
         return (
             <div>
                 <Search options={this.props.search} onSearch={this.onSearch} />

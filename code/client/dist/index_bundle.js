@@ -1130,6 +1130,7 @@ function (_super) {
   };
 
   Stations.prototype.render = function () {
+    if (this.props.stations == null) return React.createElement("div", null, "Loading...");
     return React.createElement("div", null, React.createElement(search_1.Search, {
       options: this.props.search,
       onSearch: this.onSearch
