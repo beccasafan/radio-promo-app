@@ -845,8 +845,8 @@ function (_super) {
     return React.createElement("div", null, this.props.options.formats && React.createElement(select2_1.Select2, {
       width: "100%",
       data: [{
-        id: null,
-        text: null
+        id: "",
+        text: ""
       }].concat(uniqueFormats),
       //dataAdapter={dataAdapter}
       events: events,
