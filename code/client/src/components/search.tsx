@@ -10,21 +10,33 @@ export interface SearchProps {
 
 export interface SearchState {
     parentGroup: string;
+    location: string;
+    name: string;
 }
 
 export class Search extends React.Component<SearchProps, SearchState> {
     onParentChangeDebounced: (parameters: SearchValues) => void;
+    onLocationChangeDebounced: (parameters: SearchValues) => void;
+    onNameChangeDebounced: (parameters: SearchValues) => void;
 
     constructor(props: SearchProps) {
         super(props);
 
         this.state = {
-            parentGroup: null
+            parentGroup: null,
+            location: null,
+            name: null
         };
 
         this.onFormatChange = this.onFormatChange.bind(this);
         this.onParentChange = this.onParentChange.bind(this);
         this.onParentChangeDebounced = debounce(250, this.props.onSearch.bind(this));
+
+        this.onLocationChange = this.onLocationChange.bind(this);
+        this.onLocationChangeDebounced = debounce(250, this.props.onSearch.bind(this));
+
+        this.onNameChange = this.onNameChange.bind(this);
+        this.onNameChangeDebounced = debounce(250, this.props.onSearch.bind(this));
     }
 
     onFormatChange(e: any) {
@@ -35,8 +47,24 @@ export class Search extends React.Component<SearchProps, SearchState> {
         this.setState({ parentGroup: e.target.value }, () => {
             var parentGroup = this.state.parentGroup;
 
-            this.onParentChangeDebounced({selectedParent: parentGroup});
+            this.onParentChangeDebounced({ selectedParent: parentGroup });
         });
+    }
+
+    onLocationChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ location: e.target.value }, () => {
+            var location = this.state.location;
+
+            this.onLocationChangeDebounced({ location: location });
+        });
+    }
+
+    onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ name: e.target.value }, () => {
+            var name = this.state.name;
+
+            this.onNameChangeDebounced({ name: name });
+        })
     }
 
     render() {
@@ -56,7 +84,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
             return uniqueFormats;
         }, []);
 
-        const colClass = "col md-6 lg-4";
+        const colClass = "col-sm-12 col-md-6 col-lg-4";
 
         return (
             <div className="row py-3 form-group">
@@ -70,6 +98,12 @@ export class Search extends React.Component<SearchProps, SearchState> {
                 </div>
                 <div className={colClass}>
                     <input type="text" className="form-control" placeholder="Search by Parent Network" value={this.state.parentGroup} onChange={this.onParentChange} />
+                </div>
+                <div className={colClass}>
+                    <input type="text" className="form-control" placeholder="Search by Location" value={this.state.location} onChange={this.onLocationChange} />
+                </div>
+                <div className={colClass}>
+                    <input type="text" className="form-control" placeholder="Search by Name" value={this.state.name} onChange={this.onNameChange} />
                 </div>
             </div>
         );

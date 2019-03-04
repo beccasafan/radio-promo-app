@@ -6,4 +6,6 @@ export class SearchOptions {
 export class SearchValues {
     public selectedFormat?: string;
     public selectedParent?: string;
+    public location?: string;
+    public name?: string;
 }

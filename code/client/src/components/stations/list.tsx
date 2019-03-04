@@ -22,7 +22,6 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     constructor(props: StationsProps) {
         super(props);
         this.state = {
-            selectedFormat: null,
             visibleStations: null
         };
 
@@ -39,12 +38,14 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             var format = this.props.search.formats.find(f => f.id === station.formatId);
             return selectedFormat === format.code;
         };
-        let matchesParentGroup = (station: StationSummary, selectedParentGroup: string) => {
-            return station.parentGroup != null && station.parentGroup.toLowerCase().indexOf(selectedParentGroup) >= 0;
+        let matchesText = (station: StationSummary, property: string, text: string) => {
+            return station[property] != null && station[property].toLowerCase().indexOf(text) >= 0;
         }
         var visibleStations = this.props.stations.filter(s => 
             (this.state.selectedFormat == null || matchesFormat(s, this.state.selectedFormat)) && 
-            (this.state.selectedParent == null || matchesParentGroup(s, this.state.selectedParent.toLowerCase()))
+            (this.state.selectedParent == null || matchesText(s, "parentGroup", this.state.selectedParent.toLowerCase())) &&
+            (this.state.location == null || matchesText(s, "location", this.state.location.toLowerCase())) &&
+            (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()))
         );
 
         return visibleStations;
