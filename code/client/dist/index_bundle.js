@@ -831,7 +831,7 @@ function (_super) {
     var uniqueFormats = this.props.options.formats.reduce(function (uniqueFormats, f) {
       if (uniqueFormats.find(function (uf) {
         return uf.code === f.code;
-      }) != null) {
+      }) == null) {
         uniqueFormats.push({
           id: f.code,
           text: f.name

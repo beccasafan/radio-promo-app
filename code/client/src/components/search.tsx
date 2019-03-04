@@ -38,7 +38,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         }
 
         const uniqueFormats = this.props.options.formats.reduce((uniqueFormats, f) => {
-            if (uniqueFormats.find(uf => uf.code === f.code) != null) {
+            if (uniqueFormats.find(uf => uf.code === f.code) == null) {
                 uniqueFormats.push({ id: f.code, text: f.name });
             }
 
