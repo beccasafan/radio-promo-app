@@ -135,7 +135,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                 <div className={colClass}>
                     <Select2
                         width="100%"
-                        data={[{ id: null, text: "All Formats" }].concat(uniqueFormats)}
+                        data={[{ id: "", text: "All Formats" }].concat(uniqueFormats)}
                         events={events}
                         placeholder="All Formats"
                         allowClear="true"
