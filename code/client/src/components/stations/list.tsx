@@ -29,8 +29,9 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     onSearch(values: SearchValues) {
-        this.setState(values);
-        this.setState({visibleStations: this.filter()});
+        this.setState(values, () => {
+            this.setState({visibleStations: this.filter()});
+        });
     }
 
     filter(): StationSummary[] {
