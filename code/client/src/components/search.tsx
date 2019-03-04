@@ -14,7 +14,6 @@ export interface SearchState {
 
 export class Search extends React.Component<SearchProps, SearchState> {
     onParentChangeDebounced: (parameters: SearchValues) => void;
-    //onParentChangeThrottled: (parameters: SearchValues) => void;
 
     constructor(props: SearchProps) {
         super(props);
@@ -25,8 +24,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
         this.onFormatChange = this.onFormatChange.bind(this);
         this.onParentChange = this.onParentChange.bind(this);
-        this.onParentChangeDebounced = debounce(500, this.props.onSearch.bind(this));
-        //this.onParentChangeThrottled = throttle(500, this.props.onSearch.bind(this));
+        this.onParentChangeDebounced = debounce(250, this.props.onSearch.bind(this));
     }
 
     onFormatChange(e: any) {
@@ -38,7 +36,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
             var parentGroup = this.state.parentGroup;
 
             this.onParentChangeDebounced({selectedParent: parentGroup});
-            //parentGroup.length < 5 ? this.onParentChangeThrottled({ selectedParent: parentGroup }) : this.onParentChangeDebounced({ selectedParent: parentGroup });
         });
     }
 
