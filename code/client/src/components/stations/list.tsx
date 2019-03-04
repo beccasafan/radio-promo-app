@@ -48,6 +48,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             (this.state.selectedParent == null || matchesParentGroup(s, this.state.selectedParent.toLowerCase()))
         );
 
+        console.log("search found " + visibleStations.length + " stations");
         return visibleStations;
     }
 
