@@ -1111,6 +1111,9 @@ function (_super) {
 
   Stations.prototype.onSearch = function (values) {
     this.setState(values);
+    this.setState({
+      visibleStations: this.filter()
+    });
   };
 
   Stations.prototype.filter = function () {
@@ -1140,7 +1143,7 @@ function (_super) {
     }), React.createElement("div", {
       className: "row"
     }, React.createElement(filteredList_1.FilteredList, {
-      stations: this.filter(),
+      stations: this.state.visibleStations || this.props.stations,
       onSelect: this.props.onSelect,
       onSearch: this.onSearch
     })));

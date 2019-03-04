@@ -31,6 +31,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
     onSearch(values: SearchValues) {
         this.setState(values);
+        this.setState({visibleStations: this.filter()});
     }
 
     filter(): StationSummary[] {
@@ -48,13 +49,13 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
     render() {
         if (this.props.stations == null) return (<div>Loading...</div>);
-        
+
         return (
             <div>
                 <Search options={this.props.search} onSearch={this.onSearch} />
 
                 <div className="row">
-                    <FilteredList stations={this.filter()} onSelect={this.props.onSelect} onSearch={this.onSearch} />
+                    <FilteredList stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} />
                 </div>
             </div>
         );
