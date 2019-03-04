@@ -56,7 +56,7 @@ export class Cache {
             var syndicatedTalent = syndicatedTalentByStation[s.id] || [];
             return Object.assign({}, s, { talent: talent.length, syndicated: syndicatedTalent.length });
         });
-        var stationsByCountry = Util.groupBy(stations, "countryId");
+        var stationsByCountry = Util.groupBy(stationSummaries, "countryId");
         Object.keys(stationsByCountry).forEach(c => Stations.cacheByCountry(c, stationsByCountry[c]));
 
         var countrySummaries = countries.map(c => {
