@@ -137,6 +137,8 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
         const colClass = "col-sm-12 col-md-6 col-lg-4 form-group";
 
+        var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
+
         return (
             <div className="">
                 <div className="row py-3">
@@ -144,6 +146,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                         <Select2
                             width="100%"
                             data={[{ id: "", text: "All Formats" }, { id: "", text: "All Formats" }].concat(uniqueFormats)}
+                            dataAdapter={dataAdapter}
                             events={events}
                             placeholder="All Formats"
                             allowClear="true"
