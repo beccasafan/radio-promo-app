@@ -17,7 +17,7 @@ export class Select2 extends React.Component<any, object> {
 
     componentDidMount() {
         this.$el = $(this.el);
-        var props = Object.assign({}, this.props, { theme: "bootstrap4" });
+        var props = Object.assign({}, this.props, { theme: "bootstrap4", allowClear: true });
         this.$el.select2(props);
         Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => { this.props.events[key](e) }));
     }
