@@ -1042,9 +1042,11 @@ function (_super) {
     }
 
     console.log("filtered list render");
-    return React.createElement("div", null, React.createElement("div", {
+    var result = React.createElement("div", null, React.createElement("div", {
       className: "row"
     }, this.getItems()));
+    console.log("filtered list done rendering");
+    return result;
   };
 
   return FilteredList;

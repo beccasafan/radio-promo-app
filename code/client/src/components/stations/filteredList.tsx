@@ -35,12 +35,14 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
             )
         }
 console.log("filtered list render");
-        return (
+        const result = (
             <div>
                 <div className="row">
                     {this.getItems()}
                 </div>
             </div>
         );
+console.log("filtered list done rendering");
+        return result;
     }
 }
