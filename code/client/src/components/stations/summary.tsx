@@ -21,7 +21,9 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
     }
 
     shouldComponentUpdate(nextProps: StationSummaryProps, nextState: StationSummaryState) {
-        return nextProps.station != this.props.station;
+        var shouldUpdate = nextProps.station != this.props.station;
+        console.log(nextProps.station.code, shouldUpdate);
+        return shouldUpdate;
     }
 
     open() {
