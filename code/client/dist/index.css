@@ -143,9 +143,6 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .select2-container--bootstrap4 .select2-selection--single {
   background-color: #fff; }
 
-.app {
-  background-color: #f9faec; }
-
 .station .card-footer a {
   color: #727271; }
 
@@ -159,6 +156,9 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 
 .talent a {
   color: #727271; }
+
+.app {
+  background-color: #f9faec; }
 
 
 /*# sourceMappingURL=index.css.map*/

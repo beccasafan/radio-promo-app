@@ -138,7 +138,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         const colClass = "col-sm-12 col-md-6 col-lg-4 form-group";
 
         return (
-            <div className={styles.search}>
+            <div className="">
                 <div className="row py-3">
                     <div className={colClass}>
                         <Select2
@@ -161,7 +161,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                         <small id="nameHelpBlock" className="form-text text-muted">* Can also search by call-sign.</small>
                     </div>
                     <div className={colClass}>
-                        <div className="row text-center social">
+                        <div className="row text-center social no-gutters">
                             <div className="col">
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange} />
