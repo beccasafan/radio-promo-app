@@ -30,6 +30,7 @@ interface JQuery<TElement = HTMLElement> {
             base.addOptions(base.convertToOptions(data.data));
         }
     }
+    return CustomDataAdapter;
 }));
 
 export class Select2 extends React.Component<any, object> {
