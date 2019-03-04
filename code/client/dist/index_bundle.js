@@ -1031,6 +1031,7 @@ function (_super) {
       return React.createElement("div", null, "No results...");
     }
 
+    console.log("filtered list render");
     return React.createElement("div", null, React.createElement("div", {
       className: "row"
     }, this.props.stations.map(function (s) {
