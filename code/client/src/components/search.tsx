@@ -42,6 +42,8 @@ export class Search extends React.Component<SearchProps, SearchState> {
         };
 
         this.onFormatChange = this.onFormatChange.bind(this);
+        this.onFormatReset = this.onFormatReset.bind(this);
+
         this.onParentChange = this.onParentChange.bind(this);
         this.onParentChangeDebounced = debounce(250, this.props.onSearch.bind(this));
 
@@ -61,6 +63,9 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
     onFormatChange(e: any) {
         this.props.onSearch({ selectedFormat: e.params.data.id as string });
+    }
+    onFormatReset(e: any) {
+        this.props.onSearch({ selectedFormat: null });
     }
 
     onParentChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -88,33 +93,33 @@ export class Search extends React.Component<SearchProps, SearchState> {
     }
 
     onTwitterChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.props.onSearch({twitter: e.target.checked});
+        this.props.onSearch({ twitter: e.target.checked });
     }
 
     onInstagramChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.props.onSearch({instagram: e.target.checked});
+        this.props.onSearch({ instagram: e.target.checked });
     }
 
     onFacebookChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.props.onSearch({facebook: e.target.checked});
+        this.props.onSearch({ facebook: e.target.checked });
     }
 
     onEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.props.onSearch({email: e.target.checked});
+        this.props.onSearch({ email: e.target.checked });
     }
 
     onTextChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.props.onSearch({text: e.target.checked});
+        this.props.onSearch({ text: e.target.checked });
     }
 
     onPhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.props.onSearch({phone: e.target.checked});
+        this.props.onSearch({ phone: e.target.checked });
     }
 
     render() {
         var events = {
             "select2:select": this.onFormatChange,
-            "select2:unselecting": this.onFormatChange
+            "select2:unselecting": this.onFormatReset
         };
 
         if (this.props.options == null) {
