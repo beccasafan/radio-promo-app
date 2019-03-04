@@ -9,6 +9,7 @@ import { Detail } from './stations/detail';
 import { StationDetail } from '../../../common/models/stations/stationDetail';
 import { ModalEventHandler } from 'bootstrap';
 import { SearchOptions } from '../../../common/models/search';
+import classNames = require('classnames');
 
 declare var google: any;
 
@@ -71,7 +72,7 @@ export class App extends React.Component<object, AppState> {
 
     render() {
         return (
-            <div className={styles.app}>
+            <div className={classNames(styles.app, "container")}>
                 <Intro />
                 {this.state.countries != null && (
                     <div>
