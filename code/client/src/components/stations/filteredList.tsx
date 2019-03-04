@@ -34,7 +34,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
                 <div>No results...</div>
             )
         }
-console.log("filtered list render");
+
         const result = (
             <div>
                 <div className="row">
@@ -42,7 +42,7 @@ console.log("filtered list render");
                 </div>
             </div>
         );
-console.log("filtered list done rendering");
+
         return result;
     }
 }
