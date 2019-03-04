@@ -137,7 +137,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
                         width="100%"
                         data={[{ id: "", text: "All Formats" }].concat(uniqueFormats)}
                         events={events}
-                        placeholder="All Formats"
                         allowClear="true"
                     />
                 </div>
