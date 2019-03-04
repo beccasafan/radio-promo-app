@@ -20,6 +20,10 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
         this.state = {};
     }
 
+    getItems() {
+        return this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} />);
+    }
+
     render() {
         if (this.props.stations == null) {
             return (
@@ -34,8 +38,7 @@ console.log("filtered list render");
         return (
             <div>
                 <div className="row">
-                    {this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} />
-        )}
+                    {this.getItems()}
                 </div>
             </div>
         );

@@ -1022,9 +1022,19 @@ function (_super) {
     return _this;
   }
 
-  FilteredList.prototype.render = function () {
+  FilteredList.prototype.getItems = function () {
     var _this = this;
 
+    return this.props.stations.map(function (s) {
+      return React.createElement(summary_1.Summary, {
+        key: s.id,
+        station: s,
+        onSelect: _this.props.onSelect
+      });
+    });
+  };
+
+  FilteredList.prototype.render = function () {
     if (this.props.stations == null) {
       return React.createElement("div", null, "Loading stations...");
     } else if (this.props.stations.length == 0) {
@@ -1034,13 +1044,7 @@ function (_super) {
     console.log("filtered list render");
     return React.createElement("div", null, React.createElement("div", {
       className: "row"
-    }, this.props.stations.map(function (s) {
-      return React.createElement(summary_1.Summary, {
-        key: s.id,
-        station: s,
-        onSelect: _this.props.onSelect
-      });
-    })));
+    }, this.getItems()));
   };
 
   return FilteredList;
