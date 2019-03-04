@@ -1029,6 +1029,7 @@ function (_super) {
       className: "row"
     }, this.props.stations.map(function (s) {
       return React.createElement(summary_1.Summary, {
+        key: s.id,
         station: s,
         onSelect: _this.props.onSelect
       });

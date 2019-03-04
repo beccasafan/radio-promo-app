@@ -34,7 +34,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
         return (
             <div>
                 <div className="row">
-                    {this.props.stations.map(s => <Summary station={s} onSelect={this.props.onSelect} />
+                    {this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} />
         )}
                 </div>
             </div>
