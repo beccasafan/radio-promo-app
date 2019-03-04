@@ -6,12 +6,19 @@ import { throttle, debounce } from 'throttle-debounce';
 export interface SearchProps {
     options: SearchOptions;
     onSearch: (parameters: SearchValues) => void;
+    twitter: boolean;
 }
 
 export interface SearchState {
     parentGroup: string;
     location: string;
     name: string;
+    twitter: boolean;
+    instagram: boolean;
+    facebook: boolean;
+    email: boolean;
+    text: boolean;
+    phone: boolean;
 }
 
 export class Search extends React.Component<SearchProps, SearchState> {
@@ -25,7 +32,13 @@ export class Search extends React.Component<SearchProps, SearchState> {
         this.state = {
             parentGroup: null,
             location: null,
-            name: null
+            name: null,
+            twitter: null,
+            instagram: null,
+            facebook: null,
+            email: null,
+            text: null,
+            phone: null
         };
 
         this.onFormatChange = this.onFormatChange.bind(this);
@@ -37,6 +50,13 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
         this.onNameChange = this.onNameChange.bind(this);
         this.onNameChangeDebounced = debounce(250, this.props.onSearch.bind(this));
+
+        this.onTwitterChange = this.onTwitterChange.bind(this);
+        this.onInstagramChange = this.onInstagramChange.bind(this);
+        this.onFacebookChange = this.onFacebookChange.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
+        this.onPhoneChange = this.onPhoneChange.bind(this);
     }
 
     onFormatChange(e: any) {
@@ -65,6 +85,30 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
             this.onNameChangeDebounced({ name: name });
         })
+    }
+
+    onTwitterChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.props.onSearch({twitter: e.target.checked});
+    }
+
+    onInstagramChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.props.onSearch({instagram: e.target.checked});
+    }
+
+    onFacebookChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.props.onSearch({facebook: e.target.checked});
+    }
+
+    onEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.props.onSearch({email: e.target.checked});
+    }
+
+    onTextChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.props.onSearch({text: e.target.checked});
+    }
+
+    onPhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.props.onSearch({phone: e.target.checked});
     }
 
     render() {
@@ -106,6 +150,38 @@ export class Search extends React.Component<SearchProps, SearchState> {
                 <div className={colClass}>
                     <input type="text" className="form-control" placeholder="Search by Name" value={this.state.name} onChange={this.onNameChange} aria-describedby="nameHelpBlock" />
                     <small id="nameHelpBlock" className="form-text text-muted">* Can also search by call-sign.</small>
+                </div>
+                <div className={colClass}>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange}>
+                            <label className="form-check-label" htmlFor="twitter"><i className="fab fa-twitter"></i> </label>
+                        </input>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="instagram" checked={this.state.instagram} onChange={this.onInstagramChange}>
+                            <label className="form-check-label" htmlFor="instagram"><i className="fab fa-instagram"></i> </label>
+                        </input>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="facebook" checked={this.state.facebook} onChange={this.onFacebookChange}>
+                            <label className="form-check-label" htmlFor="facebook"><i className="fab fa-facebook"></i> </label>
+                        </input>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="email" checked={this.state.email} onChange={this.onEmailChange}>
+                            <label className="form-check-label" htmlFor="email"><i className="fas fa-envelope"></i> </label>
+                        </input>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="text" checked={this.state.text} onChange={this.onTextChange}>
+                            <label className="form-check-label" htmlFor="text"><i className="fas fa-comment"></i> </label>
+                        </input>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="phone" checked={this.state.phone} onChange={this.onPhoneChange}>
+                            <label className="form-check-label" htmlFor="phone"><i className="fas fa-phone"></i> </label>
+                        </input>
+                    </div>
                 </div>
             </div>
         );

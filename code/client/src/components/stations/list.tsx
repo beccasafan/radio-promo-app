@@ -40,12 +40,21 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         };
         let matchesText = (station: StationSummary, property: string, text: string) => {
             return station[property] != null && station[property].toLowerCase().indexOf(text) >= 0;
+        };
+        let matchesBool = (station: StationSummary, property: string) => {
+            return !Util.isEmpty(station[property]);
         }
         var visibleStations = this.props.stations.filter(s => 
             (this.state.selectedFormat == null || matchesFormat(s, this.state.selectedFormat)) && 
             (this.state.selectedParent == null || matchesText(s, "parentGroup", this.state.selectedParent.toLowerCase())) &&
             (this.state.location == null || matchesText(s, "location", this.state.location.toLowerCase())) &&
-            (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase()))
+            (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase())) &&
+            (!this.state.twitter || matchesBool(s, "twitter")) &&
+            (!this.state.instagram || matchesBool(s, "instagram")) &&
+            (!this.state.facebook || matchesBool(s, "facebook")) &&
+            (!this.state.email || matchesBool(s, "email")) &&
+            (!this.state.text || matchesBool(s, "text")) &&
+            (!this.state.phone || matchesBool(s, "phone"))
         );
 
         return visibleStations;
@@ -56,7 +65,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
         return (
             <div>
-                <Search options={this.props.search} onSearch={this.onSearch} />
+                <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
 
                 <div className="row">
                     <FilteredList stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} />

@@ -8,4 +8,11 @@ export class SearchValues {
     public selectedParent?: string;
     public location?: string;
     public name?: string;
+
+    public twitter?: boolean;
+    public instagram?: boolean;
+    public facebook?: boolean;
+    public email?: boolean;
+    public text?: boolean;
+    public phone?: boolean;
 }
