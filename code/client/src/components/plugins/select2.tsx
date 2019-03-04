@@ -34,4 +34,3 @@ export class Select2 extends React.Component<any, object> {
         )
     }
 }
-

@@ -24,3 +24,4 @@ export const select2ResultsOptionHighlighted: string;
 export const select2ResultsOptions: string;
 export const select2ResultsGroup: string;
 export const select2SelectionClear: string;
+export const selectContainerBotstrap4: string;
