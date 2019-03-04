@@ -6,7 +6,7 @@ interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
     select2(options?: any): any;
 }
 
-
+/*
 class ArrayAdapter {
     constructor($element: JQuery<HTMLElement>, options: select2.Options) { }
     addOptions(data: select2.DataFormat[]) { }
@@ -17,7 +17,8 @@ interface JQuery<TElement = HTMLElement> {
     remove(selector?: string): this;
     append(...contents: Array<JQuery.htmlString | JQuery.TypeOrArray<JQuery.Node | JQuery<JQuery.Node>>>): this;
 }
-
+*/
+/*
 (($.fn.select2.amd as any).define('select2/data/customDataAdapter', ['select2/data/array'], function (ArrayAdapter: typeof Function) {
     class CustomDataAdapter extends ArrayAdapter {
         $element: JQuery<HTMLElement>;
@@ -35,7 +36,7 @@ interface JQuery<TElement = HTMLElement> {
 
     return CustomDataAdapter;
 }));
-
+*/
 export class Select2 extends React.Component<any, object> {
     private el: HTMLElement;
     private $el: JQuery<HTMLElement>;
@@ -54,7 +55,7 @@ export class Select2 extends React.Component<any, object> {
     componentWillUnmount() {
         this.$el.select2('destroy');
     }
-
+/*
     componentDidUpdate(prevProps: any) {
         if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
             var select2Data: any = $(this.el).data("select2");
@@ -64,7 +65,7 @@ export class Select2 extends React.Component<any, object> {
             $(this.el).trigger("change");
         }
     }
-
+*/
     render() {
         return (
             <div>

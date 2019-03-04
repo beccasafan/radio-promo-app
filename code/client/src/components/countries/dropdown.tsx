@@ -69,11 +69,13 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             "select2:select": this.countrySelected
         };
 
+        var defaultCountry = this.props.countries.find(c => c.id === this.props.defaultCountry);
+        defaultCountry.selected = true;
+
         return (
             <Select2
                 width="100%"
                 data={this.props.countries}
-                defaultValue={this.props.defaultCountry}
                 templateResult={this.formatCountry}
                 templateSelection={this.formatCountrySelection}
                 //dataAdapter={dataAdapter}

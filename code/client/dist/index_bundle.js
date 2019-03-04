@@ -348,15 +348,20 @@ function (_super) {
   };
 
   CountryDropdown.prototype.render = function () {
+    var _this = this;
+
     var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
 
     var events = {
       "select2:select": this.countrySelected
     };
+    var defaultCountry = this.props.countries.find(function (c) {
+      return c.id === _this.props.defaultCountry;
+    });
+    defaultCountry.selected = true;
     return React.createElement(select2_1.Select2, {
       width: "100%",
       data: this.props.countries,
-      defaultValue: this.props.defaultCountry,
       templateResult: this.formatCountry,
       templateSelection: this.formatCountrySelection,
       //dataAdapter={dataAdapter}
@@ -661,45 +666,39 @@ Object.defineProperty(exports, "__esModule", {
 var React = __webpack_require__(/*! react */ "react");
 
 var $ = __webpack_require__(/*! jquery */ "jquery");
+/*
+class ArrayAdapter {
+    constructor($element: JQuery<HTMLElement>, options: select2.Options) { }
+    addOptions(data: select2.DataFormat[]) { }
+    convertToOptions(data: select2.DataFormat[]): select2.DataFormat[] { return null; }
+}
+interface JQuery<TElement = HTMLElement> {
+    find(arg: any): this;
+    remove(selector?: string): this;
+    append(...contents: Array<JQuery.htmlString | JQuery.TypeOrArray<JQuery.Node | JQuery<JQuery.Node>>>): this;
+}
+*/
 
-var ArrayAdapter =
-/** @class */
-function () {
-  function ArrayAdapter($element, options) {}
+/*
+(($.fn.select2.amd as any).define('select2/data/customDataAdapter', ['select2/data/array'], function (ArrayAdapter: typeof Function) {
+    class CustomDataAdapter extends ArrayAdapter {
+        $element: JQuery<HTMLElement>;
+        constructor($element: any, options: any) {
+            super($element, options);
+            this.$element = $element;
+        }
 
-  ArrayAdapter.prototype.addOptions = function (data) {};
-
-  ArrayAdapter.prototype.convertToOptions = function (data) {
-    return null;
-  };
-
-  return ArrayAdapter;
-}();
-
-$.fn.select2.amd.define('select2/data/customDataAdapter', ['select2/data/array'], function (ArrayAdapter) {
-  var CustomDataAdapter =
-  /** @class */
-  function (_super) {
-    __extends(CustomDataAdapter, _super);
-
-    function CustomDataAdapter($element, options) {
-      var _this = _super.call(this, $element, options) || this;
-
-      _this.$element = $element;
-      return _this;
+        updateOptions(data: { data: select2.DataFormat[] }) {
+            this.$element.find("option").remove();
+            const base: ArrayAdapter = (this as any) as ArrayAdapter;
+            base.addOptions(base.convertToOptions(data.data));
+        }
     }
 
-    CustomDataAdapter.prototype.updateOptions = function (data) {
-      this.$element.find("option").remove();
-      var base = this;
-      base.addOptions(base.convertToOptions(data.data));
-    };
-
     return CustomDataAdapter;
-  }(ArrayAdapter);
+}));
+*/
 
-  return CustomDataAdapter;
-});
 
 var Select2 =
 /** @class */
@@ -728,16 +727,18 @@ function (_super) {
   Select2.prototype.componentWillUnmount = function () {
     this.$el.select2('destroy');
   };
+  /*
+      componentDidUpdate(prevProps: any) {
+          if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+              var select2Data: any = $(this.el).data("select2");
+              var dataAdapter = select2Data.dataAdapter;
+              dataAdapter.updateOptions(this.props);
+              $(this.el).val(this.props.defaultValue);
+              $(this.el).trigger("change");
+          }
+      }
+  */
 
-  Select2.prototype.componentDidUpdate = function (prevProps) {
-    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
-      var select2Data = $(this.el).data("select2");
-      var dataAdapter = select2Data.dataAdapter;
-      dataAdapter.updateOptions(this.props);
-      $(this.el).val(this.props.defaultValue);
-      $(this.el).trigger("change");
-    }
-  };
 
   Select2.prototype.render = function () {
     var _this = this;
