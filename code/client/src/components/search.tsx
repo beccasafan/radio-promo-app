@@ -2,6 +2,7 @@ import * as React from 'react'
 import { SearchOptions, SearchValues } from '../../../common/models/search';
 import { Select2 } from "./plugins/select2";
 import { throttle, debounce } from 'throttle-debounce';
+import * as styles from "./../styles/app.scss";
 
 export interface SearchProps {
     options: SearchOptions;
@@ -137,51 +138,67 @@ export class Search extends React.Component<SearchProps, SearchState> {
         const colClass = "col-sm-12 col-md-6 col-lg-4 form-group";
 
         return (
-            <div className="row py-3">
-                <div className={colClass}>
-                    <Select2
-                        width="100%"
-                        data={[{ id: "", text: "All Formats" }, { id: "", text: "All Formats" }].concat(uniqueFormats)}
-                        events={events}
-                        placeholder="All Formats"
-                        allowClear="true"
-                    />
-                </div>
-                <div className={colClass}>
-                    <input type="text" className="form-control" placeholder="Search by Parent Network" value={this.state.parentGroup} onChange={this.onParentChange} />
-                </div>
-                <div className={colClass}>
-                    <input type="text" className="form-control" placeholder="Search by Location" value={this.state.location} onChange={this.onLocationChange} aria-describedby="locationHelpBlock" />
-                    <small id="locationHelpBlock" className="form-text text-muted">* To search for a State/Province NY, try searching for ", NY"</small>
-                </div>
-                <div className={colClass}>
-                    <input type="text" className="form-control" placeholder="Search by Name" value={this.state.name} onChange={this.onNameChange} aria-describedby="nameHelpBlock" />
-                    <small id="nameHelpBlock" className="form-text text-muted">* Can also search by call-sign.</small>
-                </div>
-                <div className={colClass}>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange} />
-                        <label className="form-check-label" htmlFor="twitter"><i className="fab fa-twitter"></i> </label>
+            <div className={styles.search}>
+                <div className="row py-3">
+                    <div className={colClass}>
+                        <Select2
+                            width="100%"
+                            data={[{ id: "", text: "All Formats" }, { id: "", text: "All Formats" }].concat(uniqueFormats)}
+                            events={events}
+                            placeholder="All Formats"
+                            allowClear="true"
+                        />
                     </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="instagram" checked={this.state.instagram} onChange={this.onInstagramChange} />
-                        <label className="form-check-label" htmlFor="instagram"><i className="fab fa-instagram"></i> </label>
+                    <div className={colClass}>
+                        <input type="text" className="form-control" placeholder="Search by Parent Network" value={this.state.parentGroup} onChange={this.onParentChange} />
                     </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="facebook" checked={this.state.facebook} onChange={this.onFacebookChange} />
-                        <label className="form-check-label" htmlFor="facebook"><i className="fab fa-facebook"></i> </label>
+                    <div className={colClass}>
+                        <input type="text" className="form-control" placeholder="Search by Location" value={this.state.location} onChange={this.onLocationChange} aria-describedby="locationHelpBlock" />
+                        <small id="locationHelpBlock" className="form-text text-muted">* To search for a State/Province NY, try searching for ", NY"</small>
                     </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="email" checked={this.state.email} onChange={this.onEmailChange} />
-                        <label className="form-check-label" htmlFor="email"><i className="fas fa-envelope"></i> </label>
+                    <div className={colClass}>
+                        <input type="text" className="form-control" placeholder="Search by Name" value={this.state.name} onChange={this.onNameChange} aria-describedby="nameHelpBlock" />
+                        <small id="nameHelpBlock" className="form-text text-muted">* Can also search by call-sign.</small>
                     </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="text" checked={this.state.text} onChange={this.onTextChange} />
-                        <label className="form-check-label" htmlFor="text"><i className="fas fa-comment"></i> </label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="phone" checked={this.state.phone} onChange={this.onPhoneChange} />
-                        <label className="form-check-label" htmlFor="phone"><i className="fas fa-phone"></i> </label>
+                    <div className={colClass}>
+                        <div className="row text-center social">
+                            <div className="col">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange} />
+                                    <label className="form-check-label" htmlFor="twitter"><i className="fab fa-twitter"></i> </label>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="instagram" checked={this.state.instagram} onChange={this.onInstagramChange} />
+                                    <label className="form-check-label" htmlFor="instagram"><i className="fab fa-instagram"></i> </label>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="facebook" checked={this.state.facebook} onChange={this.onFacebookChange} />
+                                    <label className="form-check-label" htmlFor="facebook"><i className="fab fa-facebook"></i> </label>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="email" checked={this.state.email} onChange={this.onEmailChange} />
+                                    <label className="form-check-label" htmlFor="email"><i className="fas fa-envelope"></i> </label>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="text" checked={this.state.text} onChange={this.onTextChange} />
+                                    <label className="form-check-label" htmlFor="text"><i className="fas fa-comment"></i> </label>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="phone" checked={this.state.phone} onChange={this.onPhoneChange} />
+                                    <label className="form-check-label" htmlFor="phone"><i className="fas fa-phone"></i> </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
