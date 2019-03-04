@@ -18,13 +18,13 @@ export class Search extends React.Component<SearchProps, SearchState> {
     constructor(props: SearchProps) {
         super(props);
 
-        this.state = { };
+        this.state = {};
 
         this.onFormatChange = this.onFormatChange.bind(this);
     }
 
     onFormatChange(e: any) {
-        this.props.onSearch({selectedFormat: e.params.data.id as string});
+        this.props.onSearch({ selectedFormat: e.params.data.id as string });
     }
 
     render() {
@@ -38,16 +38,16 @@ export class Search extends React.Component<SearchProps, SearchState> {
         }
 
         const uniqueFormats = this.props.options.formats.reduce((uniqueFormats, f) => {
-            if (uniqueFormats[f.name] != null) {
-                uniqueFormats[f.name] = {};
+            if (uniqueFormats.find(uf => uf.code === f.code) != null) {
+                uniqueFormats.push({ id: f.code, text: f.name });
             }
 
             return uniqueFormats;
-        }, {} as {[key:string]: any;});
+        }, []);
 
         return (
             <div>
-                {this.props.options.formats && 
+                {this.props.options.formats &&
                     <Select2
                         width="100%"
                         data={uniqueFormats}

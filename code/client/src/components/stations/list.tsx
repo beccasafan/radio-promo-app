@@ -4,6 +4,7 @@ import { Summary } from "./summary";
 import { StationSummary } from '../../../../common/models/stations/stationSummary';
 import { Search, SearchState } from '../search';
 import { SearchOptions, SearchValues } from '../../../../common/models/search';
+import { FilteredList } from './filteredList';
 
 declare var google: any;
 
@@ -29,9 +30,15 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     onSearch(values: SearchValues) {
+        let matchesFormat = (station: StationSummary, selectedFormat: string) => {
+            if (selectedFormat == null) return true;
+
+            var format = this.props.search.formats.find(f => f.id === station.formatId);
+            return selectedFormat === format.code;
+        }
         var visibleStations = this.props.stations.filter(s => {
             var format = this.props.search.formats.find(f => f.id === s.props.station.formatId);
-            var visibleByFormat = values.selectedFormat === format.code;
+            var visibleByFormat = values.selectedFormat == null || values.selectedFormat === format.code;
             
             return visibleByFormat;
         });
@@ -42,23 +49,12 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     render() {
-        if (this.props.stations == null) {
-            return (
-                <div>Loading stations...</div>
-            );
-        }
-
-        const stations = this.props.stations.map(s =>
-            <Summary station={s} onSelect={this.props.onSelect} />
-        );
         return (
             <div>
-                <div>There are {this.props.stations.length} stations, and {this.state.visibleStations.length} match your search.</div>
-
                 <Search options={this.props.search} onSearch={this.onSearch} />
 
                 <div className="row">
-                    {stations}
+                    <FilteredList stations={this.state.visibleStations} onSelect={this.props.onSelect} onSearch={this.onSearch} />
                 </div>
             </div>
         );

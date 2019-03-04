@@ -829,12 +829,17 @@ function (_super) {
     }
 
     var uniqueFormats = this.props.options.formats.reduce(function (uniqueFormats, f) {
-      if (uniqueFormats[f.name] != null) {
-        uniqueFormats[f.name] = {};
+      if (uniqueFormats.find(function (uf) {
+        return uf.code === f.code;
+      }) != null) {
+        uniqueFormats.push({
+          id: f.code,
+          text: f.name
+        });
       }
 
       return uniqueFormats;
-    }, {});
+    }, []);
     return React.createElement("div", null, this.props.options.formats && React.createElement(select2_1.Select2, {
       width: "100%",
       data: uniqueFormats,
@@ -955,6 +960,88 @@ exports.Detail = Detail;
 
 /***/ }),
 
+/***/ "./code/client/src/components/stations/filteredList.tsx":
+/*!**************************************************************!*\
+  !*** ./code/client/src/components/stations/filteredList.tsx ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __extends = this && this.__extends || function () {
+  var _extendStatics = function extendStatics(d, b) {
+    _extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) {
+        if (b.hasOwnProperty(p)) d[p] = b[p];
+      }
+    };
+
+    return _extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    _extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __webpack_require__(/*! react */ "react");
+
+var summary_1 = __webpack_require__(/*! ./summary */ "./code/client/src/components/stations/summary.tsx");
+
+var FilteredList =
+/** @class */
+function (_super) {
+  __extends(FilteredList, _super);
+
+  function FilteredList(props) {
+    var _this = _super.call(this, props) || this;
+
+    _this.state = {};
+    return _this;
+  }
+
+  FilteredList.prototype.render = function () {
+    var _this = this;
+
+    if (this.props.stations == null) {
+      return React.createElement("div", null, "Loading stations...");
+    } else if (this.props.stations.length == 0) {
+      return React.createElement("div", null, "No results...");
+    }
+
+    return React.createElement("div", null, React.createElement("div", {
+      className: "row"
+    }, this.props.stations.map(function (s) {
+      return React.createElement(summary_1.Summary, {
+        station: s,
+        onSelect: _this.props.onSelect
+      });
+    })));
+  };
+
+  return FilteredList;
+}(React.Component);
+
+exports.FilteredList = FilteredList;
+
+/***/ }),
+
 /***/ "./code/client/src/components/stations/list.tsx":
 /*!******************************************************!*\
   !*** ./code/client/src/components/stations/list.tsx ***!
@@ -997,9 +1084,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var React = __webpack_require__(/*! react */ "react");
 
-var summary_1 = __webpack_require__(/*! ./summary */ "./code/client/src/components/stations/summary.tsx");
-
 var search_1 = __webpack_require__(/*! ../search */ "./code/client/src/components/search.tsx");
+
+var filteredList_1 = __webpack_require__(/*! ./filteredList */ "./code/client/src/components/stations/filteredList.tsx");
 
 ;
 
@@ -1022,12 +1109,22 @@ function (_super) {
   Stations.prototype.onSearch = function (values) {
     var _this = this;
 
+    var matchesFormat = function matchesFormat(station, selectedFormat) {
+      if (selectedFormat == null) return true;
+
+      var format = _this.props.search.formats.find(function (f) {
+        return f.id === station.formatId;
+      });
+
+      return selectedFormat === format.code;
+    };
+
     var visibleStations = this.props.stations.filter(function (s) {
       var format = _this.props.search.formats.find(function (f) {
         return f.id === s.props.station.formatId;
       });
 
-      var visibleByFormat = values.selectedFormat === format.code;
+      var visibleByFormat = values.selectedFormat == null || values.selectedFormat === format.code;
       return visibleByFormat;
     });
     this.setState({
@@ -1036,24 +1133,16 @@ function (_super) {
   };
 
   Stations.prototype.render = function () {
-    var _this = this;
-
-    if (this.props.stations == null) {
-      return React.createElement("div", null, "Loading stations...");
-    }
-
-    var stations = this.props.stations.map(function (s) {
-      return React.createElement(summary_1.Summary, {
-        station: s,
-        onSelect: _this.props.onSelect
-      });
-    });
-    return React.createElement("div", null, React.createElement("div", null, "There are ", this.props.stations.length, " stations, and ", this.state.visibleStations.length, " match your search."), React.createElement(search_1.Search, {
+    return React.createElement("div", null, React.createElement(search_1.Search, {
       options: this.props.search,
       onSearch: this.onSearch
     }), React.createElement("div", {
       className: "row"
-    }, stations));
+    }, React.createElement(filteredList_1.FilteredList, {
+      stations: this.state.visibleStations,
+      onSelect: this.props.onSelect,
+      onSearch: this.onSearch
+    })));
   };
 
   return Stations;
