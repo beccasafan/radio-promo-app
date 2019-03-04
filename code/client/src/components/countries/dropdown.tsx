@@ -6,6 +6,7 @@ import * as styles from "./../../styles/country.scss";
 
 export interface CountryDropdownProps {
     countries: CountrySummary[];
+    defaultCountry: string;
     onChange: (country: CountrySummary) => void;
 }
 export interface CountryDropdownState {
@@ -72,6 +73,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             <Select2
                 width="100%"
                 data={this.props.countries}
+                defaultValue={this.props.defaultCountry}
                 templateResult={this.formatCountry}
                 templateSelection={this.formatCountrySelection}
                 dataAdapter={dataAdapter}

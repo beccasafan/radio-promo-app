@@ -60,6 +60,7 @@ export class Select2 extends React.Component<any, object> {
             var select2Data: any = $(this.el).data("select2");
             var dataAdapter = select2Data.dataAdapter;
             dataAdapter.updateOptions(this.props);
+            $(this.el).val(this.props.defaultValue);
             $(this.el).trigger("change");
         }
     }

@@ -76,7 +76,7 @@ export class App extends React.Component<object, AppState> {
                 <Intro />
                 {this.state.countries != null && (
                     <div>
-                        <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} />
+                        <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} defaultCountry="US" />
                     </div>
                 )}
 

@@ -217,7 +217,8 @@ function (_super) {
       className: styles.app
     }, React.createElement(intro_1.Intro, null), this.state.countries != null && React.createElement("div", null, React.createElement(dropdown_1.CountryDropdown, {
       countries: this.state.countries,
-      onChange: this.countrySelected
+      onChange: this.countrySelected,
+      defaultCountry: "US"
     })), this.state.selectedCountry && React.createElement(list_1.Stations, {
       stations: this.state.stations,
       search: this.state.search,
@@ -355,6 +356,7 @@ function (_super) {
     return React.createElement(select2_1.Select2, {
       width: "100%",
       data: this.props.countries,
+      defaultValue: this.props.defaultCountry,
       templateResult: this.formatCountry,
       templateSelection: this.formatCountrySelection,
       dataAdapter: dataAdapter,
@@ -732,6 +734,7 @@ function (_super) {
       var select2Data = $(this.el).data("select2");
       var dataAdapter = select2Data.dataAdapter;
       dataAdapter.updateOptions(this.props);
+      $(this.el).val(this.props.defaultValue);
       $(this.el).trigger("change");
     }
   };
