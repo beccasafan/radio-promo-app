@@ -44,11 +44,11 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         let matchesParentGroup = (station: StationSummary, selectedParentGroup: string) => {
             if (selectedParentGroup == null) return true;
 
-            return station.parentGroup != null && station.parentGroup.indexOf(selectedParentGroup) > 0;
+            return station.parentGroup != null && station.parentGroup.toLowerCase().indexOf(selectedParentGroup) >= 0;
         }
         var visibleStations = this.props.stations.filter(s => 
             matchesFormat(s, this.state.selectedFormat) && 
-            matchesParentGroup(s, this.state.selectedParent)
+            matchesParentGroup(s, this.state.selectedParent.toLowerCase())
         );
 
         return visibleStations;
