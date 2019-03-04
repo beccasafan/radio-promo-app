@@ -28,7 +28,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
     }
 
     render() {
-        var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
+        //var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         var events = {
             "select2:select": this.onFormatChange
         };
@@ -51,7 +51,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                     <Select2
                         width="100%"
                         data={uniqueFormats}
-                        dataAdapter={dataAdapter}
+                        //dataAdapter={dataAdapter}
                         events={events}
                     />}
             </div>

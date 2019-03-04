@@ -821,8 +821,7 @@ function (_super) {
   };
 
   Search.prototype.render = function () {
-    var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
-
+    //var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
     var events = {
       "select2:select": this.onFormatChange
     };
@@ -846,7 +845,7 @@ function (_super) {
     return React.createElement("div", null, this.props.options.formats && React.createElement(select2_1.Select2, {
       width: "100%",
       data: uniqueFormats,
-      dataAdapter: dataAdapter,
+      //dataAdapter={dataAdapter}
       events: events
     }));
   };
