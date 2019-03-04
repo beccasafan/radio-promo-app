@@ -153,34 +153,28 @@ export class Search extends React.Component<SearchProps, SearchState> {
                 </div>
                 <div className={colClass}>
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange}>
-                            <label className="form-check-label" htmlFor="twitter"><i className="fab fa-twitter"></i> </label>
-                        </input>
+                        <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange} />
+                        <label className="form-check-label" htmlFor="twitter"><i className="fab fa-twitter"></i> </label>
                     </div>
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="instagram" checked={this.state.instagram} onChange={this.onInstagramChange}>
-                            <label className="form-check-label" htmlFor="instagram"><i className="fab fa-instagram"></i> </label>
-                        </input>
+                        <input className="form-check-input" type="checkbox" id="instagram" checked={this.state.instagram} onChange={this.onInstagramChange} />
+                        <label className="form-check-label" htmlFor="instagram"><i className="fab fa-instagram"></i> </label>
                     </div>
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="facebook" checked={this.state.facebook} onChange={this.onFacebookChange}>
-                            <label className="form-check-label" htmlFor="facebook"><i className="fab fa-facebook"></i> </label>
-                        </input>
+                        <input className="form-check-input" type="checkbox" id="facebook" checked={this.state.facebook} onChange={this.onFacebookChange} />
+                        <label className="form-check-label" htmlFor="facebook"><i className="fab fa-facebook"></i> </label>
                     </div>
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="email" checked={this.state.email} onChange={this.onEmailChange}>
-                            <label className="form-check-label" htmlFor="email"><i className="fas fa-envelope"></i> </label>
-                        </input>
+                        <input className="form-check-input" type="checkbox" id="email" checked={this.state.email} onChange={this.onEmailChange} />
+                        <label className="form-check-label" htmlFor="email"><i className="fas fa-envelope"></i> </label>
                     </div>
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="text" checked={this.state.text} onChange={this.onTextChange}>
-                            <label className="form-check-label" htmlFor="text"><i className="fas fa-comment"></i> </label>
-                        </input>
+                        <input className="form-check-input" type="checkbox" id="text" checked={this.state.text} onChange={this.onTextChange} />
+                        <label className="form-check-label" htmlFor="text"><i className="fas fa-comment"></i> </label>
                     </div>
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="phone" checked={this.state.phone} onChange={this.onPhoneChange}>
-                            <label className="form-check-label" htmlFor="phone"><i className="fas fa-phone"></i> </label>
-                        </input>
+                        <input className="form-check-input" type="checkbox" id="phone" checked={this.state.phone} onChange={this.onPhoneChange} />
+                        <label className="form-check-label" htmlFor="phone"><i className="fas fa-phone"></i> </label>
                     </div>
                 </div>
             </div>
