@@ -832,7 +832,7 @@ function (_super) {
 
     var uniqueFormats = this.props.options.formats.reduce(function (uniqueFormats, f) {
       if (uniqueFormats.find(function (uf) {
-        return uf.code === f.code;
+        return uf.id === f.code;
       }) == null) {
         uniqueFormats.push({
           id: f.code,
