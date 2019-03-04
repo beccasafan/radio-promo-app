@@ -9,7 +9,6 @@ import { Detail } from './stations/detail';
 import { StationDetail } from '../../../common/models/stations/stationDetail';
 import { ModalEventHandler } from 'bootstrap';
 import { SearchOptions } from '../../../common/models/search';
-import { Search } from './search';
 
 declare var google: any;
 

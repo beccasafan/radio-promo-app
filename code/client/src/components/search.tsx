@@ -1,9 +1,6 @@
 import * as React from 'react'
 import { SearchOptions } from '../../../common/models/search';
 import { Select2 } from "./plugins/select2";
-import { FormatSummary } from '../../../common/models/formats/formatSummary';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { StationSummary } from '../../../common/models/stations/stationSummary';
 
 export interface SearchProps {
     options: SearchOptions;
@@ -28,7 +25,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
     }
 
     render() {
-        //var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         var events = {
             "select2:select": this.onFormatChange
         };
@@ -51,7 +47,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
                     <Select2
                         width="100%"
                         data={[{id:"",text:""}].concat(uniqueFormats)}
-                        //dataAdapter={dataAdapter}
                         events={events}
                         placeholder="Filter by format"
                     />}

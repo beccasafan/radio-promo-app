@@ -44,7 +44,6 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         var visibleStations = this.props.stations
             .filter(s => matchesFormat(s, this.state.selectedFormat))
         ;
-        console.log(new Date(), "finishing filter");
         return visibleStations;
     }
 
