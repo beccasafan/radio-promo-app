@@ -100,10 +100,12 @@ export class Search extends React.Component<SearchProps, SearchState> {
                     <input type="text" className="form-control" placeholder="Search by Parent Network" value={this.state.parentGroup} onChange={this.onParentChange} />
                 </div>
                 <div className={colClass}>
-                    <input type="text" className="form-control" placeholder="Search by Location" value={this.state.location} onChange={this.onLocationChange} />
+                    <input type="text" className="form-control" placeholder="Search by Location" value={this.state.location} onChange={this.onLocationChange} aria-describedby="locationHelpBlock" />
+                    <small id="locationHelpBlock" className="form-text text-muted">To search for a State/Province NY, try searching for ", NY"</small>
                 </div>
                 <div className={colClass}>
-                    <input type="text" className="form-control" placeholder="Search by Name" value={this.state.name} onChange={this.onNameChange} />
+                    <input type="text" className="form-control" placeholder="Search by Name" value={this.state.name} onChange={this.onNameChange} aria-describedby="nameHelpBlock" />
+                    <small id="nameHelpBlock" className="form-text text-muted">Can also search by call-sign.</small>
                 </div>
             </div>
         );

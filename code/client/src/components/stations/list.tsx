@@ -45,7 +45,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             (this.state.selectedFormat == null || matchesFormat(s, this.state.selectedFormat)) && 
             (this.state.selectedParent == null || matchesText(s, "parentGroup", this.state.selectedParent.toLowerCase())) &&
             (this.state.location == null || matchesText(s, "location", this.state.location.toLowerCase())) &&
-            (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()))
+            (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase()))
         );
 
         return visibleStations;
