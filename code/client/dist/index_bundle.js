@@ -348,9 +348,8 @@ function (_super) {
   };
 
   CountryDropdown.prototype.render = function () {
-    var _this = this;
+    var _this = this; //var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
 
-    var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
 
     var events = {
       "select2:select": this.countrySelected
