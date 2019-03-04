@@ -146,10 +146,6 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .app {
   background-color: #f9faec; }
 
-.search .social {
-  font-size: 24px;
-  margin-top: -4px; }
-
 .station .card-footer a {
   color: #727271; }
 
