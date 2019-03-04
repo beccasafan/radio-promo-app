@@ -64,7 +64,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
     }
 
     render() {
-        var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
+        //var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
         var events = {
             "select2:select": this.countrySelected
         };
