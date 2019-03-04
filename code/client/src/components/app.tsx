@@ -81,7 +81,7 @@ export class App extends React.Component<object, AppState> {
                         </div>
                     )}
 
-                    {this.state.selectedCountry && <Stations stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} />}
+                    {this.state.selectedCountry && <Stations countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} />}
 
                     {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
                 </div>

@@ -9,6 +9,7 @@ import { FilteredList } from './filteredList';
 declare var google: any;
 
 export interface StationsProps {
+    countryId: string;
     stations?: StationSummary[];
     search: SearchOptions;
     onSelect: (station: StationSummary) => void;
@@ -65,7 +66,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         if (this.props.stations == null) return (<div>Loading...</div>);
 
         return (
-            <div>
+            <div key={this.props.countryId}>
                 <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
 
                 <div className="row">
