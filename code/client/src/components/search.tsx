@@ -138,6 +138,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                         data={[{ id: "", text: "" }].concat(uniqueFormats)}
                         events={events}
                         placeholder="All Formats"
+                        allowClear="true"
                     />
                 </div>
                 <div className={colClass}>
