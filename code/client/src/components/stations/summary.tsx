@@ -20,6 +20,10 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         this.open = this.open.bind(this);
     }
 
+    shouldComponentUpdate(nextProps: StationSummaryProps, nextState: StationSummaryState) {
+        return nextProps.station != this.props.station;
+    }
+
     open() {
         this.props.onSelect(this.props.station);
     }

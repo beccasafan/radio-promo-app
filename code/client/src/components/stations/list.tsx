@@ -35,7 +35,6 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     filter(): StationSummary[] {
-        console.log(new Date(), "starting filter");
         let matchesFormat = (station: StationSummary, selectedFormat: string) => {
             if (selectedFormat == null) return true;
 
@@ -50,7 +49,6 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     render() {
-        console.log(new Date(), "station list render");
         if (this.props.stations == null) return (<div>Loading...</div>);
 
         return (
