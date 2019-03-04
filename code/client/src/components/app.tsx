@@ -72,17 +72,19 @@ export class App extends React.Component<object, AppState> {
 
     render() {
         return (
-            <div className={classNames(styles.app, "container")}>
-                <Intro />
-                {this.state.countries != null && (
-                    <div>
-                        <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} defaultCountry="US" />
-                    </div>
-                )}
+            <div className={styles.app}>
+                <div className="container">
+                    <Intro />
+                    {this.state.countries != null && (
+                        <div>
+                            <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} defaultCountry="US" />
+                        </div>
+                    )}
 
-                {this.state.selectedCountry && <Stations stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} />}
+                    {this.state.selectedCountry && <Stations stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} />}
 
-                {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
+                    {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
+                </div>
             </div>
         );
     }
