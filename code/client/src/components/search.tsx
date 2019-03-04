@@ -84,10 +84,10 @@ export class Search extends React.Component<SearchProps, SearchState> {
             return uniqueFormats;
         }, []);
 
-        const colClass = "col-sm-12 col-md-6 col-lg-4";
+        const colClass = "col-sm-12 col-md-6 col-lg-4 form-group";
 
         return (
-            <div className="row py-3 form-group">
+            <div className="row py-3">
                 <div className={colClass}>
                     <Select2
                         width="100%"
