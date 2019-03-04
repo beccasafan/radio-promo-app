@@ -69,7 +69,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                     />
                 </div>
                 <div className={colClass}>
-                    <input type="text" className="form-control" placeholder="" value={this.state.parentGroup} onChange={this.onParentChange} />
+                    <input type="text" className="form-control" placeholder="Search by Parent Network" value={this.state.parentGroup} onChange={this.onParentChange} />
                 </div>
             </div>
         );
