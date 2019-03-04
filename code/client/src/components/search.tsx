@@ -24,8 +24,8 @@ export class Search extends React.Component<SearchProps, SearchState> {
         };
 
         this.onFormatChange = this.onFormatChange.bind(this);
-        this.onParentChangeDebounced = debounce(500, this.props.onSearch);
-        this.onParentChangeThrottled = throttle(500, this.props.onSearch);
+        this.onParentChangeDebounced = debounce(500, this.props.onSearch.bind(this));
+        this.onParentChangeThrottled = throttle(500, this.props.onSearch.bind(this));
     }
 
     onFormatChange(e: any) {
