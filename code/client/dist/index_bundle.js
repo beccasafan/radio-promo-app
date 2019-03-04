@@ -1123,6 +1123,8 @@ function (_super) {
   Stations.prototype.filter = function () {
     var _this = this;
 
+    console.log(new Date(), "starting filter");
+
     var matchesFormat = function matchesFormat(station, selectedFormat) {
       if (selectedFormat == null) return true;
 
@@ -1136,10 +1138,12 @@ function (_super) {
     var visibleStations = this.props.stations.filter(function (s) {
       return matchesFormat(s, _this.state.selectedFormat);
     });
+    console.log(new Date(), "finishing filter");
     return visibleStations;
   };
 
   Stations.prototype.render = function () {
+    console.log(new Date(), "station list render");
     if (this.props.stations == null) return React.createElement("div", null, "Loading...");
     return React.createElement("div", null, React.createElement(search_1.Search, {
       options: this.props.search,
