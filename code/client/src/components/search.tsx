@@ -50,9 +50,10 @@ export class Search extends React.Component<SearchProps, SearchState> {
                 {this.props.options.formats &&
                     <Select2
                         width="100%"
-                        data={uniqueFormats}
+                        data={[{id:null,text:null}].concat(uniqueFormats)}
                         //dataAdapter={dataAdapter}
                         events={events}
+                        placeholder="Filter by format"
                     />}
             </div>
         );
