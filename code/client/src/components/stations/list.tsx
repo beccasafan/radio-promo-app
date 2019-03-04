@@ -35,6 +35,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     filter(): StationSummary[] {
+        console.log("parent", this.state.selectedParent);
         let matchesFormat = (station: StationSummary, selectedFormat: string) => {
             var format = this.props.search.formats.find(f => f.id === station.formatId);
             return selectedFormat === format.code;
