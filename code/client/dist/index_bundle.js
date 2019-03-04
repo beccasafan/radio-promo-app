@@ -1107,6 +1107,10 @@ function (_super) {
   }
 
   Stations.prototype.onSearch = function (values) {
+    this.setState(values);
+  };
+
+  Stations.prototype.filter = function () {
     var _this = this;
 
     var matchesFormat = function matchesFormat(station, selectedFormat) {
@@ -1120,16 +1124,9 @@ function (_super) {
     };
 
     var visibleStations = this.props.stations.filter(function (s) {
-      var format = _this.props.search.formats.find(function (f) {
-        return f.id === s.props.station.formatId;
-      });
-
-      var visibleByFormat = values.selectedFormat == null || values.selectedFormat === format.code;
-      return visibleByFormat;
+      return matchesFormat(s, _this.state.selectedFormat);
     });
-    this.setState({
-      visibleStations: visibleStations
-    });
+    return visibleStations;
   };
 
   Stations.prototype.render = function () {
@@ -1139,7 +1136,7 @@ function (_super) {
     }), React.createElement("div", {
       className: "row"
     }, React.createElement(filteredList_1.FilteredList, {
-      stations: this.state.visibleStations,
+      stations: this.filter(),
       onSelect: this.props.onSelect,
       onSearch: this.onSearch
     })));

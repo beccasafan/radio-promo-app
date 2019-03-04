@@ -30,22 +30,20 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     onSearch(values: SearchValues) {
+        this.setState(values);
+    }
+
+    filter(): StationSummary[] {
         let matchesFormat = (station: StationSummary, selectedFormat: string) => {
             if (selectedFormat == null) return true;
 
             var format = this.props.search.formats.find(f => f.id === station.formatId);
             return selectedFormat === format.code;
         }
-        var visibleStations = this.props.stations.filter(s => {
-            var format = this.props.search.formats.find(f => f.id === s.props.station.formatId);
-            var visibleByFormat = values.selectedFormat == null || values.selectedFormat === format.code;
-            
-            return visibleByFormat;
-        });
-
-        this.setState({
-            visibleStations: visibleStations
-        });
+        var visibleStations = this.props.stations
+            .filter(s => matchesFormat(s, this.state.selectedFormat))
+        ;
+        return visibleStations;
     }
 
     render() {
@@ -54,7 +52,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
                 <Search options={this.props.search} onSearch={this.onSearch} />
 
                 <div className="row">
-                    <FilteredList stations={this.state.visibleStations} onSelect={this.props.onSelect} onSearch={this.onSearch} />
+                    <FilteredList stations={this.filter()} onSelect={this.props.onSelect} onSearch={this.onSearch} />
                 </div>
             </div>
         );
