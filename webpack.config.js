@@ -11,7 +11,7 @@ module.exports = {
         "index": "./code/client/src/index.tsx",
     },
     output: {
-        filename: "index_bundle.js",
+        filename: "[name].js",
         path: __dirname + "/code/client/dist"
     },
 
@@ -21,13 +21,18 @@ module.exports = {
             // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
-        /*new HtmlWebpackPlugin({
+        }),
+        new HtmlWebpackPlugin({
             inject: false,
             template: require('html-webpack-template'),
-            bodyHtmlSnippet: "<div id=\"example\"></div>",
+            bodyHtmlSnippet: "<div id=\"root\"></div>",
+            base: { 'href': 'https://beccasafan.github.io/radio-promo-app/code/client/dist/' },
+            hash: true,
             links: [
-                "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css",
+                "https://beccasafan.github.io/radio-promo-app/code/client/dist/index.css",
+                "https://use.fontawesome.com/releases/v5.7.2/css/all.css"
             ],
             scripts: [
                 "https://code.jquery.com/jquery-3.3.1.slim.min.js",
@@ -35,9 +40,11 @@ module.exports = {
                 "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js",
                 "https://unpkg.com/react@16/umd/react.production.min.js",
                 "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js",
-                "https://unpkg.com/react-redux@latest/dist/react-redux.js"
+                "https://unpkg.com/react-dom@16/umd/react-dom-server.browser.production.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js",
+                "https://beccasafan.github.io/radio-promo-app/code/client/dist/index_bundle.js"
             ]
-        }),*/
+        }),
         /*new CopyPlugin([
             { from: __dirname + '\\code\\client\\dist\\index_bundle.js', to: 'index_bundle.js.html' },
           ]),*/
