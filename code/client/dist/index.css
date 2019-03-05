@@ -162,11 +162,5 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .app {
   background-color: #f9faec; }
 
-.modal-open .modal.modal-center {
-  display: flex !important;
-  align-items: center !important; }
-  .modal-open .modal.modal-center .modal-dialog {
-    flex-grow: 1; }
-
 
 /*# sourceMappingURL=index.css.map*/
