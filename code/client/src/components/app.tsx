@@ -103,6 +103,9 @@ export class App extends React.Component<object, AppState> {
 
 
     render() {
+        if (this.state.countries == null) {
+            return (<p>Loading...</p>);
+        }
         return (
             <div className={styles.app}>
                 <div className="container">
