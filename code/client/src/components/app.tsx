@@ -13,6 +13,7 @@ import classNames = require('classnames');
 import { Tweet } from '../../../common/models/tweets/tweet';
 import { Language } from '../../../common/models/language';
 import { TweetsByLanguage } from '../../../common/models/tweets/tweets';
+import { Util } from '../../../common/util/util';
 
 declare var google: any;
 
@@ -64,7 +65,7 @@ export class App extends React.Component<object, AppState> {
             }, []);
 
             google.script.run.withSuccessHandler((tweets: TweetsByLanguage) => {
-                this.setState({stations: data, tweets: tweets});
+                this.setState({stations: Util.shuffle(data), tweets: tweets});
             }).getTweetsByLanguage(languages);
 
         }).getStationsByCountry(country.id);
