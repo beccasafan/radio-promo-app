@@ -29,10 +29,10 @@ export class Talent extends React.Component<TalentProps, TalentState> {
                         {!Util.isEmpty(this.props.talent.note) && <p className="card-text">{this.props.talent.note}</p>}
                         <div className="row">
                             <div className="col">
-                                {this.props.talent.twitter && <a href={this.props.getTweetUrl(this.props.talent, this.props.languageId)} target="_blank"><i className="fab fa-twitter"></i></a>}
-                                {this.props.talent.instagram && <a href={`https://instagram.com/${this.props.talent.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}
-                                {this.props.talent.facebook && <a href={`https://facebook.com/${this.props.talent.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}
-                                {this.props.talent.email && <a href={`mailto:${this.props.talent.email}`} target="_blank"><i className="fas fa-envelope"></i></a>}
+                                {this.props.talent.twitter && <a className="px-3" href={this.props.getTweetUrl(this.props.talent, this.props.languageId)} target="_blank"><i className="fab fa-twitter"></i></a>}
+                                {this.props.talent.instagram && <a className="px-3" href={`https://instagram.com/${this.props.talent.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}
+                                {this.props.talent.facebook && <a className="px-3" href={`https://facebook.com/${this.props.talent.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}
+                                {this.props.talent.email && <a className="px-3" href={`mailto:${this.props.talent.email}`} target="_blank"><i className="fas fa-envelope"></i></a>}
                             </div>
                         </div>
                     </div>
