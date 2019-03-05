@@ -29,7 +29,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         super(props);
         this.state = {
             visibleStations: null,
-            currentPage: 0
+            currentPage: 1
         };
 
         this.onSearch = this.onSearch.bind(this);
