@@ -15,26 +15,39 @@ export interface StationsProps {
     search: SearchOptions;
     onSelect: (station: StationSummary) => void;
     getTweetUrl: (station: StationSummary) => string;
+    pageSize: number;
 };
 
 export interface StationsState extends SearchValues {
     visibleStations: StationSummary[];
+    currentPage: number;
 }
 
 export class Stations extends React.Component<StationsProps, StationsState> {
+    static defaultProps: { pageSize: number; };
     constructor(props: StationsProps) {
         super(props);
         this.state = {
-            visibleStations: null
+            visibleStations: null,
+            currentPage: 0
         };
 
         this.onSearch = this.onSearch.bind(this);
+        this.onNextClick = this.onNextClick.bind(this);
+        this.onPreviousClick = this.onPreviousClick.bind(this);
     }
 
     onSearch(values: SearchValues) {
         this.setState(values, () => {
-            this.setState({visibleStations: this.filter()});
+            this.setState({ visibleStations: this.filter() });
         });
+    }
+
+    onNextClick() {
+        this.setState((prevState, props) => ({ currentPage: prevState.currentPage + 1 }));
+    }
+    onPreviousClick() {
+        this.setState((prevState, props) => ({ currentPage: prevState.currentPage - 1 }));
     }
 
     filter(): StationSummary[] {
@@ -48,8 +61,8 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         let matchesBool = (station: StationSummary, property: string) => {
             return !Util.isEmpty(station[property]);
         }
-        var visibleStations = this.props.stations.filter(s => 
-            (this.state.selectedFormat == null || matchesFormat(s, this.state.selectedFormat)) && 
+        var visibleStations = this.props.stations.filter(s =>
+            (this.state.selectedFormat == null || matchesFormat(s, this.state.selectedFormat)) &&
             (this.state.selectedParent == null || matchesText(s, "parentGroup", this.state.selectedParent.toLowerCase())) &&
             (this.state.location == null || matchesText(s, "location", this.state.location.toLowerCase())) &&
             (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase())) &&
@@ -65,16 +78,35 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     }
 
     render() {
+        let stationsToShow = this.state.visibleStations || this.props.stations;
+        console.log("all visible", { stations: stationsToShow });
+        stationsToShow = stationsToShow.slice((this.state.currentPage - 1) * this.props.pageSize, this.state.currentPage * this.props.pageSize);
+        console.log("current page", { stations: stationsToShow });
+
         if (this.props.stations == null) return (<div>Loading...</div>);
 
+        let previousElement = this.state.currentPage === 0 ? <li className="page-item disabled"><a className="page-link" href="#" tabIndex={-1}>Previous</a></li> : <li className="page-item"><a className="page-link" onClick={this.onPreviousClick}>Previous</a></li>;
+        let nextElement = this.state.currentPage === Math.ceil(stationsToShow.length / this.props.pageSize) ? <li className="page-item idsabled"><a className="page-link" href="#" tabIndex={-1}>Next</a></li> : <li className="page-item"><a className="page-link" onClick={this.onNextClick}>Next</a></li>;
+
+        let nav = (attr: string) => (
+            <nav aria-label={`${attr} Pager`}>
+                <ul className="pagination">
+                    {previousElement}
+                    {nextElement}
+                </ul>
+            </nav>
+        );
         return (
             <div key={this.props.countryId}>
                 <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
 
                 <div>
-                    <FilteredList key={this.props.countryId} countryId={this.props.countryId} stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} getTweetUrl={this.props.getTweetUrl} />
+                    {nav("Top")}
+                    <FilteredList key={this.props.countryId} countryId={this.props.countryId} stations={stationsToShow} onSelect={this.props.onSelect} onSearch={this.onSearch} getTweetUrl={this.props.getTweetUrl} />
+                    {nav("Bottom")}
                 </div>
             </div>
         );
     }
 }
+Stations.defaultProps = { pageSize: 12 };
