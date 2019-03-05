@@ -159,6 +159,16 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   color: #727271;
   cursor: pointer; }
 
+#root {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  margin: 0px;
+  padding: 0px;
+  overflow: scroll; }
+
 .app {
   background-color: #f9faec; }
 
