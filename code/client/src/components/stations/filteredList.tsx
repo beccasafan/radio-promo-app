@@ -24,16 +24,14 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
         this.state = {};
 
         this.tweetGenerator = new TweetGenerator(this.props.tweets);
-
-        this.onTweet = this.onTweet.bind(this);
     }
 
-    onTweet(station: StationSummary) {
+    getTweetUrl(station: StationSummary) {
         var tweet = this.tweetGenerator.get(station.languageId, station.twitter);
 
         tweet = encodeURIComponent(tweet);
         var url = `https://twitter.com/intent/tweet?text=${tweet}`;
-        window.open(url, "_blank");
+        return url;
     }
 
     render() {
@@ -49,7 +47,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
 
         const result = (
             <>
-                {this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} onTweet={this.onTweet} />)}
+                {this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} getTweetUrl={this.getTweetUrl} />)}
             </>
         );
 

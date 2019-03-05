@@ -7,7 +7,7 @@ import classNames from 'classnames';
 export interface StationSummaryProps {
     station: StationSummary;
     onSelect: (station: StationSummary) => void;
-    onTweet: (station: StationSummary) => void;
+    getTweetUrl: (station: StationSummary) => string;
 }
 export interface StationSummaryState {
 }
@@ -19,7 +19,6 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         this.state = {};
 
         this.open = this.open.bind(this);
-        this.onTweet = this.onTweet.bind(this);
     }
 
     shouldComponentUpdate(nextProps: StationSummaryProps, nextState: StationSummaryState) {
@@ -28,10 +27,6 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
 
     open() {
         this.props.onSelect(this.props.station);
-    }
-
-    onTweet(e: React.MouseEvent<HTMLDivElement>) {
-        this.props.onTweet(this.props.station);
     }
 
     render() {
@@ -60,7 +55,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                         <div className="row no-gutters">
                             <div className="col"><a href="javascript:;" onClick={this.open}><i className="fas fa-eye"></i></a></div>
                             <div className="col">{this.props.station.website && <a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i></a>}</div>
-                            <div className="col">{this.props.station.twitter && <div onClick={this.onTweet}><i className="fab fa-twitter"></i></div>}</div>
+                            <div className="col">{this.props.station.twitter && <a href={this.props.getTweetUrl(this.props.station)} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
                             <div className="col">{this.props.station.instagram && <a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
                             <div className="col">{this.props.station.facebook && <a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
                             <div className="col">{this.props.station.email && <a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
