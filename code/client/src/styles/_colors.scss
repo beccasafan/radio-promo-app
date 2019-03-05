@@ -1,0 +1,33 @@
+@function color($name) {
+    @return map-get($color-palette, $name);
+}
+
+$color-palette: (
+    "redpink": #EB2639,
+    "pink": #EB5769,
+    "white": #EEEDCD,
+    "gray": #BBBA9A,
+    "green": #666646,
+    "lightgreen": #999869,
+    "olivegreen": #BAA93E,
+    "yellow": #FECB5F,
+    "peach": #FECB9C,
+    "black": #211101,
+    "brown": #B96639,
+    "darkgray": #543323,
+    "lightorange": #FB885B,
+    "orange": #FC5626,
+    "darkbrown": #973319,
+    "purplegray": #987778,
+    "red": #EB1821
+);
+
+@each $name, $color in $color-palette {
+    .color--#{$name} {
+        background-color: $color;
+    }
+    .text--#{$name}, .text--#{$name}:hover, .text--#{$name}:focus {
+        color: $color;
+    }
+
+}

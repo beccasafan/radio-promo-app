@@ -1,10 +1,3 @@
-.card-img-overlay {
-  background: rgba(220, 220, 220, 0.9);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-
 .country-selector img {
   width: 48px; }
 
@@ -144,7 +137,6 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   background-color: #fff; }
 
 .station .card-footer i {
-  color: #727271;
   cursor: pointer; }
 
 .station .card-body {
@@ -156,11 +148,220 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
     flex: 1; }
 
 .talent i {
-  color: #727271;
   cursor: pointer; }
 
 .talent .col a:first-child {
   padding-left: 0 !important; }
+
+.color--redpink {
+  background-color: #EB2639; }
+
+.text--redpink, .text--redpink:hover, .text--redpink:focus {
+  color: #EB2639; }
+
+.color--pink {
+  background-color: #EB5769; }
+
+.text--pink, .text--pink:hover, .text--pink:focus {
+  color: #EB5769; }
+
+.color--white {
+  background-color: #EEEDCD; }
+
+.text--white, .text--white:hover, .text--white:focus {
+  color: #EEEDCD; }
+
+.color--gray {
+  background-color: #BBBA9A; }
+
+.text--gray, .text--gray:hover, .text--gray:focus {
+  color: #BBBA9A; }
+
+.color--green {
+  background-color: #666646; }
+
+.text--green, .text--green:hover, .text--green:focus {
+  color: #666646; }
+
+.color--lightgreen {
+  background-color: #999869; }
+
+.text--lightgreen, .text--lightgreen:hover, .text--lightgreen:focus {
+  color: #999869; }
+
+.color--olivegreen {
+  background-color: #BAA93E; }
+
+.text--olivegreen, .text--olivegreen:hover, .text--olivegreen:focus {
+  color: #BAA93E; }
+
+.color--yellow {
+  background-color: #FECB5F; }
+
+.text--yellow, .text--yellow:hover, .text--yellow:focus {
+  color: #FECB5F; }
+
+.color--peach {
+  background-color: #FECB9C; }
+
+.text--peach, .text--peach:hover, .text--peach:focus {
+  color: #FECB9C; }
+
+.color--black {
+  background-color: #211101; }
+
+.text--black, .text--black:hover, .text--black:focus {
+  color: #211101; }
+
+.color--brown {
+  background-color: #B96639; }
+
+.text--brown, .text--brown:hover, .text--brown:focus {
+  color: #B96639; }
+
+.color--darkgray {
+  background-color: #543323; }
+
+.text--darkgray, .text--darkgray:hover, .text--darkgray:focus {
+  color: #543323; }
+
+.color--lightorange {
+  background-color: #FB885B; }
+
+.text--lightorange, .text--lightorange:hover, .text--lightorange:focus {
+  color: #FB885B; }
+
+.color--orange {
+  background-color: #FC5626; }
+
+.text--orange, .text--orange:hover, .text--orange:focus {
+  color: #FC5626; }
+
+.color--darkbrown {
+  background-color: #973319; }
+
+.text--darkbrown, .text--darkbrown:hover, .text--darkbrown:focus {
+  color: #973319; }
+
+.color--purplegray {
+  background-color: #987778; }
+
+.text--purplegray, .text--purplegray:hover, .text--purplegray:focus {
+  color: #987778; }
+
+.color--red {
+  background-color: #EB1821; }
+
+.text--red, .text--red:hover, .text--red:focus {
+  color: #EB1821; }
+
+.color--redpink {
+  background-color: #EB2639; }
+
+.text--redpink, .text--redpink:hover, .text--redpink:focus {
+  color: #EB2639; }
+
+.color--pink {
+  background-color: #EB5769; }
+
+.text--pink, .text--pink:hover, .text--pink:focus {
+  color: #EB5769; }
+
+.color--white {
+  background-color: #EEEDCD; }
+
+.text--white, .text--white:hover, .text--white:focus {
+  color: #EEEDCD; }
+
+.color--gray {
+  background-color: #BBBA9A; }
+
+.text--gray, .text--gray:hover, .text--gray:focus {
+  color: #BBBA9A; }
+
+.color--green {
+  background-color: #666646; }
+
+.text--green, .text--green:hover, .text--green:focus {
+  color: #666646; }
+
+.color--lightgreen {
+  background-color: #999869; }
+
+.text--lightgreen, .text--lightgreen:hover, .text--lightgreen:focus {
+  color: #999869; }
+
+.color--olivegreen {
+  background-color: #BAA93E; }
+
+.text--olivegreen, .text--olivegreen:hover, .text--olivegreen:focus {
+  color: #BAA93E; }
+
+.color--yellow {
+  background-color: #FECB5F; }
+
+.text--yellow, .text--yellow:hover, .text--yellow:focus {
+  color: #FECB5F; }
+
+.color--peach {
+  background-color: #FECB9C; }
+
+.text--peach, .text--peach:hover, .text--peach:focus {
+  color: #FECB9C; }
+
+.color--black {
+  background-color: #211101; }
+
+.text--black, .text--black:hover, .text--black:focus {
+  color: #211101; }
+
+.color--brown {
+  background-color: #B96639; }
+
+.text--brown, .text--brown:hover, .text--brown:focus {
+  color: #B96639; }
+
+.color--darkgray {
+  background-color: #543323; }
+
+.text--darkgray, .text--darkgray:hover, .text--darkgray:focus {
+  color: #543323; }
+
+.color--lightorange {
+  background-color: #FB885B; }
+
+.text--lightorange, .text--lightorange:hover, .text--lightorange:focus {
+  color: #FB885B; }
+
+.color--orange {
+  background-color: #FC5626; }
+
+.text--orange, .text--orange:hover, .text--orange:focus {
+  color: #FC5626; }
+
+.color--darkbrown {
+  background-color: #973319; }
+
+.text--darkbrown, .text--darkbrown:hover, .text--darkbrown:focus {
+  color: #973319; }
+
+.color--purplegray {
+  background-color: #987778; }
+
+.text--purplegray, .text--purplegray:hover, .text--purplegray:focus {
+  color: #987778; }
+
+.color--red {
+  background-color: #EB1821; }
+
+.text--red, .text--red:hover, .text--red:focus {
+  color: #EB1821; }
+
+.card-header {
+  background-color: #EB1821; }
+
+a {
+  color: #211101; }
 
 #root {
   height: 100%;
@@ -171,12 +372,6 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   margin: 0px;
   padding: 0px;
   overflow: scroll; }
-
-.app {
-  background-color: #f9faec; }
-
-a, .btn-link {
-  color: #727271; }
 
 
 /*# sourceMappingURL=index.css.map*/
