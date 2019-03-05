@@ -90,7 +90,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
         let nav = (attr: string) => (
             <nav aria-label={`${attr} Pager`}>
-                <ul className="pagination">
+                <ul className="pagination justify-content-center">
                     {previousElement}
                     {nextElement}
                 </ul>
