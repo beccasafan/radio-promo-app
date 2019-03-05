@@ -154,8 +154,9 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   .station .card-body .card-grow {
     flex: 1; }
 
-.talent a {
-  color: #727271; }
+.talent i {
+  color: #727271;
+  cursor: pointer; }
 
 .app {
   background-color: #f9faec; }
