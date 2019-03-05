@@ -14,21 +14,26 @@ import { Tweets } from "./tweets";
 
 export class Cache {
     public static reset() {
+        console.log("Resetting cache")
         Cache.clear();
         Cache.load();
     }
 
     private static clear() {
+        console.log("Clearing");
         Languages.clear();
+        Tweets.clear();
         Monitors.clear();
         Formats.clear();
         Countries.clear();
         Stations.clear();
         Talents.clear();
         SyndicatedShows.clear();
+        console.log("Cleared");
     }
 
     private static load() {
+        console.log("Loading");
         var languages = Languages.load();
         var tweets = Tweets.load();
         var monitors = Monitors.load();
@@ -86,6 +91,7 @@ export class Cache {
             return Object.assign({}, c, { stations: stations.length })
         }).filter(c => c.stations > 0);
         CacheWrapper.ScriptCache.put(CacheConstants.CountrySummaries, countrySummaries);
+        console.log("Loaded");
     }
 
     public static peek(key: string) {
