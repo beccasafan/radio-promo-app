@@ -24,6 +24,8 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
         this.state = {};
 
         this.tweetGenerator = new TweetGenerator(this.props.tweets);
+
+        this.getTweetUrl = this.getTweetUrl.bind(this);
     }
 
     getTweetUrl(station: StationSummary) {
