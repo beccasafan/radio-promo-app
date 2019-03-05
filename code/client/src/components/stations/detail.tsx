@@ -85,7 +85,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                         <div className="card">
                             <div className="card-header" id={`${idFragment}_talent_heading`}>
                                 <h5 className="mb-0">
-                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Talent</button>
+                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Syndicated Talent</button>
                                 </h5>
                             </div>
 

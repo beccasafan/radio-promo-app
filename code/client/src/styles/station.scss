@@ -23,4 +23,9 @@
         color: #727271;
         cursor: pointer;
     }
+
+    
+    .col a:first-child {
+        padding-left: 0 !important;
+    }
 }

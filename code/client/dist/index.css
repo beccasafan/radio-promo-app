@@ -159,6 +159,9 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   color: #727271;
   cursor: pointer; }
 
+.talent .col a:first-child {
+  padding-left: 0 !important; }
+
 #root {
   height: 100%;
   width: 100%;
