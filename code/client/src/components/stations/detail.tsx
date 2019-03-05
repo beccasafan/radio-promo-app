@@ -76,7 +76,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                                 </h5>
                             </div>
 
-                            <div id={`${idFragment}_talent`} className="collapse show" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                            <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
                                 <div className="card-body">
                                     {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}                                    
                                 </div>
@@ -89,7 +89,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                                 </h5>
                             </div>
 
-                            <div id={`${idFragment}_talent`} className="collapse show" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                            <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
                                 <div className="card-body">
                                     {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
                                 </div>
