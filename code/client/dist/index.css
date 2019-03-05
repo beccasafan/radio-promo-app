@@ -358,13 +358,11 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   color: #EB1821; }
 
 .app {
-  background-color: #EEEDCD; }
+  background-color: #EEEDCD;
+  color: #211101; }
 
 .card-header {
   background-color: #EB1821; }
-
-a {
-  color: #211101; }
 
 #root {
   height: 100%;
