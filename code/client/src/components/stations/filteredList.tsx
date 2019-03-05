@@ -29,7 +29,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
 
     getTweetUrl(station: StationSummary) {
         if (this.tweetGenerator == null) {
-            
+            this.tweetGenerator = new TweetGenerator(this.props.tweets);
         }
         var tweet = this.tweetGenerator.get(station.languageId, station.twitter);
 
