@@ -42,7 +42,6 @@ module.exports = {
                 "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js",
                 "https://unpkg.com/react-dom@16/umd/react-dom-server.browser.production.min.js",
                 "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js",
-                "https://beccasafan.github.io/radio-promo-app/code/client/dist/index_bundle.js"
             ]
         }),
         /*new CopyPlugin([

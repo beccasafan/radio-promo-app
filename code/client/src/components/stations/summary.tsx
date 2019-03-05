@@ -44,7 +44,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
             );
         }
 
-        let emailHref = this.props.station.email.indexOf("@") >= 0 ? `mailto:${this.props.station.email}` : this.props.station.email;
+        let emailHref = this.props.station.email && this.props.station.email.indexOf("@") >= 0 ? `mailto:${this.props.station.email}` : this.props.station.email;
 
         return (
             <div ref={el => this.el = el} id={`station_${this.props.station.id}`} className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
