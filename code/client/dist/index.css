@@ -172,5 +172,8 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .app {
   background-color: #f9faec; }
 
+a, .btn-link {
+  color: #727271; }
+
 
 /*# sourceMappingURL=index.css.map*/

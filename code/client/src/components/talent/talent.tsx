@@ -22,7 +22,7 @@ export class Talent extends React.Component<TalentProps, TalentState> {
 
     render() {
         return (
-            <div className={styles.talent}>
+            <div className={`my-3 ${styles.talent}`}>
                 <div className="card">
                     <div className="card-body">
                         <div className="card-title">{this.props.talent.name}</div>
