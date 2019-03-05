@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ModalEventHandler } from 'bootstrap';
 import { Util } from '../../../../common/util/util';
+import * as styles from "./../../styles/modal.scss";
 
 export interface ModalProps {
     children: React.ReactNode;
@@ -41,8 +42,8 @@ export class Modal extends React.Component<ModalProps, ModalState> {
 
     render() {
         return (
-            <div ref={el => this.el = el} className="modal" tabIndex={-1} role="dialog">
-                <div className="modal-dialog modal-dialog-centered" role="document">
+            <div ref={el => this.el = el} className={`modal ${styles.modalCenter}`} tabIndex={-1} role="dialog">
+                <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         {this.props.children}
                     </div>
