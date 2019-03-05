@@ -12,6 +12,7 @@ export interface StationSummaryProps {
 export interface StationSummaryState {
 }
 
+declare var google: any;
 
 export class Summary extends React.Component<StationSummaryProps, StationSummaryState> {
     private el: HTMLElement;
@@ -33,7 +34,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
 
     open() {
         this.props.onSelect(this.props.station);
-        console.log("scrolled down", { elementScrollTop: this.$el.scrollTop(), elementPosition: this.$el.position(), scrollY: window.scrollY });
+        google.script.run.consoleLog("scrolled down", { elementScrollTop: this.$el.scrollTop(), elementPosition: this.$el.position(), scrollY: window.scrollY });
     }
 
     render() {
