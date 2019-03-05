@@ -13,7 +13,7 @@ export class TweetGenerator {
     }
 
     get(languageId: string, target: string) {
-        if (this.tweets == null) {
+        if (this.tweets == null || this.tweets[languageId] == null) {
             return "";
         }
 
