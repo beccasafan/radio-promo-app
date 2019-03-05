@@ -8,13 +8,11 @@ export class TweetGenerator {
 
     constructor(tweetsByLanguage: TweetsByLanguage) {
         this.tweets = {};
-        console.log("creating tweet generator", tweetsByLanguage);
 
         Object.keys(tweetsByLanguage).forEach(language => this.tweets[language] = Util.shuffle(tweetsByLanguage[language]));
     }
 
     get(languageId: string, target: string) {
-        console.log("getting tweet for ", languageId);
         if (this.tweets == null || this.tweets[languageId] == null) {
             return "";
         }
