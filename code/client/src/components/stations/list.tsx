@@ -71,8 +71,8 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             <div key={this.props.countryId}>
                 <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
 
-                <div className="row">
-                    <FilteredList countryId={this.props.countryId} stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} tweets={this.props.tweets} />
+                <div>
+                    <FilteredList key={this.props.countryId} countryId={this.props.countryId} stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} tweets={this.props.tweets} />
                 </div>
             </div>
         );

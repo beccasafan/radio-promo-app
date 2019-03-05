@@ -29,7 +29,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
 
     getTweetUrl(station: StationSummary) {
         if (this.tweetGenerator == null) {
-            this.tweetGenerator = new TweetGenerator(this.props.tweets);
+            
         }
         var tweet = this.tweetGenerator.get(station.languageId, station.twitter);
 
@@ -50,7 +50,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
         }
 
         const result = (
-            <div key={this.props.countryId}>
+            <div key={this.props.countryId} className="row">
                 {this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} getTweetUrl={this.getTweetUrl} />)}
             </div>
         );
