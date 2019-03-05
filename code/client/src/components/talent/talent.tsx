@@ -7,7 +7,7 @@ import { StationSummary } from '../../../../common/models/stations/stationSummar
 export interface TalentProps {
     talent: TalentModel;
     languageId: string;
-    getTweetUrl: (station: StationSummary|TalentModel, languageId?: string) => string;
+    getTweetUrl: (station: StationSummary | TalentModel, languageId?: string) => string;
 }
 
 export interface TalentState {
@@ -28,10 +28,12 @@ export class Talent extends React.Component<TalentProps, TalentState> {
                         <div className="card-title">{this.props.talent.name}</div>
                         {!Util.isEmpty(this.props.talent.note) && <p className="card-text">{this.props.talent.note}</p>}
                         <div className="row">
-                        <div className="col">{this.props.talent.twitter && <a href={this.props.getTweetUrl(this.props.talent, this.props.languageId)} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
-                            <div className="col">{this.props.talent.instagram && <a href={`https://instagram.com/${this.props.talent.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
-                            <div className="col">{this.props.talent.facebook && <a href={`https://facebook.com/${this.props.talent.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
-                            <div className="col">{this.props.talent.email && <a href={`mailto:${this.props.talent.email}`} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
+                            <div className="col">
+                                {this.props.talent.twitter && <a href={this.props.getTweetUrl(this.props.talent, this.props.languageId)} target="_blank"><i className="fab fa-twitter"></i></a>}
+                                {this.props.talent.instagram && <a href={`https://instagram.com/${this.props.talent.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}
+                                {this.props.talent.facebook && <a href={`https://facebook.com/${this.props.talent.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}
+                                {this.props.talent.email && <a href={`mailto:${this.props.talent.email}`} target="_blank"><i className="fas fa-envelope"></i></a>}
+                            </div>
                         </div>
                     </div>
                 </div>
