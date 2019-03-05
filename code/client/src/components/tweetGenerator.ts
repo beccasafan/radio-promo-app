@@ -24,7 +24,7 @@ export class TweetGenerator {
             .replace("{{username}}", "@Louis_Tomlinson")
             .replace("{{artist}}", "@Louis_Tomlinson")
             .replace("{{hashtag}}", "#TwoOfUs")
-            .replace("{{target}}", target)
+            .replace("{{target}}", `@${target}`)
         ;
 
         return tweet;
