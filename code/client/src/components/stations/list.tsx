@@ -5,6 +5,7 @@ import { StationSummary } from '../../../../common/models/stations/stationSummar
 import { Search, SearchState } from '../search';
 import { SearchOptions, SearchValues } from '../../../../common/models/search';
 import { FilteredList } from './filteredList';
+import { TweetsByLanguage } from '../../../../common/models/tweets/tweets';
 
 declare var google: any;
 
@@ -13,6 +14,7 @@ export interface StationsProps {
     stations?: StationSummary[];
     search: SearchOptions;
     onSelect: (station: StationSummary) => void;
+    tweets: TweetsByLanguage;
 };
 
 export interface StationsState extends SearchValues {
@@ -70,7 +72,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
                 <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
 
                 <div className="row">
-                    <FilteredList stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} />
+                    <FilteredList stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} tweets={this.props.tweets} />
                 </div>
             </div>
         );

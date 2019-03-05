@@ -18,4 +18,7 @@ export class CacheConstants {
 
     public static readonly Talent = "RadioApp.Talent";
     public static readonly TalentByStation = "RadioApp.TalentByStation";
+
+    public static readonly Tweets = "RadioApp.Tweets";
+    public static readonly TweetsByLanguage = "RadioApp.TweetsByLanguage";
 }

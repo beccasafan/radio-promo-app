@@ -10,6 +10,9 @@ import { StationDetail } from '../../../common/models/stations/stationDetail';
 import { ModalEventHandler } from 'bootstrap';
 import { SearchOptions } from '../../../common/models/search';
 import classNames = require('classnames');
+import { Tweet } from '../../../common/models/tweets/tweet';
+import { Language } from '../../../common/models/language';
+import { TweetsByLanguage } from '../../../common/models/tweets/tweets';
 
 declare var google: any;
 
@@ -20,6 +23,7 @@ export interface AppState {
     selectedStation: StationSummary;
     selectedStationDetails: StationDetail;
     search: SearchOptions;
+    tweets: TweetsByLanguage;
 }
 
 export class App extends React.Component<object, AppState> {
@@ -31,7 +35,8 @@ export class App extends React.Component<object, AppState> {
             stations: null,
             selectedStation: null,
             selectedStationDetails: null,
-            search: null
+            search: null,
+            tweets: null
         };
 
         this.countrySelected = this.countrySelected.bind(this);
@@ -51,6 +56,19 @@ export class App extends React.Component<object, AppState> {
 
         google.script.run.withSuccessHandler((data: StationSummary[]) => {
             this.setState({ stations: data });
+
+            var languages = data.reduce((uniqueLanguages: string[], d) => {
+                if (uniqueLanguages.find(ul => ul === d.languageId) == null) {
+                    uniqueLanguages.push(d.languageId);
+                }
+
+                return uniqueLanguages;
+            }, []);
+
+            google.script.run.withSuccessHandler((tweets: TweetsByLanguage) => {
+                this.setState({tweets: tweets});
+            }).getTweetsByLanguage(languages);
+
         }).getStationsByCountry(country.id);
 
         google.script.run.withSuccessHandler((data: SearchOptions) => {
@@ -81,7 +99,7 @@ export class App extends React.Component<object, AppState> {
                         </div>
                     )}
 
-                    {this.state.selectedCountry && <Stations key={this.state.selectedCountry.id} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} />}
+                    {this.state.selectedCountry && this.state.tweets && <Stations key={this.state.selectedCountry.id} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} tweets={this.state.tweets} />}
 
                     {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
                 </div>

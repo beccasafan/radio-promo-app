@@ -15,4 +15,8 @@ export class Languages {
         
         return languages;
     }
+
+    public static clear() {
+        CacheWrapper.ScriptCache.remove(CacheConstants.Languages);
+    }
 }
