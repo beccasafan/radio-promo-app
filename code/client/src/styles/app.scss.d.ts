@@ -36,4 +36,5 @@ export const textRed: string;
 export const app: string;
 export const container: string;
 export const cardHeader: string;
+export const cardFooter: string;
 export const root: string;

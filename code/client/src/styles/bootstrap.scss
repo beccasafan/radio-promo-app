@@ -17,6 +17,11 @@ $text: #333333;
 
 .card-header {
     background-color: $cardHeader;
+    color: $links;
+}
+
+.card-footer {
+    background-color: $cardFooter;
 }
 
 a {
