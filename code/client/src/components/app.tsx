@@ -96,14 +96,14 @@ export class App extends React.Component<object, AppState> {
 
     onModalOpen(e: ModalEventHandler<HTMLDivElement>) {
         console.log("open", e);
-        $("body").scrollTop(0);
+        window.scrollTo(0, 0);
     }
     
     onModalClose(e: ModalEventHandler<HTMLDivElement>) {
         console.log("close", e);
         var stationElement = $(`#station_${this.state.selectedStation.id}`);
 
-        $("body").scrollTop(stationElement.position().top);
+        window.scrollTo(0, stationElement.position().top);
     }
     getTweetUrl(station: StationSummary|Talent, languageId?: string) {
         var tweet = this.state.tweetGenerator.get(languageId || station.languageId, station.twitter);
