@@ -33,7 +33,6 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     }
 
     componentDidUpdate(prevProps: any) {
-        console.log("modal", prevProps, this.props);
         if (this.props.contentKey != null) {
             this.$el.modal("show");
         } else {
@@ -43,7 +42,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
 
     render() {
         return (
-            <div ref={el => this.el = el} className={`modal ${styles.modalCenter}`} tabIndex={-1} role="dialog">
+            <div ref={el => this.el = el} className={`modal fade ${styles.modalCenter}`} tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         {this.props.children}
