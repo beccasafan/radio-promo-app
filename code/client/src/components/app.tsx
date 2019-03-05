@@ -103,22 +103,22 @@ export class App extends React.Component<object, AppState> {
 
 
     render() {
-        if (this.state.countries == null) {
-            return (<p>Loading...</p>);
-        }
         return (
             <div className={styles.app}>
                 <div className="container">
                     <Intro />
+
+                    {this.state.countries == null && <p>Loading...</p>}
+
                     {this.state.countries != null && (
                         <div>
                             <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} defaultCountry="US" />
                         </div>
                     )}
 
-                    {this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} getTweetUrl={this.getTweetUrl} />}
+                    {this.state.countries && this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} getTweetUrl={this.getTweetUrl} />}
 
-                    {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} getTweetUrl={this.getTweetUrl} />}
+                    {this.state.countries && this.state.stations && this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} getTweetUrl={this.getTweetUrl} />}
                 </div>
             </div>
         );
