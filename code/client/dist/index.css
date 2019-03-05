@@ -143,8 +143,9 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .select2-container--bootstrap4 .select2-selection--single {
   background-color: #fff; }
 
-.station .card-footer a {
-  color: #727271; }
+.station .card-footer i {
+  color: #727271;
+  cursor: pointer; }
 
 .station .card-body {
   display: flex;

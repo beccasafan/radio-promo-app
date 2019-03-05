@@ -19,6 +19,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         this.state = {};
 
         this.open = this.open.bind(this);
+        this.onTweet = this.onTweet.bind(this);
     }
 
     shouldComponentUpdate(nextProps: StationSummaryProps, nextState: StationSummaryState) {
