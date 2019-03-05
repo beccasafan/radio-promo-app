@@ -45,7 +45,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         }
 
         return (
-            <div ref={el => this.el = el} className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
+            <div ref={el => this.el = el} id={`station_${this.props.station.id}`} className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
                 <div className="card h-100">
                     <div className="card-header" onClick={this.open}>{this.props.station.code}</div>
                     <div className="card-body">

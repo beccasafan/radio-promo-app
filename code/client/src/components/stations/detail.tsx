@@ -37,7 +37,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
 
     render() {
         return (
-            <Modal contentKey={this.props.station != null ? this.props.station.id : null } handleClose={this.handleClose} events={{"shown.bs.modal": this.props.onModalOpen, "hidden.bs.modal": this.props.onModalClose}}>
+            <Modal contentKey={this.props.station != null ? this.props.station.id : null } handleClose={this.handleClose} events={{"shown.bs.modal": this.props.onModalOpen, "hide.bs.modal": this.props.onModalClose}}>
                 <ModalHeader>
                     <h5 className="modal-title" id="station-detail-header">{this.props.station.name}</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
