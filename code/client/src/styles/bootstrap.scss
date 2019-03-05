@@ -1,18 +1,24 @@
 @import "colors";
 
+$background: #FEF1C4;
+$cardHeader: #FEF5D8;
+$cardFooter: #F9DC7C;
+$links: #ED2232;
+$text: #333333;
+
 .app {
-    background-color: color("white");
-    color: color("black");
+    background-color: $background;
+    color: $text;
 }
 
 .card-header {
-    background-color: color("redpink");
+    background-color: $cardHeader;
 }
 
 a {
-    color: color("redpink");
+    color: $links;
 
     &:hover {
-        color: color("red");
+        color: $links;
     }
 }
