@@ -4,7 +4,7 @@ import { Util } from "../../../common/util/util";
 
 export class TweetGenerator {
     private tweets: TweetsByLanguage;
-    private currentIndex: number;
+    private currentIndex: number = 0;
 
     constructor(tweets: TweetsByLanguage) {
         this.tweets = {};
