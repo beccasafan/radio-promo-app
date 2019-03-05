@@ -7,10 +7,13 @@ export interface ModalProps {
     children: React.ReactNode;
     contentKey: string;
     handleClose: (e: ModalEventHandler<HTMLDivElement>) => void;
+    events: {[key: string]: any};
 }
 
 export interface ModalState {
 }
+
+declare var google: any;
 
 export class Modal extends React.Component<ModalProps, ModalState> {
     private el: HTMLElement;
@@ -26,7 +29,10 @@ export class Modal extends React.Component<ModalProps, ModalState> {
         //this.$el.appendTo("body") 
         this.$el.modal({focus: true});
         this.$el.on("hidden.bs.modal", (e) => this.props.handleClose(e));
-        this.$el.on("shown.bs.modal", (e) => {console.log("modal position", this.$el.find(".modal-body").position())});
+
+        let modalBody = this.$el.find(".modal-body");
+        Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => { this.props.events[key](e) }));
+        this.$el.on("shown.bs.modal", (e) => {google.script.run.consoleLog("modal position", modalBody.scrollTop(), modalBody.position().top, window.scrollY)});
     }
 
     componentWillUnmount() {
@@ -44,7 +50,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     render() {
         return (
             <div ref={el => this.el = el} className={`modal fade`} tabIndex={-1} role="dialog">
-                <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         {this.props.children}
                     </div>

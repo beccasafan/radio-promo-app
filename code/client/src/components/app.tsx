@@ -48,6 +48,8 @@ export class App extends React.Component<object, AppState> {
         this.stationSelected = this.stationSelected.bind(this);
         this.stationUnselected = this.stationUnselected.bind(this);
         this.getTweetUrl = this.getTweetUrl.bind(this);
+        this.onModalOpen = this.onModalOpen.bind(this);
+        this.onModalClose = this.onModalClose.bind(this);
     }
 
     componentDidMount() {
@@ -92,7 +94,14 @@ export class App extends React.Component<object, AppState> {
         this.setState({ selectedStation: null, selectedStationDetails: null });
     }
 
+    onModalOpen(e: ModalEventHandler<HTMLDivElement>) {
+        console.log("open", e);
+        window.scroll(0, 0);
+    }
     
+    onModalClose(e: ModalEventHandler<HTMLDivElement>) {
+        console.log("close", e);
+    }
     getTweetUrl(station: StationSummary|Talent, languageId?: string) {
         var tweet = this.state.tweetGenerator.get(languageId || station.languageId, station.twitter);
 
@@ -120,7 +129,7 @@ export class App extends React.Component<object, AppState> {
 
                     {this.state.countries && this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} getTweetUrl={this.getTweetUrl} />}
 
-                    {this.state.countries && this.state.stations && this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} getTweetUrl={this.getTweetUrl} />}
+                    {this.state.countries && this.state.stations && this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} getTweetUrl={this.getTweetUrl} onModalOpen={this.onModalOpen} onModalClose={this.onModalClose} />}
                 </div>
             </div>
         );
