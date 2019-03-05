@@ -118,8 +118,8 @@ export class App extends React.Component<object, AppState> {
         return (
             <div className={styles.app}>
                 <div className="container">
-                    <Intro />
-
+                    <img src="https://beccasafan.github.io/radio-promo-app/code/client/dist/banner.png" className="img-fluid" alt="Radio Request Database" />
+                    
                     {this.state.countries == null && <p>Loading...</p>}
 
                     {this.state.countries != null && (
