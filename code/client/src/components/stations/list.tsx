@@ -81,10 +81,10 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         let allStations = this.state.visibleStations || this.props.stations;
         var stationsToShow = allStations.slice((this.state.currentPage - 1) * this.props.pageSize, this.state.currentPage * this.props.pageSize);
 
-        if (this.props.stations == null) return (<div>Loading...</div>);
+        if (this.props.stations == null) return (<p>Loading...</p>);
 
-        let previousElement = this.state.currentPage <= 1 ? <li className="page-item disabled"><a className="page-link" href="#" tabIndex={-1}>Previous</a></li> : <li className="page-item"><a className="page-link" href="#" onClick={this.onPreviousClick}>Previous</a></li>;
-        let nextElement = this.state.currentPage >= Math.ceil(allStations.length / this.props.pageSize) ? <li className="page-item disabled"><a className="page-link" href="#" tabIndex={-1}>Next</a></li> : <li className="page-item"><a className="page-link" href="#" onClick={this.onNextClick}>Next</a></li>;
+        let previousElement = this.state.currentPage <= 1 ? <li className="page-item disabled"><a className="page-link" tabIndex={-1}>Previous</a></li> : <li className="page-item"><a className="page-link" onClick={this.onPreviousClick}>Previous</a></li>;
+        let nextElement = this.state.currentPage >= Math.ceil(allStations.length / this.props.pageSize) ? <li className="page-item disabled"><a className="page-link" tabIndex={-1}>Next</a></li> : <li className="page-item"><a className="page-link" onClick={this.onNextClick}>Next</a></li>;
 
         let nav = (attr: string) => (
             <nav aria-label={`${attr} Pager`}>
