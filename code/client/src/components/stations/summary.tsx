@@ -14,11 +14,17 @@ export interface StationSummaryState {
 
 
 export class Summary extends React.Component<StationSummaryProps, StationSummaryState> {
+    private el: HTMLElement;
+    private $el: JQuery<HTMLDivElement>;
     constructor(props: StationSummaryProps) {
         super(props);
         this.state = {};
 
         this.open = this.open.bind(this);
+    }
+
+    componentDidMount() {
+        this.$el = $(this.el) as JQuery<HTMLDivElement>;
     }
 
     shouldComponentUpdate(nextProps: StationSummaryProps, nextState: StationSummaryState) {
@@ -27,6 +33,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
 
     open() {
         this.props.onSelect(this.props.station);
+        console.log("scrolled down", { elementScrollTop: this.$el.scrollTop(), elementPosition: this.$el.position(), scrollY: window.scrollY });
     }
 
     render() {
@@ -37,7 +44,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         }
 
         return (
-            <div className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
+            <div ref={el => this.el = el} className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
                 <div className="card h-100">
                     <div className="card-header" onClick={this.open}>{this.props.station.code}</div>
                     <div className="card-body">
