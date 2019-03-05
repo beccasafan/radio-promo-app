@@ -21,6 +21,7 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
     tweetGenerator: TweetGenerator;
     constructor(props: FilteredListProps) {
         super(props);
+        console.log("creating new Filtered List", this.props.countryId, this.props.tweets);
 
         this.state = {};
 
