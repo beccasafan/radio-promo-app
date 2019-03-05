@@ -50,7 +50,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                     {this.props.detail && this.props.detail.facebook && <p>{this.props.detail.facebook}</p>}
                     {this.props.detail && this.props.detail.email && <p>{this.props.detail.email}</p>}
                     {this.props.detail && this.props.detail.text && <p>{this.props.detail.text}</p>}
-                    {this.props.detail && this.props.detail.phone && <p>{this.props.detail.phone}</p>}
+                    {this.props.detail && this.props.detail.phone && (<a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.detail.phone}</a>)}
 
                     {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} />)}
                     {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} />)}

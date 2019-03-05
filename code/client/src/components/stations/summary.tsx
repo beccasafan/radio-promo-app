@@ -60,7 +60,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
                             <div className="col">{this.props.station.facebook && <a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
                             <div className="col">{this.props.station.email && <a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
                             <div className="col">{this.props.station.text && <a href="javascript:;" onClick={this.open}><i className="fas fa-comment"></i></a>}</div>
-                            <div className="col">{this.props.station.phone && <a href="javascript:;" onClick={this.open}><i className="fas fa-phone"></i></a>}</div>
+                            <div className="col">{this.props.station.phone && <a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i></a>}</div>
                             <div className="col">{this.props.station.note && <a href="javascript:;" onClick={this.open}><i onClick={this.open} className="fas fa-sticky-note"></i></a>}</div>
                         </div>
                     </div>
