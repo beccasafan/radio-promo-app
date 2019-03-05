@@ -79,9 +79,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
     render() {
         let allStations = this.state.visibleStations || this.props.stations;
-        console.log("all visible", { stations: allStations });
         var stationsToShow = allStations.slice((this.state.currentPage - 1) * this.props.pageSize, this.state.currentPage * this.props.pageSize);
-        console.log("current page", { stations: stationsToShow });
 
         if (this.props.stations == null) return (<div>Loading...</div>);
 
