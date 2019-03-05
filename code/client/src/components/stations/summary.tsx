@@ -34,7 +34,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
 
     open() {
         this.props.onSelect(this.props.station);
-        google.script.run.consoleLog("scrolled down", { elementScrollTop: this.$el.scrollTop(), elementPosition: this.$el.position(), scrollY: window.scrollY });
+        google.script.run.consoleLog("scrolled down", this.$el.scrollTop(), this.$el.position().top, window.scrollY);
     }
 
     render() {

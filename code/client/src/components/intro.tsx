@@ -12,7 +12,7 @@ export class Intro extends React.Component<object, object> {
                 <h1 className="display-4">Radio Promo App</h1>
                 <p className="lead">Explain things here...</p>
                 <hr className="my-1" />
-                <p>Maybe some more text here 3</p>
+                <p>Maybe some more text here 4</p>
             </div>
         );
     }
