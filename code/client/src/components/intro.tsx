@@ -11,7 +11,7 @@ export class Intro extends React.Component<object, object> {
             <div className="jumbotron">
                 <h1 className="display-4">Radio Promo App</h1>
                 <p className="lead">Explain things here...</p>
-                <hr className="my-4" />
+                <hr className="my-1" />
                 <p>Maybe some more text here</p>
             </div>
         );
