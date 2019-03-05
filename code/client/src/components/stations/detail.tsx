@@ -7,11 +7,13 @@ import { ModalHeader } from '../plugins/modalHeader';
 import { ModalBody } from '../plugins/modalBody';
 import { ModalFooter } from '../plugins/modalFooter';
 import { Talent } from '../talent/talent';
+import { Talent as TalentModel } from "../../../../common/models/talent/talent";
 
 export interface StationDetailProps {
     station: StationSummary;
     detail: StationDetail;
     handleClose: (e: bootstrap.ModalEventHandler<HTMLDivElement>) => void;
+    getTweetUrl: (station: StationSummary|TalentModel, languageId?: string) => string;
 }
 
 export interface StationDetailState {
@@ -44,16 +46,16 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                     {this.props.detail && this.props.detail.location && <p>{this.props.detail.location}</p>}
                     {this.props.detail && this.props.detail.parentGroup && <p>{this.props.detail.parentGroup}</p>}
                     {this.props.detail && this.props.detail.note && <p>{this.props.detail.note}</p>}
-                    {this.props.detail && this.props.detail.website && <p>{this.props.detail.website}</p>}
-                    {this.props.detail && this.props.detail.twitter && <p>{this.props.detail.twitter}</p>}
-                    {this.props.detail && this.props.detail.instagram && <p>{this.props.detail.instagram}</p>}
-                    {this.props.detail && this.props.detail.facebook && <p>{this.props.detail.facebook}</p>}
-                    {this.props.detail && this.props.detail.email && <p>{this.props.detail.email}</p>}
+                    {this.props.detail && this.props.detail.website && <p><a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
+                    {this.props.detail && this.props.detail.twitter && <p><a href={this.props.getTweetUrl(this.props.station)} target="_blank"><i className="fab fa-twitter"></i> {this.props.detail.twitter}</a></p>}
+                    {this.props.detail && this.props.detail.instagram && <p><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.detail.instagram}</a></p>}
+                    {this.props.detail && this.props.detail.facebook && <p><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.detail.facebook}</a></p>}
+                    {this.props.detail && this.props.detail.email && <p><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.detail.email}</a></p>}
                     {this.props.detail && this.props.detail.text && <p>{this.props.detail.text}</p>}
                     {this.props.detail && this.props.detail.phone && (<a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.detail.phone}</a>)}
 
-                    {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} />)}
-                    {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} />)}
+                    {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
+                    {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
 
                     {this.props.detail == null && <p>Loading...</p>}
                 </ModalBody>

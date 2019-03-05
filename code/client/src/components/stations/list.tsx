@@ -14,7 +14,7 @@ export interface StationsProps {
     stations?: StationSummary[];
     search: SearchOptions;
     onSelect: (station: StationSummary) => void;
-    tweets: TweetsByLanguage;
+    getTweetUrl: (station: StationSummary) => string;
 };
 
 export interface StationsState extends SearchValues {
@@ -72,7 +72,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
                 <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
 
                 <div>
-                    <FilteredList key={this.props.countryId} countryId={this.props.countryId} stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} tweets={this.props.tweets} />
+                    <FilteredList key={this.props.countryId} countryId={this.props.countryId} stations={this.state.visibleStations || this.props.stations} onSelect={this.props.onSelect} onSearch={this.onSearch} getTweetUrl={this.props.getTweetUrl} />
                 </div>
             </div>
         );

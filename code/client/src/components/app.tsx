@@ -14,6 +14,8 @@ import { Tweet } from '../../../common/models/tweets/tweet';
 import { Language } from '../../../common/models/language';
 import { TweetsByLanguage } from '../../../common/models/tweets/tweets';
 import { Util } from '../../../common/util/util';
+import { TweetGenerator } from './tweetGenerator';
+import { Talent } from '../../../common/models/talent/talent';
 
 declare var google: any;
 
@@ -25,6 +27,7 @@ export interface AppState {
     selectedStationDetails: StationDetail;
     search: SearchOptions;
     tweets: TweetsByLanguage;
+    tweetGenerator: TweetGenerator;
 }
 
 export class App extends React.Component<object, AppState> {
@@ -37,12 +40,14 @@ export class App extends React.Component<object, AppState> {
             selectedStation: null,
             selectedStationDetails: null,
             search: null,
-            tweets: null
+            tweets: null,
+            tweetGenerator: null
         };
 
         this.countrySelected = this.countrySelected.bind(this);
         this.stationSelected = this.stationSelected.bind(this);
         this.stationUnselected = this.stationUnselected.bind(this);
+        this.getTweetUrl = this.getTweetUrl.bind(this);
     }
 
     componentDidMount() {
@@ -65,7 +70,7 @@ export class App extends React.Component<object, AppState> {
             }, []);
 
             google.script.run.withSuccessHandler((tweets: TweetsByLanguage) => {
-                this.setState({stations: Util.shuffle(data), tweets: tweets});
+                this.setState({stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets)});
             }).getTweetsByLanguage(languages);
 
         }).getStationsByCountry(country.id);
@@ -87,6 +92,16 @@ export class App extends React.Component<object, AppState> {
         this.setState({ selectedStation: null, selectedStationDetails: null });
     }
 
+    
+    getTweetUrl(station: StationSummary|Talent, languageId?: string) {
+        var tweet = this.state.tweetGenerator.get(languageId || station.languageId, station.twitter);
+
+        tweet = encodeURIComponent(tweet);
+        var url = `https://twitter.com/intent/tweet?text=${tweet}`;
+        return url;
+    }
+
+
     render() {
         return (
             <div className={styles.app}>
@@ -98,9 +113,9 @@ export class App extends React.Component<object, AppState> {
                         </div>
                     )}
 
-                    {this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} tweets={this.state.tweets} />}
+                    {this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} getTweetUrl={this.getTweetUrl} />}
 
-                    {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} />}
+                    {this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} getTweetUrl={this.getTweetUrl} />}
                 </div>
             </div>
         );
