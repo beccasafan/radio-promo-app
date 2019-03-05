@@ -6,13 +6,13 @@
 }
 
 .card-header {
-    background-color: color("red");
+    background-color: color("redpink");
 }
 
 a {
-    color: color("lightgreen");
+    color: color("redpink");
 
     &:hover {
-        color: color("green");
+        color: color("red");
     }
 }

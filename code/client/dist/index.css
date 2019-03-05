@@ -362,12 +362,12 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   color: #211101; }
 
 .card-header {
-  background-color: #EB1821; }
+  background-color: #EB2639; }
 
 a {
-  color: #999869; }
+  color: #EB2639; }
   a:hover {
-    color: #666646; }
+    color: #EB1821; }
 
 #root {
   height: 100%;
