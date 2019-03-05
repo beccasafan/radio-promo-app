@@ -41,6 +41,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
 
     componentDidUpdate(prevProps: any) {
         if (this.props.contentKey != null) {
+            //this.props.events.onModalOpen();
             this.$el.modal("show");
         } else {
             this.$el.modal("hide");
