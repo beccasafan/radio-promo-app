@@ -6,9 +6,12 @@ export class CacheApi {
         var action = e.parameter.action.toLowerCase();
         
         switch (action) {
+            case "clear":
+                Cache.clear();
+                return Util.createJSONOutput("done");
             case "reset":
                 Cache.reset();
-                return ContentService.createTextOutput("Done.");
+                return Util.createJSONOutput("done");
             case "peek":
                 return Util.createJSONOutput(Cache.peek(e.parameter.key));
         }

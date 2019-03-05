@@ -6,49 +6,50 @@ import { CacheConstants } from "../util/constants";
 import { Talents } from "./talent";
 import { SyndicatedShows } from "./syndicated";
 import { SyndicatedTalent } from "../../common/models/syndicated/syndicated";
+import { Util } from "../../common/util/util";
 
 export class Stations {
     public static get(): Station[] {
-        var stations = CacheWrapper.ScriptCache.get<Station[]>(CacheConstants.Stations);
-        if (stations == null) {
-            stations = Stations.load();
-        }
+        return CacheWrapper.ScriptCache.get<Station[]>(CacheConstants.Stations) || Stations.load();
+    }
 
+    public static load(cache: boolean = true): Station[] {
+        var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Station").getDataRange().getValues().slice(1);
+        var stations = data.map(s => new Station(s)).filter(s => s.isValid());
+
+        if (cache) {
+            var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Stations, stations);
+        }
         return stations;
     }
 
     public static getByCountry(countryId: string): StationSummary[] {
         var stationsInCountry = CacheWrapper.ScriptCache.get<StationSummary[]>(`${CacheConstants.StationsByCountry}_${countryId}`);
         if (stationsInCountry == null) {
-            var stations = Stations.loadByCountry(countryId);
-
-            stationsInCountry = stations.map(s => {
-                var talent = Talents.getByStation(s.id);
-                var syndicatedTalent = SyndicatedShows.getByStation(s.id);
-                var station = Object.assign({}, s, { talent: talent != null ? talent.length : 0, syndicated: syndicatedTalent != null ? syndicatedTalent.length : 0 });
-                return station;
-            });
+            stationsInCountry = Stations.loadByCountry(countryId);
         }
 
         return stationsInCountry;
     }
 
-    public static loadByCountry(countryId: string): Station[] {
+    public static loadByCountry(countryId: string): StationSummary[] {
+        var talent = Talents.get();
+        var talentByStation = Util.groupByProperty(talent, "stationId");
+        var syndicatedTalent = SyndicatedShows.get();
+        var syndicatedTalentByStation = Util.groupByProperty(syndicatedTalent, "stationId");
+
         var stationsInCountry = Stations.get().filter(s => s.countryId === countryId);
+        var stationSummaries = stationsInCountry.map(s => {
+            var talent = talentByStation[s.id] || [];
+            var syndicatedTalent = syndicatedTalentByStation[s.id] || [];
+            return Object.assign({}, s, { talent: talent.length, syndicated: syndicatedTalent.length });
+        });
 
-        var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, stationsInCountry);
 
-        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.StationsByCountry) || [];
-        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+        Stations.cacheByCountry(countryId, stationSummaries);
 
-        if (!countryIsCached) {
-            cachedCountries.push(countryId);
-            CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
-        }
-
-        return stationsInCountry;
+        return stationSummaries;
     }
-
 
     public static cacheByCountry(countryId: string, data: StationSummary[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, data);
@@ -74,16 +75,6 @@ export class Stations {
         var syndicatedTalent = SyndicatedShows.getByStation(station.id).map(t => Talents.getById(t.showId));
         var detail = Object.assign({}, station, { talent: talent, syndicatedTalent: syndicatedTalent });
         return detail;
-    }
-
-    public static load(cache: boolean = true): Station[] {
-        var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Station").getDataRange().getValues().slice(1);
-        var stations = data.map(s => new Station(s)).filter(s => s.isValid());
-
-        if (cache) {
-            var chunks = CacheWrapper.ScriptCache.put(CacheConstants.Stations, stations);
-        }
-        return stations;
     }
 
     public static clear() {

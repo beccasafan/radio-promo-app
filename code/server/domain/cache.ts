@@ -19,7 +19,7 @@ export class Cache {
         Cache.load();
     }
 
-    private static clear() {
+    public static clear() {
         console.log("Clearing");
         Languages.clear();
         Tweets.clear();

@@ -3,6 +3,7 @@ import { CountrySummary } from "../../common/models/countries/countrySummary";
 import { Stations } from "./stations";
 import { CacheWrapper } from "../util/cache";
 import { CacheConstants } from "../util/constants";
+import { Util } from "../../common/util/util";
 
 export class Countries {
     public static get(): Country[] {
@@ -15,9 +16,11 @@ export class Countries {
 
     public static loadSummaries(): CountrySummary[] {
         var countries = Countries.get();
+        var stations = Stations.get();
+        var stationsByCountry = Util.groupByProperty(stations, "countryId");
 
         var summaries = countries.map(c => {
-            var stations = Stations.getByCountry(c.id);
+            var stations = stationsByCountry[c.id];
             return Object.assign({}, c, { stations: (stations != null ? stations.length : 0) || 0 })
         }).filter(c => c.stations > 0);
 
