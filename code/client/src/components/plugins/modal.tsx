@@ -23,7 +23,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
 
     componentDidMount() {
         this.$el = $(this.el) as JQuery<HTMLDivElement>;
-        this.$el.appendTo("body") 
+        //this.$el.appendTo("body") 
         this.$el.modal({});
         this.$el.on("hidden.bs.modal", (e) => this.props.handleClose(e));
     }
