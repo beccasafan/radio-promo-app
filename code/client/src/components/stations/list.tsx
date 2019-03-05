@@ -109,4 +109,4 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         );
     }
 }
-Stations.defaultProps = { pageSize: 12 };
+Stations.defaultProps = { pageSize: 24 };
