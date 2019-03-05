@@ -7,6 +7,7 @@ import { TweetsByLanguage } from '../../../../common/models/tweets/tweets';
 import { TweetGenerator } from '../tweetGenerator';
 
 export interface FilteredListProps {
+    countryId: string;
     stations: StationSummary[];
     onSelect: (station: StationSummary) => void;
     onSearch: (values: SearchValues) => void;
@@ -48,9 +49,9 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
         }
 
         const result = (
-            <>
+            <div key={this.props.countryId}>
                 {this.props.stations.map(s => <Summary key={s.id} station={s} onSelect={this.props.onSelect} getTweetUrl={this.getTweetUrl} />)}
-            </>
+            </div>
         );
 
         return result;
