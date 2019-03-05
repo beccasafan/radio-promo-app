@@ -36,6 +36,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
     }
 
     render() {
+        let idFragment = `station_detail_${this.props.station.id}`;
         return (
             <Modal contentKey={this.props.station != null ? this.props.station.id : null } handleClose={this.handleClose} events={{"show.bs.modal": this.props.onModalOpen, "hide.bs.modal": this.props.onModalClose}}>
                 <ModalHeader>
@@ -45,20 +46,56 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                     </button>
                 </ModalHeader>
                 <ModalBody>
-                    {this.props.detail && this.props.detail.location && <p>{this.props.detail.location}</p>}
-                    {this.props.detail && this.props.detail.parentGroup && <p>{this.props.detail.parentGroup}</p>}
-                    {this.props.detail && this.props.detail.note && <p>{this.props.detail.note}</p>}
-                    {this.props.detail && this.props.detail.website && <p><a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
-                    {this.props.detail && this.props.detail.twitter && <p><a href={this.props.getTweetUrl(this.props.station)} target="_blank"><i className="fab fa-twitter"></i> {this.props.detail.twitter}</a></p>}
-                    {this.props.detail && this.props.detail.instagram && <p><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.detail.instagram}</a></p>}
-                    {this.props.detail && this.props.detail.facebook && <p><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.detail.facebook}</a></p>}
-                    {this.props.detail && this.props.detail.email && <p><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.detail.email}</a></p>}
-                    {this.props.detail && this.props.detail.text && <p><i className="fas fa-comment"></i> {this.props.detail.text}</p>}
-                    {this.props.detail && this.props.detail.phone && (<a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.detail.phone}</a>)}
+                    <div id={idFragment}>
+                        <div className="card">
+                            <div className="card-header" id={`${idFragment}_details_heading`}>
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_details`}>Station Details</button>
+                                </h5>
+                            </div>
 
-                    {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
-                    {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
+                            <div id={`${idFragment}_details`} className="collapse show" aria-labelledBy={`${idFragment}_details_heading`} data-parent={`#${idFragment}`}>
+                                <div className="card-body">
+                                    {this.props.detail && this.props.detail.location && <p>{this.props.detail.location}</p>}
+                                    {this.props.detail && this.props.detail.parentGroup && <p>{this.props.detail.parentGroup}</p>}
+                                    {this.props.detail && this.props.detail.note && <p>{this.props.detail.note}</p>}
+                                    {this.props.detail && this.props.detail.website && <p><a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
+                                    {this.props.detail && this.props.detail.twitter && <p><a href={this.props.getTweetUrl(this.props.station)} target="_blank"><i className="fab fa-twitter"></i> {this.props.detail.twitter}</a></p>}
+                                    {this.props.detail && this.props.detail.instagram && <p><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.detail.instagram}</a></p>}
+                                    {this.props.detail && this.props.detail.facebook && <p><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.detail.facebook}</a></p>}
+                                    {this.props.detail && this.props.detail.email && <p><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.detail.email}</a></p>}
+                                    {this.props.detail && this.props.detail.text && <p><i className="fas fa-comment"></i> {this.props.detail.text}</p>}
+                                    {this.props.detail && this.props.detail.phone && (<a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.detail.phone}</a>)}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-header" id={`${idFragment}_talent_heading`}>
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Talent</button>
+                                </h5>
+                            </div>
 
+                            <div id={`${idFragment}_talent`} className="collapse show" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                                <div className="card-body">
+                                    {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-header" id={`${idFragment}_talent_heading`}>
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Talent</button>
+                                </h5>
+                            </div>
+
+                            <div id={`${idFragment}_talent`} className="collapse show" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                                <div className="card-body">
+                                    {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
                     {this.props.detail == null && <p>Loading...</p>}
                 </ModalBody>
                 <ModalFooter>
