@@ -55,8 +55,6 @@ export class App extends React.Component<object, AppState> {
         this.setState({ selectedCountry: country });
 
         google.script.run.withSuccessHandler((data: StationSummary[]) => {
-            this.setState({ stations: data });
-
             var languages = data.reduce((uniqueLanguages: string[], d) => {
                 if (uniqueLanguages.find(ul => ul === d.languageId) == null) {
                     uniqueLanguages.push(d.languageId);
@@ -66,7 +64,7 @@ export class App extends React.Component<object, AppState> {
             }, []);
 
             google.script.run.withSuccessHandler((tweets: TweetsByLanguage) => {
-                this.setState({tweets: tweets});
+                this.setState({stations: data, tweets: tweets});
             }).getTweetsByLanguage(languages);
 
         }).getStationsByCountry(country.id);
