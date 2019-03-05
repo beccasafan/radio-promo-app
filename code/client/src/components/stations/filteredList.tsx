@@ -24,12 +24,13 @@ export class FilteredList extends React.Component<FilteredListProps, FilteredLis
 
         this.state = {};
 
-        this.tweetGenerator = new TweetGenerator(this.props.tweets);
-
         this.getTweetUrl = this.getTweetUrl.bind(this);
     }
 
     getTweetUrl(station: StationSummary) {
+        if (this.tweetGenerator == null) {
+            this.tweetGenerator = new TweetGenerator(this.props.tweets);
+        }
         var tweet = this.tweetGenerator.get(station.languageId, station.twitter);
 
         tweet = encodeURIComponent(tweet);
