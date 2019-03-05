@@ -10,5 +10,9 @@
 }
 
 a {
-    color: color("greendark");
+    color: color("lightgreen");
+
+    &:hover {
+        color: color("green");
+    }
 }
