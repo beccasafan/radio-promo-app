@@ -33,5 +33,6 @@ export const colorPurplegray: string;
 export const textPurplegray: string;
 export const colorRed: string;
 export const textRed: string;
+export const app: string;
 export const cardHeader: string;
 export const root: string;

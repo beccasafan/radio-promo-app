@@ -357,6 +357,9 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .text--red, .text--red:hover, .text--red:focus {
   color: #EB1821; }
 
+.app {
+  background-color: #EEEDCD; }
+
 .card-header {
   background-color: #EB1821; }
 
