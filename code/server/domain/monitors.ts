@@ -38,16 +38,23 @@ export class Monitors {
         return monitorsInCountry;
     }
 
-    public static cacheByCountry(countryId: string, data: Monitor[]) {
+    public static cacheByCountry(countryId: string, data: Monitor[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.MonitorsByCountry}_${countryId}`, data);
 
-        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.MonitorsByCountry) || [];
-        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+        if (cacheMain) {
+            var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.MonitorsByCountry) || [];
+            var countryIsCached = cachedCountries.find(c => c === countryId) != null;
 
-        if (!countryIsCached) {
-            cachedCountries.push(countryId);
-            CacheWrapper.ScriptCache.put(CacheConstants.MonitorsByCountry, cachedCountries);
+            if (!countryIsCached) {
+                cachedCountries.push(countryId);
+                CacheWrapper.ScriptCache.put(CacheConstants.MonitorsByCountry, cachedCountries);
+            }
         }
+    }
+
+    
+    public static cacheCachedList(countryIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.MonitorsByCountry, countryIds);
     }
 
     

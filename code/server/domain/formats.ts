@@ -47,16 +47,22 @@ export class Formats {
         return formatsInCountry;
     }
 
-    public static cacheByCountry(countryId: string, data: FormatSummary[]) {
+    public static cacheByCountry(countryId: string, data: FormatSummary[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.FormatsByCountry}_${countryId}`, data);
 
-        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.FormatsByCountry) || [];
-        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+        if (cacheMain) {
+            var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.FormatsByCountry) || [];
+            var countryIsCached = cachedCountries.find(c => c === countryId) != null;
 
-        if (!countryIsCached) {
-            cachedCountries.push(countryId);
-            CacheWrapper.ScriptCache.put(CacheConstants.FormatsByCountry, cachedCountries);
+            if (!countryIsCached) {
+                cachedCountries.push(countryId);
+                CacheWrapper.ScriptCache.put(CacheConstants.FormatsByCountry, cachedCountries);
+            }
         }
+    }
+    
+    public static cacheCachedList(countryIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.FormatsByCountry, countryIds);
     }
 
     public static clear() {

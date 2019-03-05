@@ -50,18 +50,23 @@ export class Stations {
     }
 
 
-    public static cacheByCountry(countryId: string, data: StationSummary[]) {
+    public static cacheByCountry(countryId: string, data: StationSummary[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.StationsByCountry}_${countryId}`, data);
 
-        var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.StationsByCountry) || [];
-        var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+        if (cacheMain) {
+            var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.StationsByCountry) || [];
+            var countryIsCached = cachedCountries.find(c => c === countryId) != null;
 
-        if (!countryIsCached) {
-            cachedCountries.push(countryId);
-            CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
+            if (!countryIsCached) {
+                cachedCountries.push(countryId);
+                CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, cachedCountries);
+            }
         }
     }
 
+    public static cacheCachedList(countryIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.StationsByCountry, countryIds);
+    }
 
     public static getByCode(code: string): StationDetail {
         var station = Stations.get().find(s => s.code === code);

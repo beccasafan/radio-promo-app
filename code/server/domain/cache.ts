@@ -41,10 +41,14 @@ export class Cache {
         // no additional processing for languages
         
         var tweetsByLanguage = Util.groupByProperty(tweets, "languageId");
-        Object.keys(tweetsByLanguage).forEach(l => Tweets.cacheByLanguage(l, tweetsByLanguage[l]));
+        var languagesWithTweets = Object.keys(tweetsByLanguage);
+        languagesWithTweets.forEach(l => Tweets.cacheByLanguage(l, tweetsByLanguage[l], false));
+        Tweets.cacheCachedList(languagesWithTweets);
         
         var monitorsByCountry = Util.groupByProperty(monitors, "countryId");
-        Object.keys(monitorsByCountry).forEach(c => Monitors.cacheByCountry(c, monitorsByCountry[c]));
+        var countriesWithMonitor = Object.keys(monitorsByCountry);
+        countriesWithMonitor.forEach(c => Monitors.cacheByCountry(c, monitorsByCountry[c], false));
+        Monitors.cacheCachedList(countriesWithMonitor);
 
         var formatSummaries: FormatSummary[] = formats.map(f => 
             {
@@ -53,13 +57,19 @@ export class Cache {
             }
         );
         var formatsByCountry = Util.groupByProperty(formatSummaries, "countryId");
-        Object.keys(formatsByCountry).forEach(c => Formats.cacheByCountry(c, formatsByCountry[c]));
+        var countriesWithFormat = Object.keys(formatsByCountry);
+        countriesWithFormat.forEach(c => Formats.cacheByCountry(c, formatsByCountry[c], false));
+        Formats.cacheCachedList(countriesWithFormat);
 
         var talentByStation = Util.groupByProperty(talent, "stationId");
-        Object.keys(talentByStation).forEach(s => Talents.cacheByStation(s, talentByStation[s]));
+        var stationsWithTalent = Object.keys(talentByStation);
+        stationsWithTalent.forEach(s => Talents.cacheByStation(s, talentByStation[s], false));
+        Talents.cacheCachedList(stationsWithTalent);
 
         var syndicatedTalentByStation = Util.groupByProperty(syndicatedTalent, "stationId");
-        Object.keys(syndicatedTalentByStation).forEach(s => SyndicatedShows.cacheByStation(s, syndicatedTalentByStation[s]));
+        var stationsWithSyndicatedTalent = Object.keys(syndicatedTalentByStation);
+        stationsWithSyndicatedTalent.forEach(s => SyndicatedShows.cacheByStation(s, syndicatedTalentByStation[s], false));
+        SyndicatedShows.cacheCachedList(stationsWithSyndicatedTalent);
 
         var stationSummaries = stations.map(s => {
             var talent = talentByStation[s.id] || [];
@@ -67,7 +77,9 @@ export class Cache {
             return Object.assign({}, s, { talent: talent.length, syndicated: syndicatedTalent.length });
         });
         var stationsByCountry = Util.groupByProperty(stationSummaries, "countryId");
-        Object.keys(stationsByCountry).forEach(c => Stations.cacheByCountry(c, stationsByCountry[c]));
+        var countriesWithStations = Object.keys(stationsByCountry);
+        countriesWithStations.forEach(c => Stations.cacheByCountry(c, stationsByCountry[c], false));
+        Stations.cacheCachedList(countriesWithStations);
 
         var countrySummaries = countries.map(c => {
             var stations = stationsByCountry[c.id] || [];

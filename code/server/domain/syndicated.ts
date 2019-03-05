@@ -21,16 +21,22 @@ export class SyndicatedShows {
         return syndicatedTalentInStation;
     }
 
-    public static cacheByStation(stationId: string, data: SyndicatedTalent[]) {
+    public static cacheByStation(stationId: string, data: SyndicatedTalent[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.SyndicatedTalentByStation}_${stationId}`, data);
 
-        var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.SyndicatedTalentByStation) || [];
-        var stationIsCached = cachedStations.find(s => s === stationId) != null;
+        if (cacheMain) {
+            var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.SyndicatedTalentByStation) || [];
+            var stationIsCached = cachedStations.find(s => s === stationId) != null;
 
-        if (stationIsCached) {
-            cachedStations.push(stationId);
-            CacheWrapper.ScriptCache.put(CacheConstants.SyndicatedTalentByStation, cachedStations);
+            if (stationIsCached) {
+                cachedStations.push(stationId);
+                CacheWrapper.ScriptCache.put(CacheConstants.SyndicatedTalentByStation, cachedStations);
+            }
         }
+    }
+
+    public static cacheCachedList(stationIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.SyndicatedTalentByStation, stationIds);
     }
 
     public static load(): SyndicatedTalent[] {

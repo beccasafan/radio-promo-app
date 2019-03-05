@@ -41,16 +41,22 @@ export class Tweets {
         return tweetsInLanguage;
     }
 
-    public static cacheByLanguage(languageId: string, data: Tweet[]) {
+    public static cacheByLanguage(languageId: string, data: Tweet[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TweetsByLanguage}_${languageId}`, data);
 
-        var cachedLanguages = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TweetsByLanguage) || [];
-        var languageIsCached = cachedLanguages.find(l => l === languageId) != null;
+        if (cacheMain) {
+            var cachedLanguages = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TweetsByLanguage) || [];
+            var languageIsCached = cachedLanguages.find(l => l === languageId) != null;
 
-        if (!languageIsCached) {
-            cachedLanguages.push(languageId);
-            CacheWrapper.ScriptCache.put(CacheConstants.TweetsByLanguage, cachedLanguages);
+            if (!languageIsCached) {
+                cachedLanguages.push(languageId);
+                CacheWrapper.ScriptCache.put(CacheConstants.TweetsByLanguage, cachedLanguages);
+            }
         }
+    }
+
+    public static cacheCachedList(languageIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.TweetsByLanguage, languageIds);
     }
 
     public static clear() {

@@ -45,16 +45,22 @@ export class Talents {
         return talentInStation;
     }
 
-    public static cacheByStation(stationId: string, data: Talent[]) {
+    public static cacheByStation(stationId: string, data: Talent[], cacheMain: boolean = true) {
         var chunks = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByStation}_${stationId}`, data);
 
-        var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByStation) || [];
-        var stationIsCached = cachedStations.find(s => s === stationId) != null;
+        if (cacheMain) {
+            var cachedStations = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByStation) || [];
+            var stationIsCached = cachedStations.find(s => s === stationId) != null;
 
-        if (!stationIsCached) {
-            cachedStations.push(stationId);
-            CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, cachedStations);
+            if (!stationIsCached) {
+                cachedStations.push(stationId);
+                CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, cachedStations);
+            }
         }
+    }
+
+    public static cacheCachedList(stationIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, stationIds);
     }
 
     public static clear() {
