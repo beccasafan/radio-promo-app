@@ -360,6 +360,8 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .app {
   background-color: #FEF1C4;
   color: #333333; }
+  .app .container {
+    background-color: white; }
 
 .card-header {
   background-color: #FEF5D8; }

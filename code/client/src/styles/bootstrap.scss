@@ -9,6 +9,10 @@ $text: #333333;
 .app {
     background-color: $background;
     color: $text;
+
+    .container {
+        background-color: white;
+    }
 }
 
 .card-header {
