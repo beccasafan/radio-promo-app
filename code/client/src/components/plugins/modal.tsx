@@ -43,7 +43,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     render() {
         return (
             <div ref={el => this.el = el} className={`modal fade`} tabIndex={-1} role="dialog">
-                <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-dialog modal-dialog-scrollable" role="document">
                     <div className="modal-content">
                         {this.props.children}
                     </div>
