@@ -13,7 +13,7 @@ export class TweetGenerator {
     }
 
     get(languageId: string, target: string) {
-        var tweet = "";
+        var tweet = ".{{target}} {{artist}} {{hashtag}}";
         if (this.tweets != null && this.tweets[languageId] != null && this.tweets[languageId].length > 0) {
             this.currentIndex = (this.currentIndex + 1) % this.tweets[languageId].length;
             var tweet = this.tweets[languageId][this.currentIndex].text;
