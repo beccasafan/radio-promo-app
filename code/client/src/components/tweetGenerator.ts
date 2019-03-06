@@ -13,13 +13,13 @@ export class TweetGenerator {
     }
 
     get(languageId: string, target: string) {
-        if (this.tweets == null || this.tweets[languageId] == null || this.tweets[languageId].length <= 0) {
-            return "";
+        var tweet = "";
+        if (this.tweets != null && this.tweets[languageId] != null && this.tweets[languageId].length > 0) {
+            this.currentIndex = (this.currentIndex + 1) % this.tweets[languageId].length;
+            var tweet = this.tweets[languageId][this.currentIndex].text;
         }
 
-        this.currentIndex = (this.currentIndex + 1) % this.tweets[languageId].length;
-        var tweet = this.tweets[languageId][this.currentIndex].text;
-
+        
         if (tweet.indexOf("{{target}}") < 0) {
             tweet = `.@${target} ${tweet}`;
         }
