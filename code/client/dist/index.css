@@ -365,7 +365,8 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 
 .card-header {
   background-color: #FEF5D8;
-  color: #ED2232; }
+  color: #ED2232;
+  font-weight: bold; }
 
 .card-footer {
   background-color: #F9DC7C; }
