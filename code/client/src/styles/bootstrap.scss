@@ -46,7 +46,7 @@ $mutedText: #6c757d;
     border-color: $links;
 
     &:hover, &:not(.disabled):not(:disabled):active {
-        color: white;
+        color: white !important;
         background-color: $links;
         border-color: $links;
     }
