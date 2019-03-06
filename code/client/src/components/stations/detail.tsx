@@ -69,7 +69,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                                 </div>
                             </div>
                         </div>
-                        {this.props.detail && this.props.detail.talent && 
+                        {this.props.detail && this.props.detail.talent && this.props.detail.talent.length > 0 && 
                             <div className="card">
                                 <div className="card-header" id={`${idFragment}_talent_heading`}>
                                     <h5 className="mb-0">
@@ -84,7 +84,7 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                                 </div>
                             </div>
                         }
-                        {this.props.detail && this.props.detail.syndicatedTalent && 
+                        {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.length > 0 && 
                             <div className="card">
                                 <div className="card-header" id={`${idFragment}_talent_heading`}>
                                     <h5 className="mb-0">
