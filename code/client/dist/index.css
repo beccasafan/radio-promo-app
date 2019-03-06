@@ -376,6 +376,18 @@ a {
   a:hover {
     color: #ED2232; }
 
+.search .social {
+  color: #6c757d; }
+
+.btn-outline-secondary {
+  color: #ED2232;
+  background-color: white;
+  border-color: #ED2232; }
+  .btn-outline-secondary:hover {
+    color: white;
+    background-color: #ED2232;
+    border-color: #ED2232; }
+
 #root {
   height: 100%;
   width: 100%;

@@ -5,6 +5,7 @@ $cardHeader: #FEF5D8;
 $cardFooter: #F9DC7C;
 $links: #ED2232;
 $text: #333333;
+$mutedText: #6c757d;
 
 .app {
     background-color: $background;
@@ -30,5 +31,23 @@ a {
 
     &:hover {
         color: $links;
+    }
+}
+
+.search {
+    .social {
+        color: $mutedText;
+    }
+}
+
+.btn-outline-secondary {
+    color: $links;
+    background-color: white;
+    border-color: $links;
+
+    &:hover {
+        color: white;
+        background-color: $links;
+        border-color: $links;
     }
 }

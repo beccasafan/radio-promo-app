@@ -37,4 +37,7 @@ export const app: string;
 export const container: string;
 export const cardHeader: string;
 export const cardFooter: string;
+export const search: string;
+export const social: string;
+export const btnOutlineSecondary: string;
 export const root: string;
