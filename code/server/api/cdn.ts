@@ -5,7 +5,7 @@ export class CdnApi {
         (template as any).baseUrl = ScriptApp.getService().getUrl();
         var output = template.evaluate();
         output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
-
+        output.setTitle("Radio Request Database - Louis");
         return output;
     }
 }

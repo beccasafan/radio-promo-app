@@ -393,6 +393,12 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
   .modal-body .btn-link:hover {
     color: #ED2232; }
 
+.text--link {
+  color: #ED2232; }
+
+.missing a {
+  color: #ED2232; }
+
 #root {
   height: 100%;
   width: 100%;

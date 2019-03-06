@@ -25,8 +25,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: false,
             template: require('html-webpack-template'),
-            bodyHtmlSnippet: "<div id=\"root\"></div>",
-            base: { 'href': 'https://beccasafan.github.io/radio-promo-app/code/client/dist/' },
+            bodyHtmlSnippet: "<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-135674787-1\"></script><script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135674787-1');</script><div id=\"root\"></div>",
+            baseHref: 'https://beccasafan.github.io/radio-promo-app/code/client/dist/',
+            title: "Radio Request Database - Louis",
             hash: true,
             links: [
                 "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",

@@ -44,4 +44,6 @@ export const btnOutlineSecondary: string;
 export const disabled: string;
 export const modalBody: string;
 export const btnLink: string;
+export const textLink: string;
+export const missing: string;
 export const root: string;
