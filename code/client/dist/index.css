@@ -371,9 +371,9 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection {
 .card-footer {
   background-color: #F9DC7C; }
 
-a {
+.station a {
   color: #ED2232; }
-  a:hover {
+  .station a:hover {
     color: #ED2232; }
 
 .search .social {
@@ -383,10 +383,15 @@ a {
   color: #ED2232;
   background-color: white;
   border-color: #ED2232; }
-  .btn-outline-secondary:hover, .btn-outline-secondary:active {
+  .btn-outline-secondary:hover, .btn-outline-secondary:not(.disabled):not(:disabled):active {
     color: white;
     background-color: #ED2232;
     border-color: #ED2232; }
+
+.modal-body .btn-link {
+  color: #ED2232; }
+  .modal-body .btn-link:hover {
+    color: #ED2232; }
 
 #root {
   height: 100%;

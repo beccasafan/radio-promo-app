@@ -26,7 +26,7 @@ $mutedText: #6c757d;
     background-color: $cardFooter;
 }
 
-a {
+.station a {
     color: $links;
 
     &:hover {
@@ -45,9 +45,19 @@ a {
     background-color: white;
     border-color: $links;
 
-    &:hover, &:active {
+    &:hover, &:not(.disabled):not(:disabled):active {
         color: white;
         background-color: $links;
         border-color: $links;
+    }
+}
+
+.modal-body {
+    .btn-link {
+        color: $links;
+
+        &:hover {
+            color: $links;
+        }
     }
 }
