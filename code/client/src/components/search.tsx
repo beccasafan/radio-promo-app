@@ -140,7 +140,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         var dataAdapter = $.fn.select2.amd.require("select2/data/customDataAdapter");
 
         return (
-            <div className="">
+            <div className="search">
                 <div className="row py-3">
                     <div className={colClass}>
                         <Select2

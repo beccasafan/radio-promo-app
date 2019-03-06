@@ -383,7 +383,7 @@ a {
   color: #ED2232;
   background-color: white;
   border-color: #ED2232; }
-  .btn-outline-secondary:hover {
+  .btn-outline-secondary:hover, .btn-outline-secondary:active {
     color: white;
     background-color: #ED2232;
     border-color: #ED2232; }
