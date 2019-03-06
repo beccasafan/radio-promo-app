@@ -69,32 +69,36 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                                 </div>
                             </div>
                         </div>
-                        <div className="card">
-                            <div className="card-header" id={`${idFragment}_talent_heading`}>
-                                <h5 className="mb-0">
-                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Talent</button>
-                                </h5>
-                            </div>
+                        {this.props.detail && this.props.detail.talent && 
+                            <div className="card">
+                                <div className="card-header" id={`${idFragment}_talent_heading`}>
+                                    <h5 className="mb-0">
+                                        <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Talent</button>
+                                    </h5>
+                                </div>
 
-                            <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
-                                <div className="card-body">
-                                    {this.props.detail && this.props.detail.talent && this.props.detail.talent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}                                    
+                                <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                                    <div className="card-body">
+                                        {this.props.detail.talent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}                                    
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="card">
-                            <div className="card-header" id={`${idFragment}_talent_heading`}>
-                                <h5 className="mb-0">
-                                    <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Syndicated Talent</button>
-                                </h5>
-                            </div>
-
-                            <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
-                                <div className="card-body">
-                                    {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
+                        }
+                        {this.props.detail && this.props.detail.syndicatedTalent && 
+                            <div className="card">
+                                <div className="card-header" id={`${idFragment}_talent_heading`}>
+                                    <h5 className="mb-0">
+                                        <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Syndicated Talent</button>
+                                    </h5>
                                 </div>
-                            </div>
-                        </div>                        
+
+                                <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                                    <div className="card-body">
+                                        {this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
+                                    </div>
+                                </div>
+                            </div>                        
+                        }
                     </div>
                     {this.props.detail == null && <p>Loading...</p>}
                 </ModalBody>
