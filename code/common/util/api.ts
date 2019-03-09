@@ -24,7 +24,7 @@ function googleApi(request: IApiCall) {
             deferred.reject(e); 
         });
 
-    runner[request.directFunction](...Array.prototype.slice.call(arguments, 1));
+    runner[request.directFunction](...request.parameters);
 
     return deferred;
 }
