@@ -155,9 +155,10 @@ export class App extends React.Component<object, AppState> {
     stationSelected(station: StationSummary) {
         this.setState({ selectedStation: station });
 
-        google.script.run.withSuccessHandler((data: StationDetail) => {
-            this.setState({ selectedStationDetails: data });
-        }).getStation(station.code);
+        getJSON({directFunction: "getStation", parameters: [station.code], url: `?item=station&action=getStation&code=${station.code}`})
+            .done((data: StationDetail) => {
+                this.setState({selectedStationDetails: data});
+            });
     }
 
     stationUnselected(e: ModalEventHandler<HTMLDivElement>) {
@@ -174,7 +175,7 @@ export class App extends React.Component<object, AppState> {
         window.scrollTo(0, stationElement.position().top);
     }
     getTweetUrl(station: StationSummary | Talent, languageId?: string) {
-        var tweet = this.state.tweetGenerator.get(languageId || station.languageId, station.twitter);
+        var tweet = this.state.tweetGenerator.get(languageId || station.languageId, station.twitter, station.hashtag);
 
         tweet = encodeURIComponent(tweet);
         var url = `https://twitter.com/intent/tweet?text=${tweet}`;

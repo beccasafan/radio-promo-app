@@ -12,14 +12,14 @@ export class TweetGenerator {
         Object.keys(tweetsByLanguage).forEach(language => this.tweets[language] = Util.shuffle(tweetsByLanguage[language]));
     }
 
-    get(languageId: string, target: string) {
+    get(languageId: string, target: string, hashtag?: string) {
         var tweet = ".{{target}} {{artist}} {{hashtag}}";
         if (this.tweets != null && this.tweets[languageId] != null && this.tweets[languageId].length > 0) {
             this.currentIndex = (this.currentIndex + 1) % this.tweets[languageId].length;
             var tweet = this.tweets[languageId][this.currentIndex].text;
         }
 
-        
+
         if (tweet.indexOf("{{target}}") < 0) {
             tweet = `.@${target} ${tweet}`;
         }
@@ -29,7 +29,11 @@ export class TweetGenerator {
             .replace("{{artist}}", "@Louis_Tomlinson")
             .replace("{{hashtag}}", "#TwoOfUs")
             .replace("{{target}}", `@${target}`)
-        ;
+            ;
+
+        if (!Util.isEmpty(hashtag)) {
+            tweet += ` ${hashtag.indexOf("#") >= 0 ? "" : "#"}${hashtag}`;
+        }
 
         return tweet;
     }
