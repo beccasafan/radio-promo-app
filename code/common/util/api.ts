@@ -12,17 +12,17 @@ export function getJSON(request: IApiCall): any {
 }
 
 function googleApi(request: IApiCall) {
-    let runner = google.script.run;
     let deferred = $.Deferred();
 
-    runner.withSuccessHandler((e: any) => { 
-        console.log("success");
-        deferred.resolve(e); 
-    });
-    runner.withFailureHandler((e: any) => { 
-        console.log("error");
-        deferred.reject(e); 
-    });
+    let runner = google.script.run
+        .withSuccessHandler((e: any) => { 
+            console.log("success");
+            deferred.resolve(e); 
+        })
+        .withFailureHandler((e: any) => { 
+            console.log("error");
+            deferred.reject(e); 
+        });
 
     runner[request.directFunction](...Array.prototype.slice.call(arguments, 1));
 
