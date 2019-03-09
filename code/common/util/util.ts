@@ -1,6 +1,10 @@
 export class Util {
     public static isEmpty = (obj: any) => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length;
-    public static createJSONOutput = (obj: any): GoogleAppsScript.HTML.HtmlOutput => HtmlService.createHtmlOutput(`<pre>${JSON.stringify(obj, null, 4)}</pre>`);
+    public static createJSONOutput = (obj: any, callback: string): GoogleAppsScript.Content.TextOutput => {
+        let output = ContentService.createTextOutput(`${callback}(${JSON.stringify(obj, null, 4)})`);
+        output.setMimeType(ContentService.MimeType.JAVASCRIPT);
+        return output;
+    }
     public static groupByProperty = <T extends { [key: string]: string; }>(data: T[], property: string) => {
         return data.reduce((groups: { [key: string]: T[]; }, item: T) => {
             var groupKey = item[property].toString();

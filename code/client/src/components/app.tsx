@@ -72,7 +72,7 @@ export class App extends React.Component<object, AppState> {
             }, []);
 
             google.script.run.withSuccessHandler((tweets: TweetsByLanguage) => {
-                this.setState({stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets)});
+                this.setState({ stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets) });
             }).getTweetsByLanguage(languages);
 
         }).getStationsByCountry(country.id);
@@ -98,14 +98,14 @@ export class App extends React.Component<object, AppState> {
         console.log("open", e);
         window.scrollTo(0, 0);
     }
-    
+
     onModalClose(e: ModalEventHandler<HTMLDivElement>) {
         console.log("close", e);
         var stationElement = $(`#station_${this.state.selectedStation.id}`);
 
         window.scrollTo(0, stationElement.position().top);
     }
-    getTweetUrl(station: StationSummary|Talent, languageId?: string) {
+    getTweetUrl(station: StationSummary | Talent, languageId?: string) {
         var tweet = this.state.tweetGenerator.get(languageId || station.languageId, station.twitter);
 
         tweet = encodeURIComponent(tweet);
@@ -119,7 +119,7 @@ export class App extends React.Component<object, AppState> {
             <div className={styles.app}>
                 <div className="container">
                     <img src="https://beccasafan.github.io/radio-promo-app/code/client/dist/banner3_standard.jpg" className="img-fluid mb-5" alt="Radio Request Database" />
-                    
+
                     {this.state.countries == null && <p>Loading...</p>}
 
                     {this.state.countries != null && (

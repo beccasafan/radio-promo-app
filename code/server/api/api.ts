@@ -1,6 +1,7 @@
-import { CdnApi } from "../api/cdn";
-import { StationApi } from "../api/station";
-import { CountryApi } from "../api/country";
+import { CdnApi } from "./cdn";
+import { SearchApi } from "./search";
+import { StationApi } from "./station";
+import { CountryApi } from "./country";
 import { CacheApi } from "./cache";
 import { TalentApi } from "./talent";
 import { Cache } from "../domain/cache";
@@ -18,6 +19,8 @@ function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Cont
             return CdnApi.doGet(e);
         case "country":
             return CountryApi.doGet(e);
+        case "search":
+            return SearchApi.doGet(e);
         case "station":
             return StationApi.doGet(e);
         case "talent":

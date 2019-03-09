@@ -4,14 +4,14 @@ import { Util } from "./../../common/util/util";
 import { Stations } from "./../domain/stations";
 
 export class StationApi {
-    public static doGet(e: any): GoogleAppsScript.HTML.HtmlOutput {
+    public static doGet(e: any): GoogleAppsScript.Content.TextOutput {
         var action = e.parameter.action.toLowerCase();
-        
+        var callback = e.parameter.callback;
         switch (action) {
-            case "get":
-                return Util.createJSONOutput(Stations.get());
-            case "load":
-                return Util.createJSONOutput(Stations.load());
+            case "getByCountry":
+                return Util.createJSONOutput(Stations.getByCountry(e.parameter.country), callback);
+            case "getStation":
+                return Util.createJSONOutput(Stations.getByCode(e.parameter.code), callback);
         }
     }
 }

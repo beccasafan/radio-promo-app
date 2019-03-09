@@ -2,18 +2,16 @@ import { Cache } from "../domain/cache";
 import { Util } from "../../common/util/util";
 
 export class CacheApi {
-    public static doGet(e: any): GoogleAppsScript.HTML.HtmlOutput|GoogleAppsScript.Content.TextOutput {
+    public static doGet(e: any): GoogleAppsScript.Content.TextOutput {
         var action = e.parameter.action.toLowerCase();
+        var callback = e.parameter.callback;
         
         switch (action) {
-            case "clear":
-                Cache.clear();
-                return Util.createJSONOutput("done");
             case "reset":
                 Cache.reset();
-                return Util.createJSONOutput("done");
+                return Util.createJSONOutput("done", callback);
             case "peek":
-                return Util.createJSONOutput(Cache.peek(e.parameter.key));
+                return Util.createJSONOutput(Cache.peek(e.parameter.key), callback);
         }
     }
 }

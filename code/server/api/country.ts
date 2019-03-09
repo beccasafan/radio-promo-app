@@ -2,16 +2,12 @@ import { Util } from "./../../common/util/util";
 import { Countries } from "./../domain/countries";
 
 export class CountryApi {
-    public static doGet(e: any): GoogleAppsScript.HTML.HtmlOutput {
+    public static doGet(e: any): GoogleAppsScript.Content.TextOutput {
         var action = e.parameter.action.toLowerCase();
-        
+        var callback = e.parameter.callback;
         switch (action) {
-            case "get":
-                return Util.createJSONOutput(Countries.get());
-            case "load":
-                return Util.createJSONOutput(Countries.load());
             case "summarize":
-                return Util.createJSONOutput(Countries.summarize());
+                return Util.createJSONOutput(Countries.summarize(), callback);
         }
     }
 }
