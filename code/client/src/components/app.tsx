@@ -19,6 +19,7 @@ import { Talent } from '../../../common/models/talent/talent';
 import { getJSON, IApiCall } from "./../../../common/util/api";
 
 declare var google: any;
+declare var qs: string;
 
 export interface AppState {
     countries: CountrySummary[];
@@ -39,7 +40,7 @@ export class App extends React.Component<object, AppState> {
     constructor(props: object) {
         super(props);
 
-        this.qs = this.parseQuerystring(window.location.search.substr(1).split('&'));
+        this.qs = this.parseQuerystring(qs.split('&'));
 
         this.state = {
             countries: null,

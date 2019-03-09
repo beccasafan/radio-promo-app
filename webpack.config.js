@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 inject: false,
                 template: require('html-webpack-template'),
-                bodyHtmlSnippet: "<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-135674787-1\"></script><script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135674787-1');</script><script>var baseUrl = \"" + baseUrl + "\";</script><div id=\"root\"></div>",
+                bodyHtmlSnippet: "<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-135674787-1\"></script><script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135674787-1');</script><script>var baseUrl = \"" + baseUrl + "\";</script><script>qs = '<?!= qs ?>';</script><div id=\"root\"></div>",
                 baseHref: isProduction ? 'https://beccasafan.github.io/radio-promo-app/code/client/dist/' : "",
                 title: "Radio Request Database - Louis",
                 hash: true,

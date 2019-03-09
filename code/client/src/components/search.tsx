@@ -195,7 +195,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         addUrlParam("text", this.state.text ? "" : null, true);
         addUrlParam("phone", this.state.phone ? "" : null, true);
 
-        url = url.replace(/\?\&/, "?");
+        url = url.replace(/\?\&/, "?").replace(/\&\&/, "&");
 
         return (
             <div className="search">
