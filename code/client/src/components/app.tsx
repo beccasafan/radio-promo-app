@@ -57,7 +57,9 @@ export class App extends React.Component<object, AppState> {
         getJSON({directFunction: "getCountrySummaries", url: "?item=country&action=summarize"})
             .done((data: CountrySummary[]) => {
                 this.setState({countries: data});
-                this.countrySelected(data.find(c => c.code === "US"))
+                var initialCountry = data.find(c => c.code === "US");
+                console.log("initial country", initialCountry);
+                this.countrySelected(initialCountry);
             });
     }
 
