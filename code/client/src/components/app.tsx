@@ -74,7 +74,7 @@ export class App extends React.Component<object, AppState> {
                     return uniqueLanguages;
                 }, []);
 
-                getJSON({directFunction: "getByLanguages", parameters: [languages], url: `?item=tweet&action=getByLanguages&languages=${languages}`})
+                getJSON({directFunction: "getTweetsByLanguages", parameters: [languages], url: `?item=tweet&action=getByLanguages&languages=${languages}`})
                     .done((tweets: TweetsByLanguage) => {
                         this.setState({stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets)});
                     })
