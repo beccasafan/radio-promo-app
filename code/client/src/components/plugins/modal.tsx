@@ -32,7 +32,6 @@ export class Modal extends React.Component<ModalProps, ModalState> {
 
         let modalBody = this.$el.find(".modal-body");
         Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => { this.props.events[key](e) }));
-        this.$el.on("shown.bs.modal", (e) => {google.script.run.consoleLog("modal position", modalBody.scrollTop(), modalBody.position().top, window.scrollY)});
     }
 
     componentWillUnmount() {
