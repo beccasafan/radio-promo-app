@@ -7,7 +7,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
     var isProduction = (argv.mode || "production") === "production";
-console.log("production?", isProduction);
+    var baseUrl = isProduction ? "https://script.google.com/macros/s/AKfycbx9SzPtWjCW1vMCR-2qL9e2p9TZM1CY9czDS1m3pA/dev?item=cdn&file=index&artist=louis" : "http://beccasafan.redirectme.net/rrd/index.html";
+
     return {
         entry: {
             "index": "./code/client/src/index.tsx",
@@ -27,10 +28,13 @@ console.log("production?", isProduction);
             new HtmlWebpackPlugin({
                 inject: false,
                 template: require('html-webpack-template'),
-                bodyHtmlSnippet: "<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-135674787-1\"></script><script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135674787-1');</script><div id=\"root\"></div>",
+                bodyHtmlSnippet: "<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-135674787-1\"></script><script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135674787-1');</script><script>var baseUrl = \"" + baseUrl + "\";</script><div id=\"root\"></div>",
                 baseHref: isProduction ? 'https://beccasafan.github.io/radio-promo-app/code/client/dist/' : "",
                 title: "Radio Request Database - Louis",
                 hash: true,
+                meta: [
+                    {name: "viewport", content: "width=device-width, initial-scale=1"}
+                ],
                 links: [
                     "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
                     "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css",
@@ -45,6 +49,7 @@ console.log("production?", isProduction);
                     "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js",
                     "https://unpkg.com/react-dom@16/umd/react-dom-server.browser.production.min.js",
                     "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js",
+                    "https://unpkg.com/clipboard@2/dist/clipboard.min.js"
                 ]
             }),
             /*new CopyPlugin([

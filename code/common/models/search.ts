@@ -1,11 +1,12 @@
 import { Format } from "./formats/format";
+import { Util } from "../util/util";
 
 export class SearchOptions {
     public formats: Format[];
 }
 export class SearchValues {
-    public selectedFormat?: string;
-    public selectedParent?: string;
+    public format?: string;
+    public parentGroup?: string;
     public location?: string;
     public name?: string;
 

@@ -13,6 +13,7 @@ export interface StationSummaryState {
 }
 
 declare var google: any;
+declare var baseUrl: string;
 
 export class Summary extends React.Component<StationSummaryProps, StationSummaryState> {
     private el: HTMLElement;
@@ -26,6 +27,7 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
 
     componentDidMount() {
         this.$el = $(this.el) as JQuery<HTMLDivElement>;
+        
     }
 
     shouldComponentUpdate(nextProps: StationSummaryProps, nextState: StationSummaryState) {
@@ -44,11 +46,17 @@ export class Summary extends React.Component<StationSummaryProps, StationSummary
         }
 
         let emailHref = this.props.station.email && this.props.station.email.indexOf("@") >= 0 ? `mailto:${this.props.station.email}` : this.props.station.email;
+        let url = baseUrl + (baseUrl.indexOf("?") >= 0 ? "&" : "?") + "country=" + this.props.station.countryId.toLowerCase() + "&stations=" + this.props.station.code.toLowerCase();
 
         return (
             <div ref={el => this.el = el} id={`station_${this.props.station.id}`} className={classNames(styles.station, "col-sm-12 col-md-6 col-lg-4 col-xl-3 py-3")}>
                 <div className="card h-100">
-                    <div className="card-header" onClick={this.open}>{this.props.station.code}</div>
+                    <div className="card-header">
+                        <div className="row">
+                            <div className="col"><span onClick={this.open}>{this.props.station.code}</span></div>
+                            <div className="col-auto"><i className="clipboard fas fa-external-link-alt" data-clipboard-text={url} data-placement="bottom" data-trigger="manual" data-title="Copied"></i></div>
+                        </div>
+                    </div>
                     <div className="card-body">
                         <h5 className="card-title" onClick={this.open}>{this.props.station.name}</h5>
                         <p className="card-text">{this.props.station.location}</p>

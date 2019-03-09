@@ -6,6 +6,7 @@ import { Search, SearchState } from '../search';
 import { SearchOptions, SearchValues } from '../../../../common/models/search';
 import { FilteredList } from './filteredList';
 import { TweetsByLanguage } from '../../../../common/models/tweets/tweets';
+import * as Clipboard from 'clipboard';
 
 declare var google: any;
 
@@ -16,6 +17,7 @@ export interface StationsProps {
     onSelect: (station: StationSummary) => void;
     getTweetUrl: (station: StationSummary) => string;
     pageSize: number;
+    initialSearch: SearchValues;
 };
 
 export interface StationsState extends SearchValues {
@@ -25,6 +27,9 @@ export interface StationsState extends SearchValues {
 
 export class Stations extends React.Component<StationsProps, StationsState> {
     static defaultProps: { pageSize: number; };
+    private el: HTMLElement;
+    private $el: JQuery<HTMLDivElement>;
+
     constructor(props: StationsProps) {
         super(props);
         this.state = {
@@ -37,9 +42,21 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         this.onPreviousClick = this.onPreviousClick.bind(this);
     }
 
+    componentDidMount() {
+        this.$el = $(this.el) as JQuery<HTMLDivElement>;
+        var clipboard = new Clipboard(".clipboard");
+        var tooltip = this.$el.find(".clipboard").tooltip({ delay: { show: 500, hide: 0}});
+        clipboard.on("success", (e: any) => {
+            let tooltip = $(e.trigger);
+            $(e.trigger).tooltip("show");
+            tooltip.on("blur mouseleave", () => tooltip.tooltip("hide"));
+        });
+    }
+
     onSearch(values: SearchValues) {
         this.setState(values, () => {
-            this.setState({ visibleStations: this.filter() });
+            const visibleStations = this.filter();
+            this.setState({ visibleStations: visibleStations });
         });
     }
 
@@ -53,7 +70,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
     filter(): StationSummary[] {
         let matchesFormat = (station: StationSummary, selectedFormat: string) => {
             var format = this.props.search.formats.find(f => f.id === station.formatId);
-            return selectedFormat === format.code;
+            return format != null && selectedFormat === format.code;
         };
         let matchesText = (station: StationSummary, property: string, text: string) => {
             return station[property] != null && station[property].toLowerCase().indexOf(text) >= 0;
@@ -62,10 +79,10 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             return !Util.isEmpty(station[property]);
         }
         var visibleStations = this.props.stations.filter(s =>
-            (this.state.selectedFormat == null || matchesFormat(s, this.state.selectedFormat)) &&
-            (this.state.selectedParent == null || matchesText(s, "parentGroup", this.state.selectedParent.toLowerCase())) &&
-            (this.state.location == null || matchesText(s, "location", this.state.location.toLowerCase())) &&
-            (this.state.name == null || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase())) &&
+            (Util.isEmpty(this.state.format) || matchesFormat(s, this.state.format)) &&
+            (Util.isEmpty(this.state.parentGroup) || matchesText(s, "parentGroup", this.state.parentGroup.toLowerCase())) &&
+            (Util.isEmpty(this.state.location) || matchesText(s, "location", this.state.location.toLowerCase())) &&
+            (Util.isEmpty(this.state.name) || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase())) &&
             (!this.state.twitter || matchesBool(s, "twitter")) &&
             (!this.state.instagram || matchesBool(s, "instagram")) &&
             (!this.state.facebook || matchesBool(s, "facebook")) &&
@@ -79,6 +96,9 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
     render() {
         let allStations = this.state.visibleStations || this.props.stations;
+        if (!Util.isEmpty(this.state.visibleStations) && this.state.visibleStations[0].countryId !== this.props.countryId) {
+            allStations = this.filter();
+        }
         var stationsToShow = allStations.slice((this.state.currentPage - 1) * this.props.pageSize, this.state.currentPage * this.props.pageSize);
 
         if (this.props.stations == null) return (<p>Loading...</p>);
@@ -95,10 +115,10 @@ export class Stations extends React.Component<StationsProps, StationsState> {
             </nav>
         );
         return (
-            <div key={this.props.countryId}>
-                <Search options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} />
+            <div key={this.props.countryId} ref={el => this.el = el}>
+                <Search countryId={this.props.countryId} options={this.props.search} onSearch={this.onSearch} twitter={this.state.twitter} initialSearch={this.props.initialSearch} />
 
-                <div className="text-center">
+                <div>
                     <p className="missing">
                         <a href="http://bit.ly/radiorequestform">Something missing or wrong? Submit it here!</a>
                     </p>

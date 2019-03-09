@@ -8,7 +8,7 @@ import * as styles from "./../styles/app.scss";
 import { Detail } from './stations/detail';
 import { StationDetail } from '../../../common/models/stations/stationDetail';
 import { ModalEventHandler } from 'bootstrap';
-import { SearchOptions } from '../../../common/models/search';
+import { SearchOptions, SearchValues } from '../../../common/models/search';
 import classNames = require('classnames');
 import { Tweet } from '../../../common/models/tweets/tweet';
 import { Language } from '../../../common/models/language';
@@ -29,11 +29,18 @@ export interface AppState {
     search: SearchOptions;
     tweets: TweetsByLanguage;
     tweetGenerator: TweetGenerator;
+    renderCount: number;
 }
 
 export class App extends React.Component<object, AppState> {
+    qs: { [key: string]: string };
+    initialSearch: SearchValues;
+
     constructor(props: object) {
         super(props);
+
+        this.qs = this.parseQuerystring(window.location.search.substr(1).split('&'));
+
         this.state = {
             countries: null,
             selectedCountry: null,
@@ -42,49 +49,106 @@ export class App extends React.Component<object, AppState> {
             selectedStationDetails: null,
             search: null,
             tweets: null,
-            tweetGenerator: null
+            tweetGenerator: null,
+            renderCount: 0
         };
 
+        this.initialSearch = {
+            format: this.qs.format || "",
+            parentGroup: this.qs.network || "",
+            location: this.qs.location || "",
+            name: this.qs.name || "",
+            twitter: this.qs.twitter != null,
+            instagram: this.qs.instagram != null,
+            facebook: this.qs.facebook != null,
+            email: this.qs.email != null,
+            text: this.qs.text != null,
+            phone: this.qs.phone != null,
+        };
         this.countrySelected = this.countrySelected.bind(this);
         this.stationSelected = this.stationSelected.bind(this);
         this.stationUnselected = this.stationUnselected.bind(this);
         this.getTweetUrl = this.getTweetUrl.bind(this);
         this.onModalOpen = this.onModalOpen.bind(this);
         this.onModalClose = this.onModalClose.bind(this);
+
+    }
+
+    parseQuerystring(a: any) {
+        if (a == "") return {};
+        var b: any = {};
+        for (var i = 0; i < a.length; ++i) {
+            var p = a[i].split('=', 2);
+            if (p.length == 1)
+                b[p[0]] = "";
+            else
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
     }
 
     componentDidMount() {
-        getJSON({directFunction: "getCountrySummaries", url: "?item=country&action=summarize"})
+        const renderCount = this.state.renderCount;
+        getJSON({ directFunction: "getCountrySummaries", url: "?item=country&action=summarize" })
             .done((data: CountrySummary[]) => {
-                this.setState({countries: data});
-                var initialCountry = data.find(c => c.code === "US");
-                console.log("initial country", initialCountry);
+                this.setState({ countries: data });
+                var country = (this.qs.country || "US").toLowerCase();
+                var initialCountry = data.find(c => c.code.toLowerCase() === country);
                 this.countrySelected(initialCountry);
             });
     }
 
+    componentDidUpdate(prevProps: object, prevState: AppState) {
+        if (prevState.selectedCountry != this.state.selectedCountry) {
+            const newRenderCount = prevState.renderCount + 1;
+            if (newRenderCount > 1) {
+                this.initialSearch = {
+                    format: "",
+                    parentGroup: "",
+                    location: "",
+                    name: ""
+                };
+            }
+            this.setState({renderCount: newRenderCount});
+        }
+    }
+
     countrySelected(country: CountrySummary) {
         this.setState({ selectedCountry: country });
-
-        getJSON({directFunction: "getStationsByCountry", parameters: [country.id], url: `?item=station&action=getByCountry&country=${country.id}`})
+        getJSON({ directFunction: "getStationsByCountry", parameters: [country.id], url: `?item=station&action=getByCountry&country=${country.id}` })
             .done((data: StationSummary[]) => {
                 var languages = data.reduce((uniqueLanguages: string[], d) => {
                     if (uniqueLanguages.find(ul => ul === d.languageId) == null) {
                         uniqueLanguages.push(d.languageId);
                     }
-    
+
                     return uniqueLanguages;
                 }, []);
 
-                getJSON({directFunction: "getTweetsByLanguages", parameters: [languages], url: `?item=tweet&action=getByLanguages&languages=${languages}`})
+                getJSON({ directFunction: "getTweetsByLanguages", parameters: [languages], url: `?item=tweet&action=getByLanguages&languages=${languages}` })
                     .done((tweets: TweetsByLanguage) => {
-                        this.setState({stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets)});
+                        let stations = Util.shuffle(data);
+
+                        if (!Util.isEmpty(this.qs.country) && this.qs.country.toLowerCase() === country.id.toLowerCase() && !Util.isEmpty(this.qs.stations)) {
+                            let move = (arr: Array<StationSummary>, from: number, to: number) => {
+                                var a = arr.splice(from, 1);
+                                arr.unshift(a[0]);
+                            }
+                            this.qs.stations.split(',').reverse().forEach((code: string) => {
+                                code = code.trim().toLowerCase();
+                                var index = stations.findIndex(station => station.code.toLowerCase() === code);
+                                if (index > 0) {
+                                    move(stations, index, 0);
+                                }
+                            })
+                        }
+                        this.setState({ stations: stations, tweets: tweets, tweetGenerator: new TweetGenerator(tweets) });
                     })
 
             });
 
-        getJSON({directFunction: "getSearchOptions", parameters: [country.id], url: `?item=search&action=get&country=${country.id}`})
-            .done((data: SearchOptions) => {this.setState({search:data});});
+        getJSON({ directFunction: "getSearchOptions", parameters: [country.id], url: `?item=search&action=get&country=${country.id}` })
+            .done((data: SearchOptions) => { this.setState({ search: data }); });
     }
 
     stationSelected(station: StationSummary) {
@@ -100,12 +164,10 @@ export class App extends React.Component<object, AppState> {
     }
 
     onModalOpen(e: ModalEventHandler<HTMLDivElement>) {
-        console.log("open", e);
         window.scrollTo(0, 0);
     }
 
     onModalClose(e: ModalEventHandler<HTMLDivElement>) {
-        console.log("close", e);
         var stationElement = $(`#station_${this.state.selectedStation.id}`);
 
         window.scrollTo(0, stationElement.position().top);
@@ -129,13 +191,13 @@ export class App extends React.Component<object, AppState> {
 
                     {this.state.countries != null && (
                         <div>
-                            <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} defaultCountry="US" />
+                            <CountryDropdown countries={this.state.countries} onChange={this.countrySelected} defaultCountry={this.qs.country || "US"} />
                         </div>
                     )}
 
                     {this.state.countries && !(this.state.stations || this.state.tweets) && <p>Loading...</p>}
 
-                    {this.state.countries && this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} getTweetUrl={this.getTweetUrl} />}
+                    {this.state.countries && this.state.selectedCountry && this.state.tweets && <Stations key={`${this.state.selectedCountry.id}_${Object.keys(this.state.tweets).join(",")}`} countryId={this.state.selectedCountry.id} stations={this.state.stations} search={this.state.search} onSelect={this.stationSelected} getTweetUrl={this.getTweetUrl} initialSearch={this.initialSearch} />}
 
                     {this.state.countries && this.state.stations && this.state.selectedStation && <Detail station={this.state.selectedStation} detail={this.state.selectedStationDetails} handleClose={this.stationUnselected} getTweetUrl={this.getTweetUrl} onModalOpen={this.onModalOpen} onModalClose={this.onModalClose} />}
                 </div>

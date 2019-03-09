@@ -70,7 +70,7 @@ export class CountryDropdown extends React.Component<CountryDropdownProps, Count
             "select2:select": this.countrySelected
         };
 
-        var defaultCountry = this.props.countries.find(c => c.id === this.props.defaultCountry);
+        var defaultCountry = this.props.countries.find(c => c.id.toLowerCase() === this.props.defaultCountry.toLowerCase());
         defaultCountry.selected = true;
 
         return (
