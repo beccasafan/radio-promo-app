@@ -16,6 +16,7 @@ import { TweetsByLanguage } from '../../../common/models/tweets/tweets';
 import { Util } from '../../../common/util/util';
 import { TweetGenerator } from './tweetGenerator';
 import { Talent } from '../../../common/models/talent/talent';
+import { getJSON, IApiCall } from "./../../../common/util/api";
 
 declare var google: any;
 
@@ -53,33 +54,35 @@ export class App extends React.Component<object, AppState> {
     }
 
     componentDidMount() {
-        google.script.run.withSuccessHandler((data: CountrySummary[]) => {
-            this.setState({ countries: data });
-            this.countrySelected(data.find(c => c.code === "US"));
-        }).getCountrySummaries();
+        getJSON({directFunction: "getCountrySummaries", url: "?item=country&action=summarize"})
+            .done((data: CountrySummary[]) => {
+                this.setState({countries: data});
+                this.countrySelected(data.find(c => c.code === "US"))
+            });
     }
 
     countrySelected(country: CountrySummary) {
         this.setState({ selectedCountry: country });
 
-        google.script.run.withSuccessHandler((data: StationSummary[]) => {
-            var languages = data.reduce((uniqueLanguages: string[], d) => {
-                if (uniqueLanguages.find(ul => ul === d.languageId) == null) {
-                    uniqueLanguages.push(d.languageId);
-                }
+        getJSON({directFunction: "getStationsByCountry", parameters: [country.id], url: `?item=station&action=getByCountry&country=${country.id}`})
+            .done((data: StationSummary[]) => {
+                var languages = data.reduce((uniqueLanguages: string[], d) => {
+                    if (uniqueLanguages.find(ul => ul === d.languageId) == null) {
+                        uniqueLanguages.push(d.languageId);
+                    }
+    
+                    return uniqueLanguages;
+                }, []);
 
-                return uniqueLanguages;
-            }, []);
+                getJSON({directFunction: "getByLanguages", parameters: [languages], url: `?item=tweet&action=getByLanguages&languages=${languages}`})
+                    .done((tweets: TweetsByLanguage) => {
+                        this.setState({stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets)});
+                    })
 
-            google.script.run.withSuccessHandler((tweets: TweetsByLanguage) => {
-                this.setState({ stations: Util.shuffle(data), tweets: tweets, tweetGenerator: new TweetGenerator(tweets) });
-            }).getTweetsByLanguage(languages);
+            });
 
-        }).getStationsByCountry(country.id);
-
-        google.script.run.withSuccessHandler((data: SearchOptions) => {
-            this.setState({ search: data })
-        }).getSearchOptions(country.id);
+        getJSON({directFunction: "getSearchOptions", parameters: [country.id], url: `?item=search&action=get&country=${country.id}`})
+            .done((data: SearchOptions) => {this.setState({search:data});});
     }
 
     stationSelected(station: StationSummary) {

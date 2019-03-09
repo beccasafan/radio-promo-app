@@ -7,7 +7,7 @@ export class TalentApi {
         var callback = e.parameter.callback;
 
         switch (action) {
-            case "getByStation":
+            case "getbystation":
                 return Util.createJSONOutput(Talents.getByStation(e.parameter.station), callback);
         }
     }

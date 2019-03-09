@@ -8,6 +8,7 @@ import { Cache } from "../domain/cache";
 import { Countries } from "../domain/countries";
 import { Stations } from "../domain/stations";
 import { Talents } from "../domain/talent";
+import { TweetApi } from "./tweets";
 
 function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Content.TextOutput {
     var item = e.parameter.item.toLowerCase();
@@ -25,6 +26,8 @@ function doGet(e: any): GoogleAppsScript.HTML.HtmlOutput | GoogleAppsScript.Cont
             return StationApi.doGet(e);
         case "talent":
             return TalentApi.doGet(e);
+        case "tweet":
+            return TweetApi.doGet(e);
     }
 }
 

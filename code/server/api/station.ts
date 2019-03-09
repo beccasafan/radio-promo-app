@@ -8,9 +8,9 @@ export class StationApi {
         var action = e.parameter.action.toLowerCase();
         var callback = e.parameter.callback;
         switch (action) {
-            case "getByCountry":
+            case "getbycountry":
                 return Util.createJSONOutput(Stations.getByCountry(e.parameter.country), callback);
-            case "getStation":
+            case "getstation":
                 return Util.createJSONOutput(Stations.getByCode(e.parameter.code), callback);
         }
     }
