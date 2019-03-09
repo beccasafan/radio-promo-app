@@ -7,7 +7,8 @@ export interface IApiCall {
 }
 
 export function getJSON(request: IApiCall): any {
-    return typeof google === "object" ? googleApi(request) : externalApi(request);
+    return googleApi(request);
+    //return typeof google === "object" ? googleApi(request) : externalApi(request);
 }
 
 function googleApi(request: IApiCall) {
