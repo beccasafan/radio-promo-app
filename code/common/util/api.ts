@@ -15,8 +15,14 @@ function googleApi(request: IApiCall) {
     let runner = google.script.run;
     let deferred = $.Deferred();
 
-    runner.withSuccessHandler((e: any) => { deferred.resolve(e); });
-    runner.withFailureHandler((e: any) => { deferred.reject(e); });
+    runner.withSuccessHandler((e: any) => { 
+        console.log("success");
+        deferred.resolve(e); 
+    });
+    runner.withFailureHandler((e: any) => { 
+        console.log("error");
+        deferred.reject(e); 
+    });
 
     runner[request.directFunction].apply(this, Array.prototype.slice.call(arguments, 1));
 
