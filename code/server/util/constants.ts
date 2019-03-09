@@ -15,9 +15,11 @@ export class CacheConstants {
 
     public static readonly SyndicatedTalent = "RadioApp.SyndicatedTalent";
     public static readonly SyndicatedTalentByStation = "RadioApp.SyndicatedTalentByStation";
+    public static readonly SyndicatedTalentByCountry = "RadioApp.SyndicatedTalentByCountry";
 
     public static readonly Talent = "RadioApp.Talent";
     public static readonly TalentByStation = "RadioApp.TalentByStation";
+    public static readonly TalentByCountry = "RadioApp.TalentByCountry";
 
     public static readonly Tweets = "RadioApp.Tweets";
     public static readonly TweetsByLanguage = "RadioApp.TweetsByLanguage";

@@ -10,10 +10,10 @@ export class TweetApi {
 
         switch (action) {
             case "getbylanguages":
-                return Util.createJSONOutput(Tweets.getByLanguages(e.parameter.languages), callback)
+                return Util.createJSONOutput(Tweets.getByLanguages(e.parameters.languages), callback)
         }
     }
 }
-function getTweetsByLanguage(language): TweetsByLanguage {
+function getTweetsByLanguages(language): TweetsByLanguage {
     return Tweets.getByLanguages(language);
 }

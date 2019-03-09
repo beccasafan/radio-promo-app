@@ -1,6 +1,7 @@
 import { CacheWrapper } from "../util/cache";
 import { Talent } from "../../common/models/talent/talent";
 import { CacheConstants } from "../util/constants";
+import { TalentSummary } from "../../common/models/talent/talentSummary";
 
 export class Talents {
     public static get(): Talent[] {
@@ -59,8 +60,26 @@ export class Talents {
         }
     }
 
-    public static cacheCachedList(stationIds: string[]) {
+    public static cacheCachedStationList(stationIds: string[]) {
         CacheWrapper.ScriptCache.put(CacheConstants.TalentByStation, stationIds);
+    }
+
+    public static cacheByCountry(countryId: string, data: TalentSummary[], cacheMain: boolean = true) {
+        var chunk = CacheWrapper.ScriptCache.put(`${CacheConstants.TalentByCountry}_${countryId}`, data);
+
+        if (cacheMain) {
+            var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByCountry) || [];
+            var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+
+            if (!countryIsCached) {
+                cachedCountries.push(countryId);
+                CacheWrapper.ScriptCache.put(CacheConstants.TalentByCountry, cachedCountries);
+            }
+        }
+    }
+
+    public static cacheCachedCountryList(countryIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.TalentByCountry, countryIds);
     }
 
     public static clear() {
@@ -70,6 +89,12 @@ export class Talents {
         if (talentByStation != null) {
             talentByStation.forEach(s => CacheWrapper.ScriptCache.remove(`${CacheConstants.TalentByStation}_${s}`));
             CacheWrapper.ScriptCache.remove(CacheConstants.TalentByStation);
+        }
+
+        var talentByCountry = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.TalentByCountry);
+        if (talentByCountry != null) {
+            talentByCountry.forEach(c => CacheWrapper.ScriptCache.remove(`${CacheConstants.TalentByCountry}_${c}`));
+            CacheWrapper.ScriptCache.remove(CacheConstants.TalentByCountry);
         }
     }
 }

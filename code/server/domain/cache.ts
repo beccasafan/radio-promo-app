@@ -1,9 +1,11 @@
 import { Countries } from "./countries";
 import { Stations } from "./stations";
 import { Talents } from "./talent";
+import { TalentSummary } from "./../../common/models/talent/talentSummary";
 import { CacheWrapper } from "../util/cache";
 import { CacheConstants } from "../util/constants";
 import { SyndicatedShows } from "./syndicated";
+import { SyndicatedTalentSummary } from "./../../common/models/syndicated/syndicatedSummary";
 import { Monitors } from "./monitors";
 import { Formats } from "./formats";
 import { Util } from "../../common/util/util";
@@ -69,12 +71,30 @@ export class Cache {
         var talentByStation = Util.groupByProperty(talent, "stationId");
         var stationsWithTalent = Object.keys(talentByStation);
         stationsWithTalent.forEach(s => Talents.cacheByStation(s, talentByStation[s], false));
-        Talents.cacheCachedList(stationsWithTalent);
+        Talents.cacheCachedStationList(stationsWithTalent);
 
+        var talentSummaries: TalentSummary[] = talent.map(t => {
+            var station = stations.find(s => s.id === t.stationId);
+            return Object.assign({}, t, {countryId: station.countryId});
+        });
+        var talentByCountry = Util.groupByProperty(talentSummaries, "countryId");
+        var countriesWithTalent = Object.keys(talentByCountry);
+        countriesWithTalent.forEach(c => Talents.cacheByCountry(c, countriesWithTalent[c], false));
+        Talents.cacheCachedCountryList(countriesWithTalent);
+
+        var syndicatedTalentSummaries: SyndicatedTalentSummary[] = syndicatedTalent.map(t => {
+            var station = stations.find(s => s.id === t.stationId);
+            return Object.assign({}, t, {countryId: station.countryId});
+        });
         var syndicatedTalentByStation = Util.groupByProperty(syndicatedTalent, "stationId");
         var stationsWithSyndicatedTalent = Object.keys(syndicatedTalentByStation);
         stationsWithSyndicatedTalent.forEach(s => SyndicatedShows.cacheByStation(s, syndicatedTalentByStation[s], false));
-        SyndicatedShows.cacheCachedList(stationsWithSyndicatedTalent);
+        SyndicatedShows.cacheCachedStationList(stationsWithSyndicatedTalent);
+
+        var syndicatedTalentByCountry = Util.groupByProperty(syndicatedTalentSummaries, "countryId");
+        var countriesWithSyndicatedTalent = Object.keys(syndicatedTalentByCountry);
+        countriesWithSyndicatedTalent.forEach(c => SyndicatedShows.cacheByCountry(c, countriesWithSyndicatedTalent[c], false));
+        SyndicatedShows.cacheCachedCountryList(countriesWithSyndicatedTalent);
 
         var stationSummaries = stations.map(s => {
             var talent = talentByStation[s.id] || [];

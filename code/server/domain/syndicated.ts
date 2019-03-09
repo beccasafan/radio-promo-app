@@ -1,6 +1,7 @@
 import { SyndicatedTalent } from "../../common/models/syndicated/syndicated";
 import { CacheWrapper } from "../util/cache";
 import { CacheConstants } from "../util/constants";
+import { SyndicatedTalentSummary } from "../../common/models/syndicated/syndicatedSummary";
 
 export class SyndicatedShows {
     public static get(): SyndicatedTalent[] {
@@ -35,8 +36,26 @@ export class SyndicatedShows {
         }
     }
 
-    public static cacheCachedList(stationIds: string[]) {
+    public static cacheCachedStationList(stationIds: string[]) {
         CacheWrapper.ScriptCache.put(CacheConstants.SyndicatedTalentByStation, stationIds);
+    }
+
+    public static cacheByCountry(countryId: string, data: SyndicatedTalentSummary[], cacheMain: boolean = true) {
+        var chunk = CacheWrapper.ScriptCache.put(`${CacheConstants.SyndicatedTalentByCountry}_${countryId}`, data);
+
+        if (cacheMain) {
+            var cachedCountries = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.SyndicatedTalentByCountry) || [];
+            var countryIsCached = cachedCountries.find(c => c === countryId) != null;
+
+            if (!countryIsCached) {
+                cachedCountries.push(countryId);
+                CacheWrapper.ScriptCache.put(CacheConstants.SyndicatedTalentByCountry, cachedCountries);
+            }
+        }
+    }
+
+    public static cacheCachedCountryList(countryIds: string[]) {
+        CacheWrapper.ScriptCache.put(CacheConstants.SyndicatedTalentByCountry, countryIds);
     }
 
     public static load(): SyndicatedTalent[] {
@@ -63,6 +82,12 @@ export class SyndicatedShows {
         if (syndicatedTalentByStation != null) {
             syndicatedTalentByStation.forEach(s => CacheWrapper.ScriptCache.remove(`${CacheConstants.SyndicatedTalentByStation}_${s}`));
             CacheWrapper.ScriptCache.remove(CacheConstants.SyndicatedTalentByStation);
+        }
+        
+        var syndicatedTalentByCountry = CacheWrapper.ScriptCache.get<string[]>(CacheConstants.SyndicatedTalentByCountry);
+        if (syndicatedTalentByCountry != null) {
+            syndicatedTalentByCountry.forEach(c => CacheWrapper.ScriptCache.remove(`${CacheConstants.SyndicatedTalentByCountry}_${c}`));
+            CacheWrapper.ScriptCache.remove(CacheConstants.SyndicatedTalentByCountry);
         }
     }
 }

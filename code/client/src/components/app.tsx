@@ -110,7 +110,7 @@ export class App extends React.Component<object, AppState> {
                     name: ""
                 };
             }
-            this.setState({renderCount: newRenderCount});
+            this.setState({ renderCount: newRenderCount });
         }
     }
 
@@ -155,9 +155,9 @@ export class App extends React.Component<object, AppState> {
     stationSelected(station: StationSummary) {
         this.setState({ selectedStation: station });
 
-        getJSON({directFunction: "getStation", parameters: [station.code], url: `?item=station&action=getStation&code=${station.code}`})
+        getJSON({ directFunction: "getStation", parameters: [station.code], url: `?item=station&action=getStation&code=${station.code}` })
             .done((data: StationDetail) => {
-                this.setState({selectedStationDetails: data});
+                this.setState({ selectedStationDetails: data });
             });
     }
 
