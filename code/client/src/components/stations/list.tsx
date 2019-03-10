@@ -101,7 +101,7 @@ export class Stations extends React.Component<StationsProps, StationsState> {
 
     render() {
         let allStations = this.state.visibleStations || this.props.stations;
-        if (!Util.isEmpty(this.state.visibleStations) && this.state.visibleStations[0].countryId !== this.props.countryId) {
+        if (!Util.isEmpty(this.state.visibleStations) && this.state.visibleStations.length > 0 && this.state.visibleStations[0].countryId !== this.props.countryId) {
             allStations = this.filter();
         }
         var stationsToShow = allStations.slice((this.state.currentPage - 1) * this.props.pageSize, this.state.currentPage * this.props.pageSize);
