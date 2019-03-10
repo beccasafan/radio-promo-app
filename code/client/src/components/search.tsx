@@ -229,7 +229,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
                         <input type="text" className="form-control" placeholder="Search by On-Air DJs / Shows" value={this.state.talent} onChange={this.onTalentChange} />
                     </div>
                     <div className={colClass}>
-                        <div className="row text-center social no-gutters">
+                        <div className="row text-center social no-gutters h-100 align-items-center">
                             <div className="col">
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox" id="twitter" checked={this.state.twitter} onChange={this.onTwitterChange} />
