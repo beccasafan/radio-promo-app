@@ -82,7 +82,7 @@ export class Cache {
         talentSummaries = talentSummaries.filter(s => s != null);
         var talentByCountry = Util.groupByProperty(talentSummaries, "countryId");
         var countriesWithTalent = Object.keys(talentByCountry);
-        countriesWithTalent.forEach(c => Talents.cacheByCountry(c, countriesWithTalent[c], false));
+        countriesWithTalent.forEach(c => Talents.cacheByCountry(c, talentByCountry[c], false));
         Talents.cacheCachedCountryList(countriesWithTalent);
 
         var syndicatedTalentSummaries: SyndicatedTalentSummary[] = syndicatedTalent.map(t => {
@@ -99,7 +99,7 @@ export class Cache {
 
         var syndicatedTalentByCountry = Util.groupByProperty(syndicatedTalentSummaries, "countryId");
         var countriesWithSyndicatedTalent = Object.keys(syndicatedTalentByCountry);
-        countriesWithSyndicatedTalent.forEach(c => SyndicatedShows.cacheByCountry(c, countriesWithSyndicatedTalent[c], false));
+        countriesWithSyndicatedTalent.forEach(c => SyndicatedShows.cacheByCountry(c, syndicatedTalentByCountry[c], false));
         SyndicatedShows.cacheCachedCountryList(countriesWithSyndicatedTalent);
 
         var stationSummaries = stations.map(s => {
