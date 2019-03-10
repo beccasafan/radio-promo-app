@@ -7,6 +7,7 @@ import { Talents } from "./talent";
 import { SyndicatedShows } from "./syndicated";
 import { SyndicatedTalent } from "../../common/models/syndicated/syndicated";
 import { Util } from "../../common/util/util";
+import { Talent } from "../../common/models/talent/talent";
 
 export class Stations {
     public static get(): Station[] {
@@ -40,9 +41,9 @@ export class Stations {
 
         var stationsInCountry = Stations.get().filter(s => s.countryId === countryId);
         var stationSummaries = stationsInCountry.map(s => {
-            var talent = talentByStation[s.id] || [];
+            var talent = talentByStation[s.id] || ([] as Talent[]);
             var syndicatedTalent = syndicatedTalentByStation[s.id] || [];
-            return Object.assign({}, s, { talent: talent.length, syndicated: syndicatedTalent.length });
+            return Object.assign({}, s, { talent: talent.length, syndicated: syndicatedTalent.length, talentNames: talent.map(t => t.name) });
         });
 
 

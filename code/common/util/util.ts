@@ -12,7 +12,7 @@ export class Util {
             group.push(item);
             groups[groupKey] = group;
             return groups;
-        }, {});
+        }, {} as {[key: string]: T[]});
     };
 
     public static shuffle = <T>(array: T[]) => {
