@@ -77,12 +77,17 @@ export class Stations extends React.Component<StationsProps, StationsState> {
         };
         let matchesBool = (station: StationSummary, property: string) => {
             return !Util.isEmpty(station[property]);
-        }
+        };
+        let matchesArrayText = (station: StationSummary, property: string, text: string) => {
+            return station[property] != null && (station[property] as string[]).some(i => i.toLowerCase().indexOf(text) >= 0);
+        };
+
         var visibleStations = this.props.stations.filter(s =>
             (Util.isEmpty(this.state.format) || matchesFormat(s, this.state.format)) &&
             (Util.isEmpty(this.state.parentGroup) || matchesText(s, "parentGroup", this.state.parentGroup.toLowerCase())) &&
             (Util.isEmpty(this.state.location) || matchesText(s, "location", this.state.location.toLowerCase())) &&
             (Util.isEmpty(this.state.name) || matchesText(s, "name", this.state.name.toLowerCase()) || matchesText(s, "code", this.state.name.toLowerCase())) &&
+            (Util.isEmpty(this.state.talent) || matchesArrayText(s, "talentNames", this.state.talent.toLowerCase())) &&
             (!this.state.twitter || matchesBool(s, "twitter")) &&
             (!this.state.instagram || matchesBool(s, "instagram")) &&
             (!this.state.facebook || matchesBool(s, "facebook")) &&

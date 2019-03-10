@@ -19,6 +19,7 @@ export interface SearchState {
     parentGroup?: string;
     location?: string;
     name?: string;
+    talent?: string;
     twitter?: boolean;
     instagram?: boolean;
     facebook?: boolean;
@@ -32,6 +33,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
     onParentChangeDebounced: (parameters: SearchValues) => void;
     onLocationChangeDebounced: (parameters: SearchValues) => void;
     onNameChangeDebounced: (parameters: SearchValues) => void;
+    onTalentChangeDebounced: (parameters: SearchValues) => void;
 
     constructor(props: SearchProps) {
         super(props);
@@ -41,6 +43,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
             parentGroup: null,
             location: null,
             name: null,
+            talent: null,
             twitter: null,
             instagram: null,
             facebook: null,
@@ -61,6 +64,9 @@ export class Search extends React.Component<SearchProps, SearchState> {
         this.onNameChange = this.onNameChange.bind(this);
         this.onNameChangeDebounced = debounce(250, this.props.onSearch.bind(this));
 
+        this.onTalentChange = this.onTalentChange.bind(this);
+        this.onTalentChangeDebounced = debounce(250, this.props.onSearch.bind(this));
+
         this.onTwitterChange = this.onTwitterChange.bind(this);
         this.onInstagramChange = this.onInstagramChange.bind(this);
         this.onFacebookChange = this.onFacebookChange.bind(this);
@@ -74,13 +80,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
     }
 
     private loadSearch(search: SearchValues) {
-        let hasAValue =
-            !Util.isEmpty(search.format) ||
-            !Util.isEmpty(search.parentGroup) ||
-            !Util.isEmpty(search.location) ||
-            !Util.isEmpty(search.name)
-            ;
-
         this.setState(search);
 
         this.props.onSearch(search);
@@ -124,6 +123,12 @@ export class Search extends React.Component<SearchProps, SearchState> {
             var name = this.state.name;
 
             this.onNameChangeDebounced({ name: name });
+        })
+    }
+
+    onTalentChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ talent: e.target.value }, () => {
+            this.onTalentChangeDebounced({talent: this.state.talent});
         })
     }
 
@@ -188,6 +193,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         addUrlParam("network", this.state.parentGroup);
         addUrlParam("location", this.state.location);
         addUrlParam("name", this.state.name);
+        addUrlParam("talent", this.state.talent);
         addUrlParam("twitter", this.state.twitter ? "" : null, true);
         addUrlParam("instagram", this.state.instagram ? "" : null, true);
         addUrlParam("facebook", this.state.facebook ? "" : null, true);
@@ -218,6 +224,9 @@ export class Search extends React.Component<SearchProps, SearchState> {
                     </div>
                     <div className={colClass}>
                         <input type="text" className="form-control" placeholder="Search by Call-Sign / Name" value={this.state.name} onChange={this.onNameChange} />
+                    </div>
+                    <div className={colClass}>
+                        <input type="text" className="form-control" placeholder="Search by On-Air DJs / Shows" value={this.state.talent} onChange={this.onTalentChange} />
                     </div>
                     <div className={colClass}>
                         <div className="row text-center social no-gutters">

@@ -9,6 +9,7 @@ export class SearchValues {
     public parentGroup?: string;
     public location?: string;
     public name?: string;
+    public talent?: string;
 
     public twitter?: boolean;
     public instagram?: boolean;

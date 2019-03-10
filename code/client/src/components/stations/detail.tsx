@@ -86,13 +86,13 @@ export class Detail extends React.Component<StationDetailProps, StationDetailSta
                         }
                         {this.props.detail && this.props.detail.syndicatedTalent && this.props.detail.syndicatedTalent.length > 0 && 
                             <div className="card">
-                                <div className="card-header" id={`${idFragment}_talent_heading`}>
+                                <div className="card-header" id={`${idFragment}_syndicatedTalent_heading`}>
                                     <h5 className="mb-0">
-                                        <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_talent`}>Syndicated DJs and Shows</button>
+                                        <button className="btn btn-link" data-toggle="collapse" data-target={`#${idFragment}_syndicatedTalent`}>Syndicated DJs and Shows</button>
                                     </h5>
                                 </div>
 
-                                <div id={`${idFragment}_talent`} className="collapse" aria-labelledBy={`${idFragment}_talent_heading`} data-parent={`#${idFragment}`}>
+                                <div id={`${idFragment}_syndicatedTalent`} className="collapse" aria-labelledBy={`${idFragment}_syndicatedTalent_heading`} data-parent={`#${idFragment}`}>
                                     <div className="card-body">
                                         {this.props.detail.syndicatedTalent.map(t => <Talent talent={t} languageId={this.props.station.languageId} getTweetUrl={this.props.getTweetUrl} />)}
                                     </div>
