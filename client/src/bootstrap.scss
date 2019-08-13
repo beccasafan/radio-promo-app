@@ -1,0 +1,178 @@
+$font-family-sans-serif: Roboto;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "~bootstrap/scss/bootstrap";
+:global {
+    .harry {
+        --base: #FFFFFF;
+        --background: #f3d0d6;
+        --bounding-box: #d6d5d5;
+        --card-header: #bc353a;
+        --card-header-text: #FFFFFF;
+        --inner-boxes: #ECEBEB;
+        --inner-box-text: #bc353a;
+        --summary-text: #333333;
+        --buttons: #000000;
+        --button-hover: #ff858d;
+        --button-text: #bc353a;
+        --button-hover-text: #FFFFFF;
+        --icons: #bc353a;
+        --icon-hover: #ff858d;
+    }
+    .liam {
+        --base: #FFFFFF;
+        --background: #DDF6E5;
+        --bounding-box: #D6D5D5;
+        --card-header: #3d7442;
+        --card-header-text: #FFFFFF;
+        --inner-boxes: #ecebeb;
+        --inner-box-text: #3d7442;
+        --summary-text: #333333;
+        --buttons: #000000;
+        --button-hover: #66ae6d;
+        --button-text: #217080;
+        --button-hover-text: #FFFFFF;
+        --icons: #3d7442;
+        --icon-hover: #66ae6d;
+    }
+    .louis {
+        --base: #FFFFFF;
+        --background: #b3d9dc;
+        --bounding-box: #d6d5d5;
+        --card-header: #217080;
+        --card-header-text: #FFFFFF;
+        --inner-boxes: #ECEBEB;
+        --inner-box-text: #217080;
+        --summary-text: #333333;
+        --buttons: #000000;
+        --button-hover: #7ec7d6;
+        --button-text: #217080;
+        --button-hover-text: #FFFFFF;
+        --icons: #217080;
+        --icon-hover: #7ec7d6;
+    }
+    .niall {
+        --base: #FFFFFF;
+        --background: #b3d9dc;
+        --bounding-box: #d6d5d5;
+        --card-header: #f15b08;
+        --card-header-text: #FFFFFF;
+        --inner-boxes: #ECEBEB;
+        --inner-box-text: #f15b08;
+        --summary-text: #333333;
+        --buttons: #000000;
+        --button-hover: #fccd72;
+        --button-text: #f15b08;
+        --button-hover-text: #FFFFFF;
+        --icons: #f15b08;
+        --icon-hover: #f6b841;
+    }
+    .zayn {
+        --base: #FFFFFF;
+        --background: #b3d9dc;
+        --bounding-box: #d6d5d5;
+        --card-header: #7236a1;
+        --card-header-text: #FFFFFF;
+        --inner-boxes: #ECEBEB;
+        --inner-box-text: #7236a1;
+        --summary-text: #333333;
+        --buttons: #000000;
+        --button-hover: #9586c6;
+        --button-text: #7236a1;
+        --button-hover-text: #FFFFFF;
+        --icons: #7236a1;
+        --icon-hover: #9586c6;
+    } 
+}
+
+#app {
+    // background-color: var(--background);
+    color: var(--text);
+
+    .container {
+        background-color: var(--base);
+    }
+}
+
+.card {
+    border-color: var(--bounding-box);
+
+    
+    .card-header {
+        background-color: var(--card-header);
+        color: var(--card-header-text);
+        font-weight: bold;
+        padding: 0.625rem;
+
+        a, a:hover, button, button:hover {
+            color: var(--card-header-text);
+        }
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        padding: 0.625rem;
+
+        color: var(--summary-text);
+    
+        .card-text:last-child {
+            margin-bottom: 1rem;
+        }
+    
+        .card-grow {
+            flex: 1;
+        }
+    }
+
+    .card-footer {
+        background-color: var(--inner-boxes);
+        color: var(--inner-box-text);
+        i {
+            cursor: pointer;
+            color: var(--icons);
+
+            &:hover {
+                color: var(--icon-hover);
+            }
+        }
+    }
+
+    i {
+        &.fa-clock, &.fa-map-marker-alt, &.fa-angle-right, &.fa-microphone, &.fa-user-friends {
+            &:hover {
+                color: var(--icons);
+            }
+        }
+    }
+}
+
+
+
+
+.btn-outline-secondary {
+    color: var(--button-text);
+    background-color: var(--base);
+    border-color: var(--buttons);
+
+    &:hover, &:not(.disabled):not(:disabled):active {
+        color:var(--button-hover-text) !important;
+        background-color: var(--button-hover);
+        border-color: var(--button-hover);
+    }
+}
+
+a, .page-link, .btn-link {
+    color: var(--icons);
+
+    &:hover {
+        color: var(--icon-hover);
+    }
+}
+
+.page-link:hover {
+    background-color: var(--button-hover);
+    color: var(--button-hover-text);
+    border-color: var(--button-hover);
+}
+

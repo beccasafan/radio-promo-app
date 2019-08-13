@@ -1,1 +1,5 @@
 node_modules/
+dist/
+client/build/
+server/lib
+shared/lib

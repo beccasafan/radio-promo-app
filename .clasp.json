@@ -1,4 +1,5 @@
 {
-    "scriptId":"12MQCAxxDB75vm88cCiL-GRPPXhcKkiI1aemTp5FKug6uFmkvxfGUGqyx",
-    "rootDir":"code"
+    "scriptId": "1MAPXVPf1nVPrwU-TlyCU2gsGiUMCOwjvJ01061TY3P2JOpIz10ygJutm",
+    "rootDir": "dist",
+    "filePushOrder": ["dist/shared/models/country.ts", "dist/shared/models/format.ts", "dist/shared/models/station.ts", "dist/shared/models/syndicated-talent.ts", "dist/shared/models/talent.ts", "dist/shared/models/tweet.ts"]
 }

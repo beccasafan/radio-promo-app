@@ -1,0 +1,65 @@
+{
+  "name": "radio-app-2",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://localhost/rrd2/",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "clipboard": "^2.0.4",
+    "jquery": "^3.4.0",
+    "jsonp": "^0.2.1",
+    "lodash.isequal": "^4.5.0",
+    "popper.js": "^1.15.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.2",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "select2": "^4.0.5",
+    "throttle-debounce": "^2.1.0",
+    "typescript": "3.4.4"
+  },
+  "devDependencies": {
+    "@craco/craco": "^5.0.2",
+    "@types/bootstrap": "^4.3.0",
+    "@types/clipboard": "^2.0.1",
+    "@types/google-apps-script": "0.0.44",
+    "@types/jquery": "^3.3.29",
+    "@types/jsonp": "^0.2.0",
+    "@types/lodash.isequal": "^4.5.5",
+    "@types/node": "11.13.6",
+    "@types/react": "16.8.14",
+    "@types/react-dom": "16.8.4",
+    "@types/react-redux": "^7.0.8",
+    "@types/react-router-dom": "^4.3.2",
+    "@types/select2": "^4.0.48",
+    "@types/throttle-debounce": "^1.1.1",
+    "awesome-typed-sass-modules": "^1.2.0",
+    "concurrently": "^4.1.0",
+    "node-sass": "^4.11.0",
+    "radio-app-2-shared": "^0.0.1",
+    "react-scripts": "2.1.8",
+    "redux-devtools-extension": "^2.13.8",
+    "typescript-fsa": "^3.0.0-beta-2",
+    "typescript-fsa-reducers": "^1.2.1",
+    "typescript-fsa-redux-thunk": "^2.0.0-beta.11"
+  },
+  "scripts": {
+    "atsm": "atsm -s -c -p \"/src/**/**?(.module).?(s)css\"",
+    "start": "concurrently \"npm:atsm -- -w\" \"craco start\"",
+    "build": "npm run atsm && craco build",
+    "test": "npm run atsm && craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

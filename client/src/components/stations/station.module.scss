@@ -1,0 +1,29 @@
+.station {
+    .local-time {
+        background-color: var(--inner-boxes);
+        color: var(--inner-box-text);
+        padding: 0.625rem;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .actions {
+        button {
+            border-radius: 0;
+        }
+    }
+
+    i {
+        cursor: pointer;
+        width: 1rem;
+        text-align: center;
+        color: var(--icons);
+        margin-right: 0.5rem;
+
+        &:hover:not(.fa-map-marker-alt, .fa-clock, .fa-angle-right) {
+            color: var(--icon-hover);
+        }
+    }
+}
