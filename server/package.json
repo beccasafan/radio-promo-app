@@ -16,7 +16,6 @@
     "copy-webpack-plugin": "^5.0.4",
     "onchange": "^6.0.0",
     "prettier": "^1.18.2",
-    "radio-app-2-shared": "^0.0.1",
     "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
