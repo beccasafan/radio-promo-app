@@ -48,7 +48,7 @@ class VisibleStations extends Component<Props> {
                     </div>
                 }
 
-                {!this.props.station && <p className={bs.textCenter}>No results...</p>}
+                {!this.props.stations && <p className={bs.textCenter}>No results...</p>}
                 <Nav description="Bottom" {...navProps} />
 
                 {this.props.station && <Detail id={this.props.station.id} />}
