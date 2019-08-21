@@ -5,6 +5,7 @@ import * as cs from './station.module.scss';
 import * as bs from 'src/bootstrap.scss';
 import Time from '../ui/time';
 import { StationSummaryProps } from './summary';
+import NoteContent from '../ui/note-content';
 
 const Summary2 = (props: StationSummaryProps) => (
     <div className={`${bs.card} ${bs.h100}`}>
@@ -19,20 +20,20 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
         <div className={bs.cardBody}>
             <div className={bs.cardGrow}>
-                {props.station.note && <div>
-                    {props.station.note.twitterClout && <p><i className="fas fa-angle-right"></i>{props.station.note.twitterClout} on Twitter</p>}
-                    {props.station.note.instagramClout && <p><i className="fas fa-angle-right"></i>{props.station.note.instagramClout} on Instagram</p>}
-                    {props.station.note.preferredContact && <p><i className="fas fa-angle-right"></i>Preferred Contact is {props.station.note.preferredContact}</p>}
-                    {props.station.note.stationCred && <p><i className="fas fa-angle-right"></i>{props.station.note.programmingTips}</p>}
-                    {props.station.note.programmingTips && <p><i className="fas fa-angle-right"></i>{props.station.note.programmingTips}</p>}
-                    {props.station.note.app && <p><i className="fas fa-angle-right"></i>Station has an app.</p>}
-                    {props.station.note.general && <p><i className="fas fa-angle-right"></i>{props.station.note.general}</p>}
-                    {props.selectedArtist === "harry" && props.station.note.harry && <p><i className="fas fa-angle-right"></i>{props.station.note.harry}</p>}
-                    {props.selectedArtist === "liam" && props.station.note.liam && <p><i className="fas fa-angle-right"></i>{props.station.note.liam}</p>}
-                    {props.selectedArtist === "louis" && props.station.note.louis && <p><i className="fas fa-angle-right"></i>{props.station.note.louis}</p>}
-                    {props.selectedArtist === "niall" && props.station.note.niall && <p><i className="fas fa-angle-right"></i>{props.station.note.niall}</p>}
-                    {props.selectedArtist === "zayn" && props.station.note.zayn && <p><i className="fas fa-angle-right"></i>{props.station.note.zayn}</p>}
-                </div>}
+                {props.station.note && <>
+                    {props.station.note.twitterClout && <NoteContent text={`${props.station.note.twitterClout} on Twitter`} />}
+                    {props.station.note.instagramClout && <NoteContent text={`${props.station.note.instagramClout} on Instagram`} />}
+                    {props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${props.station.note.preferredContact}`} />}
+                    {props.station.note.stationCred && <NoteContent text={props.station.note.stationCred} />}
+                    {props.station.note.programmingTips && <NoteContent text={props.station.note.programmingTips} />}
+                    {props.station.note.app && <NoteContent text="Station has an app." />}
+                    {props.station.note.general && <NoteContent text={props.station.note.general} />}
+                    {props.selectedArtist === "harry" && props.station.note.harry && <NoteContent text={props.station.note.harry} />}
+                    {props.selectedArtist === "liam" && props.station.note.liam && <NoteContent text={props.station.note.liam} />}
+                    {props.selectedArtist === "louis" && props.station.note.louis && <NoteContent text={props.station.note.louis} />}
+                    {props.selectedArtist === "niall" && props.station.note.niall && <NoteContent text={props.station.note.niall} />}
+                    {props.selectedArtist === "zayn" && props.station.note.zayn && <NoteContent text={props.station.note.zayn} />}
+                </>}
             </div>
 
         </div>

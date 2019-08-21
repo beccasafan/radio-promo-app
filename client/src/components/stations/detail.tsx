@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import * as Bootstrap from 'src/bootstrap.scss';
 import styles from './station.module.scss';
 import Time from '../ui/time';
+import NoteContent from '../ui/note-content';
 
 interface OwnProps {
     id: string;
@@ -105,29 +106,28 @@ class Detail extends Component<Props> {
 
                                 <div id={`${idFragment}_details`} className={`${Bootstrap.collapse} ${section === "detail" ? Bootstrap.show : ""}`} aria-labelledby={`${idFragment}_details_heading`} data-parent={`#${idFragment}`}>
                                     <div className={Bootstrap.cardBody}>
-                                        <p>{this.props.station.code} {this.props.station.parentGroup && <span> // {this.props.station.parentGroup}</span>}</p>
-                                        {this.props.station.note && <div>
-                                            {this.props.station.note.twitterClout && <p><i className="fas fa-angle-right"></i>{this.props.station.note.twitterClout} on Twitter</p>}
-                                            {this.props.station.note.instagramClout && <p><i className="fas fa-angle-right"></i>{this.props.station.note.instagramClout} on Instagram</p>}
-                                            {this.props.station.note.preferredContact && <p><i className="fas fa-angle-right"></i>Preferred Contact is {this.props.station.note.preferredContact}</p>}
-                                            {this.props.station.note.stationCred && <p><i className="fas fa-angle-right"></i>{this.props.station.note.programmingTips}</p>}
-                                            {this.props.station.note.programmingTips && <p><i className="fas fa-angle-right"></i>{this.props.station.note.programmingTips}</p>}
-                                            {this.props.station.note.app && <p><i className="fas fa-angle-right"></i>Station has an app.</p>}
-                                            {this.props.station.note.general && <p><i className="fas fa-angle-right"></i>{this.props.station.note.general}</p>}
-                                            {this.props.selectedArtist === "harry" && this.props.station.note.harry && <p><i className="fas fa-angle-right"></i>{this.props.station.note.harry}</p>}
-                                            {this.props.selectedArtist === "liam" && this.props.station.note.liam && <p><i className="fas fa-angle-right"></i>{this.props.station.note.liam}</p>}
-                                            {this.props.selectedArtist === "louis" && this.props.station.note.louis && <p><i className="fas fa-angle-right"></i>{this.props.station.note.louis}</p>}
-                                            {this.props.selectedArtist === "niall" && this.props.station.note.niall && <p><i className="fas fa-angle-right"></i>{this.props.station.note.niall}</p>}
-                                            {this.props.selectedArtist === "zayn" && this.props.station.note.zayn && <p><i className="fas fa-angle-right"></i>{this.props.station.note.zayn}</p>}
-                                        </div>}
-                                        {this.props.station.oldNote && <p>{this.props.station.oldNote}</p>}
-                                        {this.props.station.website && <p><a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
-                                        {this.props.station.twitter && <p><a href="#" className="twitter" onMouseDown={this.setTweetUrl} onMouseEnter={this.setTweetUrl} target="_blank"><i className="fab fa-twitter"></i> {this.props.station.twitter}</a></p>}
-                                        {this.props.station.instagram && <p><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.station.instagram}</a></p>}
-                                        {this.props.station.facebook && <p><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.station.facebook}</a></p>}
-                                        {this.props.station.email && <p><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
-                                        {this.props.station.text && <p><i className="fas fa-comment"></i> {this.props.station.text}</p>}
-                                        {this.props.station.phone && (<p><a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
+                                        <p className={Bootstrap.cardText}>{this.props.station.code} {this.props.station.parentGroup && <span> // {this.props.station.parentGroup}</span>}</p>
+                                        {this.props.station.note && <>
+                                            {this.props.station.note.twitterClout && <NoteContent text={`${this.props.station.note.twitterClout} on Twitter`} />}
+                                            {this.props.station.note.instagramClout && <NoteContent text={`${this.props.station.note.instagramClout} on Instagram`} />}
+                                            {this.props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${this.props.station.note.preferredContact}`} />}
+                                            {this.props.station.note.stationCred && <NoteContent text={`${this.props.station.note.programmingTips}`} />}
+                                            {this.props.station.note.programmingTips && <NoteContent text={`${this.props.station.note.programmingTips}`} /> }
+                                            {this.props.station.note.app && <NoteContent text="Station has an app." />}
+                                            {this.props.station.note.general && <NoteContent text={this.props.station.note.general} />}
+                                            {this.props.selectedArtist === "harry" && this.props.station.note.harry && <NoteContent text={this.props.station.note.harry} />}
+                                            {this.props.selectedArtist === "liam" && this.props.station.note.liam && <NoteContent text={this.props.station.note.liam} />}
+                                            {this.props.selectedArtist === "louis" && this.props.station.note.louis && <NoteContent text={this.props.station.note.louis} />}
+                                            {this.props.selectedArtist === "niall" && this.props.station.note.niall && <NoteContent text={this.props.station.note.niall} />}
+                                            {this.props.selectedArtist === "zayn" && this.props.station.note.zayn && <NoteContent text={this.props.station.note.zayn} />}
+                                        </>}
+                                        {this.props.station.website && <p className={Bootstrap.cardText}><a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
+                                        {this.props.station.twitter && <p className={Bootstrap.cardText}><a href="#" className="twitter" onMouseDown={this.setTweetUrl} onMouseEnter={this.setTweetUrl} target="_blank"><i className="fab fa-twitter"></i> {this.props.station.twitter}</a></p>}
+                                        {this.props.station.instagram && <p className={Bootstrap.cardText}><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.station.instagram}</a></p>}
+                                        {this.props.station.facebook && <p className={Bootstrap.cardText}><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.station.facebook}</a></p>}
+                                        {this.props.station.email && <p className={Bootstrap.cardText}><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
+                                        {this.props.station.text && <p className={Bootstrap.cardText}><i className="fas fa-comment"></i> {this.props.station.text}</p>}
+                                        {this.props.station.phone && (<p className={Bootstrap.cardText}><a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
                                     </div>
                                 </div>
                             </div>
