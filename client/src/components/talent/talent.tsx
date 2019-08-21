@@ -5,6 +5,7 @@ import * as bootstrap from 'src/bootstrap.scss';
 import * as styles from './talent.module.scss';
 import { getTweet } from 'src/logic/helpers/twitter';
 import TalentTime from '../ui/talent-time';
+import NoteContent from '../ui/note-content';
 
 interface OwnProps {
     station: Station;
@@ -32,8 +33,8 @@ export default class Talent extends Component<OwnProps> {
                 <div className={bootstrap.card}>
                     <div className={`${styles.name} ${bootstrap.fontWeightBold}`}>{this.props.talent.name}</div>
                     <div className={bootstrap.cardBody}>
-                        {this.props.talent.schedule && <p className={bootstrap.cardText}><i className="fas fa-angle-right"></i>{this.props.talent.schedule}</p>}
-                        {this.props.talent.note && <p className={bootstrap.cardText}><i className="fas fa-angle-right"></i>{this.props.talent.note}</p>}
+                        {this.props.talent.schedule && <NoteContent text={this.props.talent.schedule} />}
+                        {this.props.talent.note && <NoteContent text={this.props.talent.note} />}
                         <div className="row">
                             <div className="col">
                                 {this.props.talent.twitter && <a className="twitter px-3" onMouseDown={this.setTweetUrl} onMouseEnter={this.setTweetUrl} target="_blank"><i className="fab fa-twitter"></i></a>}
