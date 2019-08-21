@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Station, StationDetail, StationNote, StationSummary, SyndicatedTalent, Talent } from "radio-app-2-shared";
+import { Format, Station, StationDetail, StationNote, StationSummary, SyndicatedTalent, Talent } from "radio-app-2-shared";
 // prettier-ignore
 import { groupByProperty, IGroupedEntity, ITypedEntity, readSheetData } from "../util";
 import CacheConstants from "./cache-constants";
@@ -44,12 +44,24 @@ function loadStations(
     .map(n => new StationNote(n))
     .filter(n => n.isValid());
 
+  const formats = readSheetData("Format")
+    .map(f => new Format(f))
+    .filter(f => f.isValid());
+
   const notesByStation = notes.reduce(
     (res, n) => {
       res[n.stationId] = n;
       return res;
     },
     {} as ITypedEntity<StationNote>
+  );
+
+  const formatsById = formats.reduce(
+    (res, f) => {
+      res[f.id] = f;
+      return res;
+    },
+    {} as ITypedEntity<Format>
   );
 
   stations.forEach(s => {
@@ -75,6 +87,8 @@ function loadStations(
     if (notesByStation != null) {
       s.note = notesByStation[s.id];
     }
+
+    s.format = formatsById[s.formatId];
   });
 
   const stationsByCountry = groupByProperty(stations, "countryId");

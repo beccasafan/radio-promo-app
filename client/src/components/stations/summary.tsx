@@ -59,7 +59,7 @@ export default Summary;
 
 
 export interface StationSummaryProps {
-    station: Station;
+    station: StationSummary;
     setTweetUrl: () => void;
     onSelect: () => void;
     onOnAirSelect: () => void;

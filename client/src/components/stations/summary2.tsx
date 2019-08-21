@@ -13,12 +13,12 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
 
         <div className={`${cs.localTime} ${bs.cardFooter}`}>
-            <i className="far fa-clock"></i>&nbsp;<span>{props.station.utc && <Time utcOffset={props.station.utc} />}</span>
-            <p><i className="fas fa-map-marker-alt"></i>&nbsp;{props.station.location}</p>
+            <div><i className="far fa-clock"></i>&nbsp;<span>{props.station.utc && <Time utcOffset={props.station.utc} />}</span></div>
+            <div><i className="fas fa-map-marker-alt"></i>&nbsp;{props.station.location}</div>
+            {props.station.format && <div className={bs.fontItalic}><i className="fas fa-music"></i> {props.station.format.name}</div>}
         </div>
         <div className={bs.cardBody}>
             <div className={bs.cardGrow}>
-
                 {props.station.note && <div>
                     {props.station.note.twitterClout && <p><i className="fas fa-angle-right"></i>{props.station.note.twitterClout} on Twitter</p>}
                     {props.station.note.instagramClout && <p><i className="fas fa-angle-right"></i>{props.station.note.instagramClout} on Instagram</p>}

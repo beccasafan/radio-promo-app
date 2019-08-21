@@ -92,9 +92,10 @@ class Detail extends Component<Props> {
                             <div className={Bootstrap.card}>
 
                                 <div className={styles.localTime}>
-                                    <i className="far fa-clock"></i>&nbsp;<span>{this.props.station.utc && <Time utcOffset={this.props.station.utc} />}</span>
-                                    <p><i className="fas fa-map-marker-alt"></i>&nbsp;{this.props.station.location}</p>
-                                </div>
+                                    <div><i className="far fa-clock"></i>&nbsp;<span>{this.props.station.utc && <Time utcOffset={this.props.station.utc} />}</span></div>
+                                    <div><i className="fas fa-map-marker-alt"></i>&nbsp;{this.props.station.location}</div>
+                                    {this.props.station.format && <div className={Bootstrap.fontItalic}><i className="fas fa-music"></i> {this.props.station.format.name}</div>}
+                                 </div>
                                 <div className={Bootstrap.cardHeader} id={`${idFragment}_details_heading`}>
                                     <h5 className={Bootstrap.mb0}>
                                         <button className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} data-toggle="collapse" data-target={`#${idFragment}_details`}>Station Details</button>
