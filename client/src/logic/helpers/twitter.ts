@@ -9,7 +9,6 @@ let song: Song;
 export function setSong(s: Song) {
     song = s;
 
-    console.log("set song", song, data, validData);
     filterTweets();
 }
 
@@ -22,7 +21,6 @@ export function setTweets(tweetsByLanguage: NormalizedEntity<NormalizedTweetsByL
         return res;
     }, {} as { [languageId: string]: { tweets: Tweet[]; index: number } });
 
-    console.log("set tweets", song, data, validData);
     filterTweets();
 }
 
@@ -40,12 +38,10 @@ function filterTweets() {
         validData[language] = { tweets: tweets, index: 0 };
     });
 
-    console.log("filtered tweets", song, data, validData);
 }
 
 export function getTweet(element: HTMLElement, station: Station, talent?: Talent) {
     let tweet = ".{{target}} {{artist}} {{hashtag}}";
-    console.log(element, data, validData);
 
 
     if (validData != null) {

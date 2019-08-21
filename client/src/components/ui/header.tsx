@@ -57,7 +57,6 @@ const selectedArtist = createSelector([getArtists, getSelectedArtist], (artists,
 const theme = createSelector(selectedArtist, a => {
     if (a != null) return a.id;
     const number = Math.floor(Math.random() * 8) + 1;
-    console.log(number);
     return "ot5-" + number;
 });
 
