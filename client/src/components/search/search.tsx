@@ -10,7 +10,7 @@ import { DataFormat, SearchOptions } from "select2";
 import { setRouteData } from "src/route";
 import { createSelector } from "reselect";
 import { debounce } from 'throttle-debounce'
-import { Artist, Song } from "radio-app-2-shared";
+import { Artist, Song, shuffle } from "radio-app-2-shared";
 import { setSong } from "src/logic/helpers/twitter";
 import { actions as songActions } from 'src/logic/songs/songs-redux';
 import Dropdown from "../countries/dropdown";
@@ -431,7 +431,7 @@ const artists = createSelector([getArtists, getSelectedArtist], (guys, artist) =
         return a;
     });
 
-    return [{ id: "ot5", code: "ot5", name: "All" } as unknown as Artist, ...data];
+    return [{ id: "ot5", code: "ot5", name: "All" } as unknown as Artist, ...shuffle(data)];
 }
 );
 
