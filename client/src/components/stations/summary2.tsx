@@ -39,7 +39,6 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
         <div className={bs.cardFooter}>
             <div className={`${bs.row} ${bs.noGutters}`}>
-                <div className={bs.col}><a href="javascript:;" onClick={props.onSelect}><i className="fas fa-eye"></i></a></div>
                 <div className={bs.col}>{props.station.website && <a href={props.station.website} target="_blank"><i className="fas fa-link"></i></a>}</div>
                 <div className={bs.col}>{props.station.twitter && <a href="#" className="twitter" onMouseDown={props.setTweetUrl} onMouseEnter={props.setTweetUrl} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
                 <div className={bs.col}>{props.station.instagram && <a href={`https://instagram.com/${props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
