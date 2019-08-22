@@ -2,10 +2,24 @@ $font-family-sans-serif: Roboto;
 
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import "~bootstrap/scss/bootstrap";
+
 :global {
+    .ot5 {
+        --base: #FFFFFF;
+        --bounding-box: #D6D5D5;
+        --card-header: #696969;
+        --card-header-text: #FFFFFF;
+        --inner-boxes: #ECEBEB;
+        --inner-box-text: #696969;
+        --summary-text: #333333;
+        --buttons: #000000;
+        --button-hover: #CCCCCC;
+        --button-hover-text: #FFFFFF;
+        --icons: #778899;
+        --icon-hover: #CCCCCC;
+    }
     .harry {
         --base: #FFFFFF;
-        --background: #f3d0d6;
         --bounding-box: #d6d5d5;
         --card-header: #bc353a;
         --card-header-text: #FFFFFF;
@@ -21,7 +35,6 @@ $font-family-sans-serif: Roboto;
     }
     .liam {
         --base: #FFFFFF;
-        --background: #DDF6E5;
         --bounding-box: #D6D5D5;
         --card-header: #3d7442;
         --card-header-text: #FFFFFF;
@@ -37,7 +50,6 @@ $font-family-sans-serif: Roboto;
     }
     .louis {
         --base: #FFFFFF;
-        --background: #b3d9dc;
         --bounding-box: #d6d5d5;
         --card-header: #217080;
         --card-header-text: #FFFFFF;
@@ -53,40 +65,37 @@ $font-family-sans-serif: Roboto;
     }
     .niall {
         --base: #FFFFFF;
-        --background: #b3d9dc;
         --bounding-box: #d6d5d5;
-        --card-header: #f15b08;
+        --card-header: #EC7B3D;
         --card-header-text: #FFFFFF;
         --inner-boxes: #ECEBEB;
-        --inner-box-text: #f15b08;
+        --inner-box-text: #EC7B3D;
         --summary-text: #333333;
         --buttons: #000000;
-        --button-hover: #fccd72;
-        --button-text: #f15b08;
+        --button-hover: #FBB067;
+        --button-text: #EC7B3D;
         --button-hover-text: #FFFFFF;
-        --icons: #f15b08;
-        --icon-hover: #f6b841;
+        --icons: #EC7B3D;
+        --icon-hover: #FBB067;
     }
     .zayn {
         --base: #FFFFFF;
-        --background: #b3d9dc;
         --bounding-box: #d6d5d5;
-        --card-header: #7236a1;
+        --card-header: #8566AF;
         --card-header-text: #FFFFFF;
         --inner-boxes: #ECEBEB;
-        --inner-box-text: #7236a1;
+        --inner-box-text: #8566AF;
         --summary-text: #333333;
         --buttons: #000000;
-        --button-hover: #9586c6;
-        --button-text: #7236a1;
+        --button-hover: #C4B4EC;
+        --button-text: #8566AF;
         --button-hover-text: #FFFFFF;
-        --icons: #7236a1;
-        --icon-hover: #9586c6;
+        --icons: #8566AF;
+        --icon-hover: #C4B4EC;
     } 
 }
 
 #app {
-    // background-color: var(--background);
     color: var(--text);
 
     .container {
