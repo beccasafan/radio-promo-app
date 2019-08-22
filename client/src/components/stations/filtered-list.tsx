@@ -1,6 +1,6 @@
 import React, { Component, Dispatch } from 'react';
 import NormalizedEntity, { INormalizableEntity } from 'src/logic/helpers/normalized-entity';
-import { Format, StationSummary } from 'radio-app-2-shared';
+import { Format, StationSummary, shuffle } from 'radio-app-2-shared';
 import { connect } from 'react-redux';
 import Summary from './summary';
 import * as bs from 'src/bootstrap.scss';
@@ -101,7 +101,8 @@ const searchStations = x(
     [itemsSelector, formatsSelector, formatSelector, parentGroupSelector, locationSelector, nameSelector, talentSelector, socialSelector],
     (items, formats, format, parentGroup, location, name, talent, socials): StationSummary[] => {
         const allFormats = formats.allIds.map(f => formats.byId[f]);
-        return items
+        
+        return shuffle(items
             .allIds
             .filter(id => {
                 const station = items.byId[id];
@@ -119,7 +120,7 @@ const searchStations = x(
                     && matchesBool(station.whatsapp, socials.whatsapp)
                 ;
             })
-            .map(id => items.byId[id])
+            .map(id => items.byId[id]))
         ;
     }
 );
