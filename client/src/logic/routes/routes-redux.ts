@@ -31,7 +31,8 @@ const handleGetFromRoute = (state: RouteData, payload: RouteInfo): RouteData => 
         whatsapp: !!payload.whatsapp && booleanRegex.test(payload.whatsapp!),
         page: Number(payload.page),
         pageSize: Number(payload.pageSize),
-        section: payload.section
+        section: payload.section,
+        stations: payload.stations ? payload.stations.split(",").map(s => s.trim()) : undefined
     };
 
     let title = Object.keys(routeInfo).map(k => k === "history" ? null : (routeInfo as any)[k] || null).filter(i => i).join(" - ");
@@ -99,6 +100,10 @@ const handleGetFromRoute = (state: RouteData, payload: RouteInfo): RouteData => 
 
     if (routeInfo.page) {
         t.push(routeInfo.page);
+    }
+
+    if (routeInfo.stations) {
+        t.push(routeInfo.stations.join("/"));
     }
 
     document.title = t.join(" - ") + " - Radio Request Database";

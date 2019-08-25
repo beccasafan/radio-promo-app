@@ -20,6 +20,7 @@ export interface UrlParams {
     pageSize?: string;
     station?: string;
     section?: string;
+    stations?: string;
 }
 
 export interface RouteInfo extends UrlParams {
@@ -46,4 +47,5 @@ export interface RouteData {
     station?: string;
     section?: string;
     history?: History; 
+    stations?: string[];
 }

@@ -78,6 +78,7 @@ const phoneSelector = (state: AppState) => state.routes.phone;
 const whatsappSelector = (state: AppState) => state.routes.whatsapp;
 
 const selectedStationSelector = (state: AppState) => state.routes.station;
+const selectedStationsSelector = (state: AppState) => state.routes.stations;
 
 const socialSelector = createSelector(
     [twitterSelector, instagramSelector, facebookSelector, emailSelector, textSelector, phoneSelector, whatsappSelector],
@@ -131,8 +132,18 @@ const searchStations = x(
 );
 
 const getStations = x(
-    [searchStations, selectedStationSelector],
-    (stations, selectedStation) => {
+    [searchStations, selectedStationSelector, selectedStationsSelector],
+    (stations, selectedStation, selectedStations) => {
+        if (selectedStations != null) {
+            [...selectedStations].reverse().forEach(station => {
+                const s = stations.findIndex(st => st.id == station);
+                if (s >= 0) {
+                    const moveToFront = stations.splice(s, 1)[0];
+                    stations.unshift(moveToFront);
+                }
+            });
+        }
+
         if (selectedStation != null) {
             const s = stations.findIndex(st => st.id == selectedStation);
             if (s >= 0) {
