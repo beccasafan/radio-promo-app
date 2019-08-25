@@ -126,7 +126,7 @@ class Detail extends Component<Props> {
                                         {this.props.station.instagram && <p className={Bootstrap.cardText}><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.station.instagram}</a></p>}
                                         {this.props.station.facebook && <p className={Bootstrap.cardText}><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.station.facebook}</a></p>}
                                         {this.props.station.email && <p className={Bootstrap.cardText}><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
-                                        {this.props.station.text && <p className={Bootstrap.cardText}><i className="fas fa-comment"></i> {this.props.station.text}</p>}
+                                        {this.props.station.text && <p className={Bootstrap.cardText}><a href={`sms:${this.props.station.text}`}><i className="fas fa-comment"></i> {this.props.station.text}</a></p>}
                                         {this.props.station.phone && (<p className={Bootstrap.cardText}><a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
                                     </div>
                                 </div>

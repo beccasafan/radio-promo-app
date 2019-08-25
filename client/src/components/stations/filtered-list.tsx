@@ -76,6 +76,9 @@ const emailSelector = (state: AppState) => state.routes.email;
 const textSelector = (state: AppState) => state.routes.text;
 const phoneSelector = (state: AppState) => state.routes.phone;
 const whatsappSelector = (state: AppState) => state.routes.whatsapp;
+
+const selectedStationSelector = (state: AppState) => state.routes.station;
+
 const socialSelector = createSelector(
     [twitterSelector, instagramSelector, facebookSelector, emailSelector, textSelector, phoneSelector, whatsappSelector],
     (twitter, instagram, facebook, email, text, phone, whatsapp) => ({ twitter, instagram, facebook, email, text, phone, whatsapp })
@@ -101,8 +104,8 @@ const searchStations = x(
     [itemsSelector, formatsSelector, formatSelector, parentGroupSelector, locationSelector, nameSelector, talentSelector, socialSelector],
     (items, formats, format, parentGroup, location, name, talent, socials): StationSummary[] => {
         const allFormats = formats.allIds.map(f => formats.byId[f]);
-        
-        return shuffle(items
+        console.log("shuffling", items, formats, format, parentGroup, location, name, talent, socials);
+        const stations = shuffle(items
             .allIds
             .filter(id => {
                 const station = items.byId[id];
@@ -122,14 +125,31 @@ const searchStations = x(
             })
             .map(id => items.byId[id]))
         ;
+
+        return stations;
     }
 );
 
+const getStations = x(
+    [searchStations, selectedStationSelector],
+    (stations, selectedStation) => {
+        if (selectedStation != null) {
+            const s = stations.findIndex(st => st.id == selectedStation);
+            if (s >= 0) {
+                const moveToFront = stations.splice(s, 1)[0];
+                stations.unshift(moveToFront);
+            }
+        }
+        
+        return stations;
+    }
+)
+
 const getPageOfStations = x(
-    [searchStations, pageSelector, pageSizeSelector],
+    [getStations, pageSelector, pageSizeSelector],
     (items, page, pageSize): StationSummary[] => items.slice(((page - 1) * pageSize), (page * pageSize))
 );
-const getTotalStations = x([searchStations], (items): number => items.length);
+const getTotalStations = x([getStations], (items): number => items.length);
 
 function mapStateToProps(appState: AppState, ownProps: OwnProps): StateProps {
     return { 
@@ -145,12 +165,10 @@ function mapStateToProps(appState: AppState, ownProps: OwnProps): StateProps {
 const mapDispatchToProps = {
     onNextClick: (event: React.MouseEvent<HTMLAnchorElement>) => (dispatch: Dispatch<any>, getState: () => AppState, extraArgument: any) => {
         event.preventDefault();
-        console.log("next");
         setRouteData({page: (getState().routes.page || 1)+1});
     },
     onPreviousClick: (event: React.MouseEvent<HTMLAnchorElement>) => (dispatch: Dispatch<any>, getState: () => AppState, extraArgument: any) => {
         event.preventDefault();
-        console.log("prev");
         setRouteData({page: (getState().routes.page || 1)-1});
     }
 };

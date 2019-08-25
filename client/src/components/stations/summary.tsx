@@ -35,21 +35,24 @@ export class Summary extends Component<Props>{
         getTweet(this.el, this.props.station);
     }
 
-    onSelect() {
+    onSelect(event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
         setRouteData({country: this.props.station.countryId, station: this.props.station.id});
     }
-    onOnAirSelect() {
+    onOnAirSelect(event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
         setRouteData({country: this.props.station.countryId, station: this.props.station.id, section: "onair"});
     }
 
     render() {
         const emailHref = this.props.station.email && this.props.station.email.indexOf("@") >= 0 ? `mailto:${this.props.station.email}` : this.props.station.email;
-        const url = window.location.origin + window.location.pathname + getUrl({country: this.props.station.countryId, station: this.props.station.id}).url;//baseUrl + (baseUrl.indexOf("?") >= 0 ? "&" : "?") + "country=" + this.props.station.countryId.toLowerCase() + "&stations=" + this.props.station.code.toLowerCase();
+        const url = window.location.origin + window.location.pathname + getUrl({country: this.props.station.countryId, station: this.props.station.id}).url;
+        const onAirUrl = window.location.origin + window.location.pathname + getUrl({country: this.props.station.countryId, station: this.props.station.id, section: "onair"}).url;
         const onAir = (this.props.station.talent || 0) + (this.props.station.syndicated || 0);
 
         return (
             <div ref={el => this.el = el as HTMLElement} id={`station_${this.props.station.id}`} className={`${cs.station} ${bs.colSm12} ${bs.colMd6} ${bs.colLg4} ${bs.colXl3} ${bs.py3}`}>
-                <Summary2 selectedArtist={this.props.artist} station={this.props.station} setTweetUrl={this.setTweetUrl} onSelect={this.onSelect} onOnAirSelect={this.onOnAirSelect} emailHref={emailHref} url={url} onAir={onAir} />
+                <Summary2 selectedArtist={this.props.artist} station={this.props.station} setTweetUrl={this.setTweetUrl} onSelect={this.onSelect} onOnAirSelect={this.onOnAirSelect} emailHref={emailHref} url={url} onAirUrl={onAirUrl} onAir={onAir} />
             </div>
         );
     }
@@ -61,10 +64,11 @@ export default Summary;
 export interface StationSummaryProps {
     station: StationSummary;
     setTweetUrl: () => void;
-    onSelect: () => void;
-    onOnAirSelect: () => void;
+    onSelect: (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => void;
+    onOnAirSelect: (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => void;
     emailHref: string;
     url: string;
+    onAirUrl: string;
     onAir: number;
     selectedArtist?: string;
 }

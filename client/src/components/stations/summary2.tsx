@@ -10,7 +10,7 @@ import NoteContent from '../ui/note-content';
 const Summary2 = (props: StationSummaryProps) => (
     <div className={`${bs.card} ${bs.h100}`}>
         <div className={`${bs.cardHeader} `}>
-            <div><a href="#" onClick={props.onSelect}>{props.station.name}</a></div>
+            <div><a href={props.url} onClick={props.onSelect}>{props.station.name}</a></div>
         </div>
 
         <div className={`${cs.localTime} ${bs.cardFooter}`}>
@@ -44,17 +44,17 @@ const Summary2 = (props: StationSummaryProps) => (
                 <div className={bs.col}>{props.station.instagram && <a href={`https://instagram.com/${props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
                 <div className={bs.col}>{props.station.facebook && <a href={`https://facebook.com/${props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
                 <div className={bs.col}>{props.station.email && <a href={props.emailHref} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
-                <div className={bs.col}>{props.station.text && <a href="javascript:;" onClick={props.onSelect}><i className="fas fa-comment"></i></a>}</div>
+                <div className={bs.col}>{props.station.text && <a href={`sms:${props.station.text}`}><i className="fas fa-comment"></i></a>}</div>
                 <div className={bs.col}>{props.station.phone && <a href={`tel:${props.station.phone}`}><i className="fas fa-phone"></i></a>}</div>
-                <div className={bs.col}>{props.station.note && <a href="javascript:;" onClick={props.onSelect}><i onClick={props.onSelect} className="fas fa-sticky-note"></i></a>}</div>
+                <div className={bs.col}>{props.station.note && <a href={props.url} onClick={props.onSelect}><i className="fas fa-sticky-note"></i></a>}</div>
             </div>
         </div>
         <div className={cs.actions}>
             <div className={`${bs.row} ${bs.noGutters}`}>
-                <button onClick={props.onSelect} className={`${bs.btn} ${bs.btnOutlineSecondary} ${bs.btnBlock}`}><i className="fas fa-microphone"></i>&nbsp; <span>Station Details</span></button>
+                <a href={props.url} onClick={props.onSelect} className={`${bs.btn} ${bs.btnOutlineSecondary} ${bs.btnBlock}`}><i className="fas fa-microphone"></i>&nbsp; <span>Station Details</span></a>
             </div>
             <div className={`${bs.row} ${bs.noGutters}`}>
-                <button onClick={props.onOnAirSelect} className={`${bs.btn} ${bs.btnOutlineSecondary} ${bs.btnBlock}`}><i className="fas fa-user-friends"></i>&nbsp; <span>{props.onAir} DJ{props.onAir == 1 ? "" : "s"} {props.onAir == 1 ? "or" : "and"} Show{props.onAir == 1 ? "" : "s"}</span></button>
+                <a href={props.onAirUrl} onClick={props.onOnAirSelect} className={`${bs.btn} ${bs.btnOutlineSecondary} ${bs.btnBlock}`}><i className="fas fa-user-friends"></i>&nbsp; <span>{props.onAir} DJ{props.onAir == 1 ? "" : "s"} {props.onAir == 1 ? "or" : "and"} Show{props.onAir == 1 ? "" : "s"}</span></a>
             </div>
         </div>
     </div>
