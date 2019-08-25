@@ -21,6 +21,7 @@ export interface UrlParams {
     station?: string;
     section?: string;
     stations?: string;
+    userGuide?: string;
 }
 
 export interface RouteInfo extends UrlParams {
@@ -48,4 +49,5 @@ export interface RouteData {
     section?: string;
     history?: History; 
     stations?: string[];
+    userGuide: boolean;
 }

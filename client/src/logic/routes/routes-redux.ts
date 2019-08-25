@@ -1,6 +1,7 @@
 import { getFactories } from "../helpers/helper";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 import { RouteData, RouteInfo, UrlParams } from "./route-models";
+import { setRouteData } from "src/route";
 
 const initial: RouteData = {
     country: "US",
@@ -9,7 +10,8 @@ const initial: RouteData = {
     format: undefined,
     artist: undefined,
     song: undefined,
-    history: undefined
+    history: undefined,
+    userGuide: false
 };
 
 const factory = getFactories<RouteData>("routes");
@@ -18,7 +20,7 @@ const booleanRegex = new RegExp("true", "i");
 
 const getFromRoute = factory.sync<RouteInfo>("get-from-route");
 const handleGetFromRoute = (state: RouteData, payload: RouteInfo): RouteData => {
-    const routeInfo = {
+    const routeInfo: RouteData = {
         //...state,
         ...payload,
         country: payload.country,
@@ -32,10 +34,9 @@ const handleGetFromRoute = (state: RouteData, payload: RouteInfo): RouteData => 
         page: Number(payload.page),
         pageSize: Number(payload.pageSize),
         section: payload.section,
-        stations: payload.stations ? payload.stations.split(",").map(s => s.trim()) : undefined
+        stations: payload.stations ? payload.stations.split(",").map(s => s.trim()) : undefined,
+        userGuide: !!payload.userGuide && booleanRegex.test(payload.userGuide)
     };
-
-    let title = Object.keys(routeInfo).map(k => k === "history" ? null : (routeInfo as any)[k] || null).filter(i => i).join(" - ");
 
     let t = [];
     if (routeInfo.artist) {
@@ -104,6 +105,10 @@ const handleGetFromRoute = (state: RouteData, payload: RouteInfo): RouteData => 
 
     if (routeInfo.stations) {
         t.push(routeInfo.stations.join("/"));
+    }
+
+    if (routeInfo.userGuide) {
+        t.push("user-guide");
     }
 
     document.title = t.join(" - ") + " - Radio Request Database";
