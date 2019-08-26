@@ -289,7 +289,7 @@ class Search extends Component<Props, State> {
     render() {
         return (
             <>
-                <div className={`${Bootstrap.row} ${Bootstrap.mb3}`}>
+                <div className={`${Bootstrap.row} ${Bootstrap.mb3} emphasis`}>
                     <div className={colClass}>
                         <Select2
                             data={this.props.artists}
@@ -318,6 +318,9 @@ class Search extends Component<Props, State> {
                     <div className={colClass}>
                         <Dropdown />
                     </div>
+                </div>
+                <div>
+                    <h5 className={`${Bootstrap.textCenter} ${styles.subheader} ${Bootstrap.fontWeightBold}`}>SEARCH OPTIONS</h5>
                 </div>
                 <div className={`${Bootstrap.row} ${Bootstrap.py3}`}>
                     <div className={colClass}>

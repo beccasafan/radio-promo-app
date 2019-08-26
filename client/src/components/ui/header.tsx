@@ -32,6 +32,7 @@ class Header extends Component<Props> {
     }
     
     setTheme(oldTheme: string | undefined, newTheme: string) {
+        newTheme = newTheme.startsWith("ot5") ? "ot5" : newTheme;
         if (oldTheme != newTheme) {
             const body = document.getElementsByTagName("body")[0];
             if (oldTheme) {
