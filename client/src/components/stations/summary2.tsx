@@ -26,7 +26,7 @@ const Summary2 = (props: StationSummaryProps) => (
                     {props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${props.station.note.preferredContact}`} />}
                     {props.station.note.stationCred && <NoteContent text={props.station.note.stationCred} />}
                     {props.station.note.programmingTips && <NoteContent text={props.station.note.programmingTips} />}
-                    {props.station.note.app && <NoteContent text="Station has an app." />}
+                    {props.station.note.app && <NoteContent text="Station has an app" />}
                     {props.station.note.general && <NoteContent text={props.station.note.general} />}
                     {props.selectedArtist === "harry" && props.station.note.harry && <NoteContent text={props.station.note.harry} />}
                     {props.selectedArtist === "liam" && props.station.note.liam && <NoteContent text={props.station.note.liam} />}

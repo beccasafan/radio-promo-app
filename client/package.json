@@ -54,7 +54,7 @@
     "test": "npm run atsm && craco test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "for /F %I IN ('git rev-parse HEAD') DO gh-pages -d build -m %I",
     "gh-pages": "gh-pages"
   },
   "eslintConfig": {
