@@ -103,7 +103,7 @@ const x = createSelectorCreator(defaultMemoize, isEqual);
 const searchStations = x(
     [itemsSelector, formatSelector, parentGroupSelector, locationSelector, nameSelector, talentSelector, socialSelector],
     (items, format, parentGroup, location, name, talent, socials): StationSummary[] => {
-        console.log("shuffling", items, format, parentGroup, location, name, talent, socials);
+        
         const stations = shuffle(items
             .allIds
             .filter(id => {
