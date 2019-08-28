@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/radio-promo-app/static/css/2.1baa7fd0.chunk.css"
   },
   {
-    "revision": "8d42772a369d4e551f463a31dc734728",
+    "revision": "84ec399f2378dba4e976751c5df14115",
     "url": "/radio-promo-app/index.html"
   }
 ];
