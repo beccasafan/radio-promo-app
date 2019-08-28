@@ -25,7 +25,7 @@ function googleApi<T>(request: IApiCall): Promise<T> {
     return promise;
 }
 
-const apiUrl: string = "https://script.google.com/macros/s/AKfycbzDrMCmVd8Fzxs6YPZz_19CEnONd16rw_X-AwMDCQocJ_W9ixJyDOci4KNWAgAGey38QA/exec"; // exec
+const apiUrl: string = "https://script.google.com/macros/s/AKfycbwjw-CsaKA68SPu4JRx29ysBQ6OJj8iF9PWHKF66YeL9Y6JP99OBMOWbdbVIaxmbRO0ZQ/exec"; // exec
 export default function externalApi<T>(request: IApiCall): Promise<T> {
     const url = `${apiUrl}${request.url}${request.url.indexOf("?") >= 0 ? "&" : "?"}`;
     const promise = new Promise<T>( (resolve, reject) => {

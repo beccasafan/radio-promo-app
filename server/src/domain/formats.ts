@@ -1,4 +1,4 @@
-import { FormatSummary, Monitor } from "radio-app-2-shared";
+import { Format } from "radio-app-2-shared";
 import { groupByProperty, readSheetData } from "../util";
 import CacheConstants from "./cache-constants";
 import { getScriptCache } from "./cache-wrapper";
@@ -25,21 +25,9 @@ function emptyFormatsCache(): void {
 function loadFormats(): string[] {
   console.log({ message: "loading formats" });
 
-  const monitors = readSheetData("Monitor")
-    .map(m => new Monitor(m))
-    .filter(m => m.isValid());
-  let formats = readSheetData("Format")
-    .map(f => new FormatSummary(f))
+  const formats = readSheetData("Format")
+    .map(f => new Format(f))
     .filter(f => f.isValid());
-
-  formats.forEach(f => {
-    const monitor = monitors.find(m => m.id === f.monitorId);
-    if (monitor == null) {
-      return null;
-    }
-    f.countryId = monitor.countryId;
-  });
-  formats = formats.filter(f => f != null);
 
   const formatsByCountry = groupByProperty(formats, "countryId");
   const countriesWithFormats = Object.keys(formatsByCountry);
@@ -54,9 +42,7 @@ function loadFormats(): string[] {
   return countriesWithFormats;
 }
 
-export function getFormatsByCountry(
-  countryId: string
-): FormatSummary[] | undefined {
+export function getFormatsByCountry(countryId: string): Format[] | undefined {
   let cachedCountries = ScriptCache.get<string[]>(
     CacheConstants.formatsByCountry
   );
@@ -66,7 +52,7 @@ export function getFormatsByCountry(
   }
 
   if (cachedCountries != null && cachedCountries.includes(countryId)) {
-    return ScriptCache.get<FormatSummary[]>(
+    return ScriptCache.get<Format[]>(
       `${CacheConstants.formatsByCountry}_${countryId}`
     );
   }

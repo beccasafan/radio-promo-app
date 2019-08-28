@@ -48,5 +48,5 @@ export default class Song {
   }
 
   public isValid = (): boolean =>
-    this.id != null && this.id !== "" && !this.deleted;
+    this.id != null && this.id !== "" && !this.deleted && this.active;
 }

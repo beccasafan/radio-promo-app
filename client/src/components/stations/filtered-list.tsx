@@ -85,9 +85,8 @@ const socialSelector = createSelector(
     (twitter, instagram, facebook, email, text, phone, whatsapp) => ({ twitter, instagram, facebook, email, text, phone, whatsapp })
 );
 
-const matchesFormat = (formats: Format[], station: StationSummary, selectedFormat: string) => {
-    const format = formats.find(f => f.id === station.formatId);
-    return format != null && selectedFormat === format.code;
+const matchesFormat = (station: StationSummary, selectedFormat: string) => {
+    return selectedFormat === station.formatId;
 }
 const matchesText = (stationText: string, selectedText: string | undefined) => {
     return !selectedText || (stationText && stationText.toLowerCase().indexOf(selectedText!.toLowerCase()) >= 0);
@@ -102,15 +101,14 @@ const matchesBool = (stationValue: string, selectedValue: boolean | undefined) =
 const x = createSelectorCreator(defaultMemoize, isEqual);
 
 const searchStations = x(
-    [itemsSelector, formatsSelector, formatSelector, parentGroupSelector, locationSelector, nameSelector, talentSelector, socialSelector],
-    (items, formats, format, parentGroup, location, name, talent, socials): StationSummary[] => {
-        const allFormats = formats.allIds.map(f => formats.byId[f]);
-        console.log("shuffling", items, formats, format, parentGroup, location, name, talent, socials);
+    [itemsSelector, formatSelector, parentGroupSelector, locationSelector, nameSelector, talentSelector, socialSelector],
+    (items, format, parentGroup, location, name, talent, socials): StationSummary[] => {
+        console.log("shuffling", items, format, parentGroup, location, name, talent, socials);
         const stations = shuffle(items
             .allIds
             .filter(id => {
                 const station = items.byId[id];
-                return (!format || matchesFormat(allFormats, station, format!)) 
+                return (!format || matchesFormat(station, format!)) 
                     && matchesText(station.parentGroup, parentGroup)
                     && matchesText(station.location, location)
                     && (matchesText(station.name, name) || matchesText(station.code, name))

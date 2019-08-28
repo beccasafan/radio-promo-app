@@ -413,13 +413,22 @@ class Search extends Component<Props, State> {
 
 const formatsSelector = (appState: AppState) => appState.search.formats;
 const formatSelector = (appState: AppState) => appState.routes.format;
-const getFormats = createSelector([formatsSelector, formatSelector], (formats, format) => formats.allIds.reduce((uniqueFormats, id) => {
+const getFormats = createSelector([formatsSelector, formatSelector], (formats, format) => formats.allIds.map(id => {
+    const f = formats.byId[id];
+    return {
+        id: f.id,
+        text: f.name,
+        selected: f.id === format
+    }
+}));
+
+/*const getFormats = createSelector([formatsSelector, formatSelector], (formats, format) => formats.allIds.reduce((uniqueFormats, id) => {
     const f = formats.byId[id];
     if (uniqueFormats.find(uf => uf.id === f.code) == null) {
         uniqueFormats.push({ id: f.code, text: f.name, selected: f.code.toLowerCase() === format });
     }
     return uniqueFormats;
-}, [{ id: "", text: "" }] as DataFormat[]));
+}, [{ id: "", text: "" }] as DataFormat[]));*/
 
 
 const getArtists = (state: AppState) => state.songs.artists;

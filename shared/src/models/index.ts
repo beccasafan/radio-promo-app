@@ -6,8 +6,7 @@ import CountrySummary from "./country-summary";
 export { Country, CountrySummary };
 
 import Format from "./format";
-import FormatSummary from "./format-summary";
-export { Format, FormatSummary };
+export { Format };
 
 import Language from "./language";
 export { Language };
