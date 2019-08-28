@@ -2,7 +2,7 @@
   "name": "radio-app-2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://localhost/rrd2/",
+  "homepage": "https://beccasafan.github.com/radio-promo-app",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "clipboard": "^2.0.4",
@@ -38,6 +38,7 @@
     "@types/throttle-debounce": "^1.1.1",
     "awesome-typed-sass-modules": "^1.2.0",
     "concurrently": "^4.1.0",
+    "gh-pages": "^2.1.1",
     "node-sass": "^4.11.0",
     "radio-app-2-shared": "^0.0.1",
     "react-scripts": "2.1.8",
@@ -51,7 +52,9 @@
     "start": "concurrently \"npm:atsm -- -w\" \"craco start\"",
     "build": "npm run atsm && craco build",
     "test": "npm run atsm && craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
