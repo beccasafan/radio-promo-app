@@ -73,7 +73,7 @@ class Dropdown extends Component<Props> {
 
     countrySelected(e: any) {
         var country = e.params.data as CountrySummary;
-        setRouteData({country: country.id, page: undefined});
+        setRouteData({country: country.id, page: undefined, format: undefined});
         return false;
     }
 
