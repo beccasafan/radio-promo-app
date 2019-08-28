@@ -53,7 +53,6 @@
     "build": "npm run atsm && craco build",
     "test": "npm run atsm && craco test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
