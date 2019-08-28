@@ -21,8 +21,8 @@ const Summary2 = (props: StationSummaryProps) => (
         <div className={bs.cardBody}>
             <div className={bs.cardGrow}>
                 {props.station.note && <>
-                    {props.station.note.twitterClout && <NoteContent text={`${props.station.note.twitterClout} on Twitter`} />}
-                    {props.station.note.instagramClout && <NoteContent text={`${props.station.note.instagramClout} on Instagram`} />}
+                    {props.station.note.twitterClout && <NoteContent text={`${props.station.note.twitterClout} followers on Twitter`} />}
+                    {props.station.note.instagramClout && <NoteContent text={`${props.station.note.instagramClout} followers on Instagram`} />}
                     {props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${props.station.note.preferredContact}`} />}
                     {props.station.note.stationCred && <NoteContent text={props.station.note.stationCred} />}
                     {props.station.note.programmingTips && <NoteContent text={props.station.note.programmingTips} />}

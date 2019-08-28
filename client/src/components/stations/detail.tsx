@@ -108,8 +108,8 @@ class Detail extends Component<Props> {
                                     <div className={Bootstrap.cardBody}>
                                         <p className={Bootstrap.cardText}>{this.props.station.code} {this.props.station.parentGroup && <span> // {this.props.station.parentGroup}</span>}</p>
                                         {this.props.station.note && <>
-                                            {this.props.station.note.twitterClout && <NoteContent text={`${this.props.station.note.twitterClout} on Twitter`} />}
-                                            {this.props.station.note.instagramClout && <NoteContent text={`${this.props.station.note.instagramClout} on Instagram`} />}
+                                            {this.props.station.note.twitterClout && <NoteContent text={`${this.props.station.note.twitterClout} followers on Twitter`} />}
+                                            {this.props.station.note.instagramClout && <NoteContent text={`${this.props.station.note.instagramClout} followers on Instagram`} />}
                                             {this.props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${this.props.station.note.preferredContact}`} />}
                                             {this.props.station.note.stationCred && <NoteContent text={`${this.props.station.note.programmingTips}`} />}
                                             {this.props.station.note.programmingTips && <NoteContent text={`${this.props.station.note.programmingTips}`} /> }
