@@ -397,9 +397,6 @@ class Search extends Component<Props, State> {
                     </div>
                 </div>
                 <div className={Bootstrap.row}>
-                    <div className={colClass}>
-                        <button className={`clipboard ${Bootstrap.btn} ${Bootstrap.btnLink}`} style={{ "paddingLeft": "0" }} data-clipboard-text={window.location.href} data-placement="bottom" data-trigger="manual" data-title="Copied"><i className="fas fa-external-link-alt"></i>&nbsp;Copy Link to this Search</button>
-                    </div>
                     <div className={Bootstrap.col}>
                         <p>
                             <a className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} href="http://bit.ly/radiorequestform"><i className="fas fa-paper-plane"></i>&nbsp;Something missing or wrong? Submit it here!</a>
