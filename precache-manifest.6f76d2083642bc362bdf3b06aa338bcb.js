@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/radio-promo-app/static/js/runtime~main.9db086f4.js"
   },
   {
-    "revision": "a82c7452731174f09fa0",
-    "url": "/radio-promo-app/static/js/main.965969f0.chunk.js"
+    "revision": "e0db9a72b865caa095f1",
+    "url": "/radio-promo-app/static/js/main.93a75a36.chunk.js"
   },
   {
     "revision": "4aba4d8ff93f2a43736a",
     "url": "/radio-promo-app/static/js/2.650375fe.chunk.js"
   },
   {
-    "revision": "a82c7452731174f09fa0",
+    "revision": "e0db9a72b865caa095f1",
     "url": "/radio-promo-app/static/css/main.ee21029d.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/radio-promo-app/static/css/2.1baa7fd0.chunk.css"
   },
   {
-    "revision": "198362a316095d8c4a3e3d92708db522",
+    "revision": "6ad68b0606c278575780b15a4f846445",
     "url": "/radio-promo-app/index.html"
   }
 ];
