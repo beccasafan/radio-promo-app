@@ -6,6 +6,8 @@ import { ModalBody } from '../ui/modal/modal-body';
 import { ModalFooter } from '../ui/modal/modal-footer';
 import { setRouteData } from 'src/route';
 
+declare var publicUrl: string;
+
 export default class UserGuide extends Component<{}> {
     private el!: HTMLElement;
 
@@ -37,13 +39,14 @@ export default class UserGuide extends Component<{}> {
             <div ref={el => this.el = el as HTMLElement}>
                 <Modal contentKey="user-guide" handleClose={this.handleClose} events={{ "show.bs.modal": this.onModalOpen, "hide.bs.modal": this.onModalClose}}>
                     <ModalHeader>
-                        <h5 className={Bootstrap.modalTitle}>User Guide</h5>}
+                        <h5 className={Bootstrap.modalTitle}>How To Use the Radio Request Database</h5>
                         <a className={Bootstrap.close} data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </ModalHeader>
                     <ModalBody>
-                        <p>This is the user guide, wheeeeeeee!!!</p>
+                        <img className={Bootstrap.imgFluid} src={`${publicUrl}/how-to-search.jpg`} alt="How To Search Guide" />
+                        <a href={`${publicUrl}/how-to-search.jpg`} className={`${Bootstrap.btn} ${Bootstrap.btnLink} ${Bootstrap.pl0}`} target="_blank">Click to view full image</a>
                     </ModalBody>
                     <ModalFooter>
                         <button type="button" className={`${Bootstrap.btn} ${Bootstrap.btnSecondary}`} data-dismiss="modal">Close</button>
