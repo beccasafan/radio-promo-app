@@ -107,6 +107,7 @@ class Detail extends Component<Props> {
                                 <div id={`${idFragment}_details`} className={`${Bootstrap.collapse} ${section === "detail" ? Bootstrap.show : ""}`} aria-labelledby={`${idFragment}_details_heading`} data-parent={`#${idFragment}`}>
                                     <div className={Bootstrap.cardBody}>
                                         {this.props.station.parentGroup && <NoteContent text={this.props.station.parentGroup} />}
+                                        {!this.props.station.note && this.props.station.oldNote && <NoteContent text={this.props.station.oldNote} />}
                                         {this.props.station.note && <>
                                             {this.props.station.note.twitterClout && <NoteContent text={`${this.props.station.note.twitterClout} followers on Twitter`} />}
                                             {this.props.station.note.instagramClout && <NoteContent text={`${this.props.station.note.instagramClout} followers on Instagram`} />}

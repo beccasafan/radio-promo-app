@@ -20,7 +20,7 @@ export default class Station {
     "phone",
     "whatsapp",
     "utc",
-    "note",
+    "oldNote",
     "active",
     "deleted"
   ];

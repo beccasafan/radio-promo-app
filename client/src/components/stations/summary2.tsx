@@ -20,6 +20,7 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
         <div className={bs.cardBody}>
             <div className={bs.cardGrow}>
+                {!props.station.note && props.station.oldNote && <NoteContent text={props.station.oldNote} />}
                 {props.station.note && <>
                     {props.station.note.twitterClout && <NoteContent text={`${props.station.note.twitterClout} followers on Twitter`} />}
                     {props.station.note.instagramClout && <NoteContent text={`${props.station.note.instagramClout} followers on Instagram`} />}
