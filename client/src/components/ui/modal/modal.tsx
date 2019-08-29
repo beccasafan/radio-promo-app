@@ -6,9 +6,9 @@ import { ModalEventHandler } from 'bootstrap';
 
 export interface ModalProps {
     children: React.ReactNode;
-    contentKey: string;
+    contentKey?: string;
     handleClose: (e: ModalEventHandler<HTMLDivElement>) => void;
-    events: {[key: string]: any};
+    events?: {[key: string]: any};
 }
 
 export class Modal extends Component<ModalProps, {}> {
@@ -37,7 +37,9 @@ export class Modal extends Component<ModalProps, {}> {
                 this.$el.removeClass(bs.show);
             });
         ;*/
-        Object.keys(this.props.events).forEach(key => $(this.el!).on(key, (e) => { this.props.events[key](e) }));
+        if (this.props.events != null) {
+            Object.keys(this.props.events).forEach(key => $(this.el!).on(key, (e) => { this.props.events![key](e) }));
+        }
         this.$el.modal({focus: true});
 
     }

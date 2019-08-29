@@ -24,18 +24,18 @@ interface JQuery<TElement = HTMLElement> {
     remove(selector?: string): this;
 }
 
-function getSelectionAdapter(usePlaceholder: boolean, useAllowClear: boolean) {
-    const name = `select2/selection/customSelectionAdapter|${usePlaceholder}|${useAllowClear}`;
+function getSelectionAdapter(usePlaceholder: boolean, useAllowClear: boolean, multiple: boolean = false) {
+    const name = `select2/selection/customSelectionAdapter|${usePlaceholder}|${useAllowClear}|${multiple}`;
     if (($.fn.select2.amd.require as any)._defined[name]) {
         return $.fn.select2.amd.require(name);
     }
 
     (($.fn.select2.amd as any).define(name,
-        ['select2/utils', 'select2/selection/single', 'select2/compat/containerCss', 'select2/selection/eventRelay', 'select2/selection/placeholder', 'select2/dropdown/hidePlaceholder', 'select2/selection/allowClear', 'select2/compat/query'],
-        function (Utils: any, SingleSelection: any, ContainerCss: any, EventRelay: any, Placeholder: any, HidePlaceholder: any, AllowClear: any, Query: any) {
-            let CustomSelectionAdapter = Utils.Decorate(SingleSelection, ContainerCss);
+        ['select2/utils', 'select2/selection/single', 'select2/selection/multiple', 'select2/compat/containerCss', 'select2/selection/eventRelay', 'select2/selection/placeholder', 'select2/dropdown/hidePlaceholder', 'select2/selection/allowClear', 'select2/selection/search'],
+        function (Utils: any, SingleSelection: any, MultipleSelection: any, ContainerCss: any, EventRelay: any, Placeholder: any, HidePlaceholder: any, AllowClear: any, Search: any) {
+            let CustomSelectionAdapter = Utils.Decorate(multiple ? MultipleSelection : SingleSelection, ContainerCss);
             CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, EventRelay);
-            // CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Query);
+            if (multiple) CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Search);
 
             if (usePlaceholder) {
                 CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Placeholder);
@@ -104,10 +104,12 @@ class Select2 extends React.Component<any, object> {
 
     componentDidMount() {
         this.$el = $(this.el);
-        var selectionAdapter = getSelectionAdapter(this.props.placeholder != null, this.props.allowClear != null);
-        // var dropdownAdapter = getDropdownAdapter();
+        var selectionAdapter = getSelectionAdapter(this.props.placeholder != null, this.props.allowClear != null, this.props.multiple);
+        var dropdownAdapter = getDropdownAdapter();
         this.$el.select2({ ...this.props, theme: "bootstrap4", selectionAdapter: selectionAdapter/*, dropdownAdapter: dropdownAdapter*/, width: "100%" });
-        Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => this.props.events[key](e)));
+        if (this.props.events != null) {
+            Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => this.props.events[key](e)));
+        }
     }
 
     componentWillUnmount() {

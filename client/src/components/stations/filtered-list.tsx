@@ -132,6 +132,10 @@ const searchStations = x(
 const getStations = x(
     [searchStations, selectedStationSelector, selectedStationsSelector],
     (stations, selectedStation, selectedStations) => {
+
+        if (selectedStations != null || selectedStation != null) {
+            stations = [...stations];
+        }
         if (selectedStations != null) {
             [...selectedStations].reverse().forEach(station => {
                 const s = stations.findIndex(st => st.id == station);
@@ -156,7 +160,9 @@ const getStations = x(
 
 const getPageOfStations = x(
     [getStations, pageSelector, pageSizeSelector],
-    (items, page, pageSize): StationSummary[] => items.slice(((page - 1) * pageSize), (page * pageSize))
+    (items, page, pageSize): StationSummary[] => {
+        return items.slice(((page - 1) * pageSize), (page * pageSize));
+    }
 );
 const getTotalStations = x([getStations], (items): number => items.length);
 

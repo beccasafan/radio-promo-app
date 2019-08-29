@@ -14,6 +14,7 @@ import { Artist, Song, shuffle } from "radio-app-2-shared";
 import { setSong } from "src/logic/helpers/twitter";
 import { actions as songActions } from 'src/logic/songs/songs-redux';
 import Dropdown from "../countries/dropdown";
+import SpecificStationsSelector from "./specific-stations-selector";
 
 interface OwnProps {
     countryId: string;
@@ -111,7 +112,7 @@ class Search extends Component<Props, State> {
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onPhoneChange = this.onPhoneChange.bind(this);
-        this.onWhatsappChange = this.onWhatsappChange.bind(this);
+        this.onWhatsappChange = this.onWhatsappChange.bind(this);        
     }
 
     componentDidMount() {
@@ -395,11 +396,18 @@ class Search extends Component<Props, State> {
                             </div>
                         </div>
                     </div>
+
+                    <div className={colClass}>
+                        
+                    </div>
                 </div>
                 <div className={Bootstrap.row}>
+                    <div className={colClass}>
+                        <SpecificStationsSelector />
+                    </div>
                     <div className={Bootstrap.col}>
                         <p>
-                            <a className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} href="http://bit.ly/radiorequestform"><i className="fas fa-paper-plane"></i>&nbsp;Something missing or wrong? Submit it here!</a>
+                            <a className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} style={{ "paddingLeft": "0" }} href="http://bit.ly/radiorequestform"><i className="fas fa-paper-plane"></i>&nbsp;Something missing or wrong?</a>
                         </p>
                     </div>
                 </div>
@@ -460,7 +468,7 @@ const selectedSong = createSelector([songs, getSelectedSong], (songs, song) => {
     setSong(s);
 
     return s;
-})
+});
 
 function mapStateToProps(appState: AppState, ownProps: OwnProps): StateProps {
     return {
@@ -481,7 +489,7 @@ function mapStateToProps(appState: AppState, ownProps: OwnProps): StateProps {
         email: appState.routes.email,
         text: appState.routes.text,
         phone: appState.routes.phone,
-        whatsapp: appState.routes.whatsapp
+        whatsapp: appState.routes.whatsapp,
     };
 }
 
