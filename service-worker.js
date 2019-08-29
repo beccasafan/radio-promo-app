@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/radio-promo-app/precache-manifest.6f76d2083642bc362bdf3b06aa338bcb.js"
+  "/radio-promo-app/precache-manifest.374f81ff1895253abde7cb80a92d64f1.js"
 );
 
 workbox.clientsClaim();
