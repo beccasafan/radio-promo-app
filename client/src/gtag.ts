@@ -50,7 +50,8 @@ export function pageview(params: any) {
         text: routes.text ? "Y" : defaultValue,
         phone: routes.phone ? "Y" : defaultValue,
         whatsapp: routes.whatsapp ? "Y" : defaultValue,
-        stations: routes.stations ? "Y" : defaultValue
+        stations: routes.stations ? "Y" : defaultValue,
+        page: routes.page || defaultValue
     };
 
     gtag('config', id, {
@@ -70,7 +71,8 @@ export function pageview(params: any) {
             "dimension13": "text",
             "dimension14": "phone",
             "dimension15": "whatsapp",
-            "dimension16": "stations"
+            "dimension16": "stations",
+            "dimension17": "page"
             
         },
         ...params,
