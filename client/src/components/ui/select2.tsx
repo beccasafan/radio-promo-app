@@ -26,24 +26,31 @@ interface JQuery<TElement = HTMLElement> {
 
 function getSelectionAdapter(usePlaceholder: boolean, useAllowClear: boolean, multiple: boolean = false) {
     const name = `select2/selection/customSelectionAdapter|${usePlaceholder}|${useAllowClear}|${multiple}`;
+    console.log("getting selection adapter", name);
     if (($.fn.select2.amd.require as any)._defined[name]) {
         return $.fn.select2.amd.require(name);
     }
 
     (($.fn.select2.amd as any).define(name,
-        ['select2/utils', 'select2/selection/single', 'select2/selection/multiple', 'select2/compat/containerCss', 'select2/selection/eventRelay', 'select2/selection/placeholder', 'select2/dropdown/hidePlaceholder', 'select2/selection/allowClear', 'select2/selection/search'],
-        function (Utils: any, SingleSelection: any, MultipleSelection: any, ContainerCss: any, EventRelay: any, Placeholder: any, HidePlaceholder: any, AllowClear: any, Search: any) {
-            let CustomSelectionAdapter = Utils.Decorate(multiple ? MultipleSelection : SingleSelection, ContainerCss);
-            CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, EventRelay);
-            if (multiple) CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Search);
+        ['select2/utils', 'select2/selection/single', 'select2/selection/multiple', 'select2/compat/containerCss', 'select2/selection/eventRelay', 'select2/selection/placeholder', 'select2/selection/allowClear', 'select2/selection/search'],
+        function (Utils: any, SingleSelection: any, MultipleSelection: any, ContainerCss: any, EventRelay: any, Placeholder: any, AllowClear: any, Search: any) {
+            let CustomSelectionAdapter = multiple ? MultipleSelection : SingleSelection;
 
             if (usePlaceholder) {
                 CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Placeholder);
-                CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, HidePlaceholder);
             }
+
             if (useAllowClear) {
                 CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, AllowClear);
             }
+            
+            if (multiple) {
+                CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Search)
+            }
+
+            CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, ContainerCss);
+            CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, EventRelay);
+            
             return CustomSelectionAdapter;
         }
     ));
@@ -51,8 +58,8 @@ function getSelectionAdapter(usePlaceholder: boolean, useAllowClear: boolean, mu
     return $.fn.select2.amd.require(name);
 }
 
-function getDropdownAdapter() {
-    const name = `select2/dropdown/customDropdownAdapter`;
+function getDropdownAdapter(multiple: boolean = false) {
+    const name = `select2/dropdown/customDropdownAdapter|${multiple}`;
     if (($.fn.select2.amd.require as any)._defined[name]) {
         return $.fn.select2.amd.require(name);
     }
@@ -60,13 +67,12 @@ function getDropdownAdapter() {
     (($.fn.select2.amd as any).define(name, 
         ['select2/utils', 'select2/dropdown', 'select2/dropdown/attachBody', 'select2/dropdown/attachContainer', 'select2/dropdown/search', 'select2/dropdown/minimumResultsForSearch', 'select2/dropdown/closeOnSelect', 'select2/compat/dropdownCss'],
         function(Utils: any, DropdownAdapter: any, AttachBody: any, AttachContainer: any, DropdownSearch: any, MinimumResultsForSearch: any, CloseOnSelect: any, DropdownCss: any) {
-            let CustomDropdownAdapter = Utils.Decorate(DropdownAdapter, AttachBody);
-            //CustomDropdownAdapter = Utils.Decorate(CustomDropdownAdapter, AttachContainer);
-            CustomDropdownAdapter = Utils.Decorate(CustomDropdownAdapter, DropdownSearch);
-            CustomDropdownAdapter = Utils.Decorate(CustomDropdownAdapter, MinimumResultsForSearch);
+            //let CustomDropdownAdapter = Utils.Decorate(DropdownAdapter, AttachContainer);
+            let CustomDropdownAdapter = multiple ? DropdownAdapter : Utils.Decorate(DropdownAdapter, DropdownSearch);
             CustomDropdownAdapter = Utils.Decorate(CustomDropdownAdapter, CloseOnSelect);
             CustomDropdownAdapter = Utils.Decorate(CustomDropdownAdapter, DropdownCss);
-
+            CustomDropdownAdapter = Utils.Decorate(CustomDropdownAdapter, AttachBody);
+            
             return CustomDropdownAdapter;
         }
     ));
@@ -105,8 +111,8 @@ class Select2 extends React.Component<any, object> {
     componentDidMount() {
         this.$el = $(this.el);
         var selectionAdapter = getSelectionAdapter(this.props.placeholder != null, this.props.allowClear != null, this.props.multiple);
-        var dropdownAdapter = getDropdownAdapter();
-        this.$el.select2({ ...this.props, theme: "bootstrap4", selectionAdapter: selectionAdapter/*, dropdownAdapter: dropdownAdapter*/, width: "100%" });
+        var dropdownAdapter = getDropdownAdapter(this.props.multiple);
+        this.$el.select2({ ...this.props, theme: "bootstrap4", selectionAdapter: selectionAdapter, dropdownAdapter: dropdownAdapter, width: "100%" });
         if (this.props.events != null) {
             Object.keys(this.props.events).forEach(key => $(this.el).on(key, (e) => this.props.events[key](e)));
         }

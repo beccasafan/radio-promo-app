@@ -34,12 +34,17 @@ class SpecificStationsSelector extends Component<StateProps, State> {
         this.state = {show: false};
 
         this.handleClose = this.handleClose.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
         this.openModal = this.openModal.bind(this);
         this.save = this.save.bind(this);
     }
 
     openModal(e: React.MouseEvent<HTMLButtonElement>) {
         this.setState({show:true});
+    }
+
+    handleOpen() {
+        $(this.el).find(".select2-search.select2-search--inline").css("width", "100%").find("input").css("width", "100%");
     }
 
     handleClose() {
@@ -89,7 +94,7 @@ class SpecificStationsSelector extends Component<StateProps, State> {
                 </p>
                 <div ref={el => this.el = el as HTMLElement}>
                     {this.state.show && 
-                    <Modal handleClose={this.handleClose}>
+                    <Modal handleClose={this.handleClose} events={{"shown.bs.modal": this.handleOpen}}>
                         <ModalHeader>
                             <h5 className={Bootstrap.modalTitle}>Select Stations</h5>
                             <a className={Bootstrap.close} data-dismiss="modal" aria-label="Close">
