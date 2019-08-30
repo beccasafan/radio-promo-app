@@ -5,13 +5,10 @@ declare var gtag: any;
 
 const id = "UA-102964622-1";
 
-export function pageview() {
+function getDimensions(routes: RouteData) {
     const defaultValue = "-";
-    const routeData = parseUrl();
-    const routes = routeData.data;
-
-
-    const dimensions = {
+    
+    return {
         artist: routes.artist || defaultValue,
         song: routes.song || defaultValue,
         country: routes.country || defaultValue,
@@ -27,9 +24,15 @@ export function pageview() {
         text: routes.text ? "Y" : defaultValue,
         phone: routes.phone ? "Y" : defaultValue,
         whatsapp: routes.whatsapp ? "Y" : defaultValue,
-        stations: routes.stations ? "Y" : defaultValue,
+        stations: (routes.stations || [defaultValue]).join(","),
         page: routes.page || defaultValue
     };
+}
+
+export function pageview() {
+    const routeData = parseUrl();
+    const routes = routeData.data;
+    const dimensions = getDimensions(routes);
 
     gtag('config', id, {
         "custom_map": {
@@ -61,30 +64,9 @@ export function pageview() {
 }
 
 export function event(action: any, category: any, label?: any) {
-    const defaultValue = "-";
     const routeData = parseUrl();
     const routes = routeData.data;
-
-    const dimensions = {
-        artist: routes.artist || defaultValue,
-        song: routes.song || defaultValue,
-        country: routes.country || defaultValue,
-        location: routes.location || defaultValue,
-        parentNetwork: routes.parentGroup || defaultValue,
-        format: routes.format || defaultValue,
-        name: routes.name || defaultValue,
-        talent: routes.talent || defaultValue,
-        twitter: routes.twitter ? "Y" : defaultValue,
-        instagram: routes.instagram ? "Y" : defaultValue,
-        facebook: routes.facebook ? "Y" : defaultValue,
-        email: routes.email ? "Y" : defaultValue,
-        text: routes.text ? "Y" : defaultValue,
-        phone: routes.phone ? "Y" : defaultValue,
-        whatsapp: routes.whatsapp ? "Y" : defaultValue,
-        stations: routes.stations ? "Y" : defaultValue,
-        page: routes.page || defaultValue
-    };
-
+    const dimensions = getDimensions(routes);
     
     gtag('event', action, {
         'event_category': category,
@@ -92,5 +74,5 @@ export function event(action: any, category: any, label?: any) {
         ...dimensions
     });
     
-    // console.log("event", action, category, label, dimensions);
+     // console.log("event", action, category, label, dimensions);
 }
