@@ -47,6 +47,7 @@ const Summary2 = (props: StationSummaryProps) => (
                 <div className={bs.col}>{props.station.email && <a href={props.emailHref} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
                 <div className={bs.col}>{props.station.text && <a href={`sms:${props.station.text}`}><i className="fas fa-comment"></i></a>}</div>
                 <div className={bs.col}>{props.station.phone && <a href={`tel:${props.station.phone}`}><i className="fas fa-phone"></i></a>}</div>
+                <div className={bs.col}>{props.station.whatsapp && <a href={`whatsapp://${props.station.whatsapp}`}><i className="fab fa-whatsapp"></i></a>}</div>
                 <div className={bs.col}>{props.station.note && <a href={props.url} onClick={props.onSelect}><i className="fas fa-sticky-note"></i></a>}</div>
             </div>
         </div>

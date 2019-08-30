@@ -112,7 +112,7 @@ class Detail extends Component<Props> {
                                             {this.props.station.note.twitterClout && <NoteContent text={`${this.props.station.note.twitterClout} followers on Twitter`} />}
                                             {this.props.station.note.instagramClout && <NoteContent text={`${this.props.station.note.instagramClout} followers on Instagram`} />}
                                             {this.props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${this.props.station.note.preferredContact}`} />}
-                                            {this.props.station.note.stationCred && <NoteContent text={`${this.props.station.note.programmingTips}`} />}
+                                            {this.props.station.note.stationCred && <NoteContent text={`${this.props.station.note.stationCred}`} />}
                                             {this.props.station.note.programmingTips && <NoteContent text={`${this.props.station.note.programmingTips}`} /> }
                                             {this.props.station.note.app && <NoteContent text="Station has an app." />}
                                             {this.props.station.note.general && <NoteContent text={this.props.station.note.general} />}
@@ -129,6 +129,7 @@ class Detail extends Component<Props> {
                                         {this.props.station.email && <p className={Bootstrap.cardText}><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
                                         {this.props.station.text && <p className={Bootstrap.cardText}><a href={`sms:${this.props.station.text}`}><i className="fas fa-comment"></i> {this.props.station.text}</a></p>}
                                         {this.props.station.phone && (<p className={Bootstrap.cardText}><a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
+                                        {this.props.station.whatsapp && <p className={Bootstrap.cardText}><a href={`whatsapp://${this.props.station.whatsapp}`}><i className="fab fa-whatsapp"></i> {this.props.station.whatsapp}</a>}</p>}
                                     </div>
                                 </div>
                             </div>
