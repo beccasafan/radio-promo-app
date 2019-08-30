@@ -77,8 +77,9 @@ export function getTweet(element: HTMLElement, station: Station, talent?: Talent
         tweet += ` ${station.hashtag.indexOf("#") >= 0 ? "" : "#"}${station.hashtag}`;
     }
 
+    const tweetText = tweet;
     tweet = encodeURIComponent(tweet);
     const url = `https://twitter.com/intent/tweet?text=${tweet}`;
-    $(".twitter", element).attr("href", url);
+    $(".twitter", element).attr("href", url).data("tweet", tweetText);
 }
 

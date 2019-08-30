@@ -15,6 +15,7 @@ import * as Bootstrap from 'src/bootstrap.scss';
 import styles from './station.module.scss';
 import Time from '../ui/time';
 import NoteContent from '../ui/note-content';
+import { event } from 'src/gtag';
 
 interface OwnProps {
     id: string;
@@ -41,6 +42,15 @@ class Detail extends Component<Props> {
         this.onModalClose = this.onModalClose.bind(this);
         this.onModalOpen = this.onModalOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+
+        this.logWebsite = this.logWebsite.bind(this);
+        this.logTweet = this.logTweet.bind(this);
+        this.logInstagram = this.logInstagram.bind(this);
+        this.logFacebook = this.logFacebook.bind(this);
+        this.logEmail = this.logEmail.bind(this);
+        this.logText = this.logText.bind(this);
+        this.logPhone = this.logPhone.bind(this);
+        this.logWhatsapp = this.logWhatsapp.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +76,32 @@ class Detail extends Component<Props> {
     handleClose() {
         setRouteData({ station: null, section: null });
     }
+
+    logWebsite() {
+        event("website", this.props.station.id);
+    }
+    logTweet() {
+        event("tweet", this.props.station.id, $(this.el).find(".twitter").data("tweet"));
+    }
+    logInstagram() {
+        event("instagram", this.props.station.id);
+    }
+    logFacebook() {
+        event("facebook", this.props.station.id);
+    }
+    logEmail() {
+        event("email", this.props.station.id);
+    }
+    logText() {
+        event("text", this.props.station.id);
+    }
+    logPhone() {
+        event("phone", this.props.station.id);
+    }
+    logWhatsapp() {
+        event("whatsapp", this.props.station.id);
+    }
+
     render() {
         const idFragment = `station_detail_${this.props.id}`;
 
@@ -122,14 +158,14 @@ class Detail extends Component<Props> {
                                             {this.props.selectedArtist === "niall" && this.props.station.note.niall && <NoteContent text={this.props.station.note.niall} />}
                                             {this.props.selectedArtist === "zayn" && this.props.station.note.zayn && <NoteContent text={this.props.station.note.zayn} />}
                                         </>}
-                                        {this.props.station.website && <p className={Bootstrap.cardText}><a href={this.props.station.website} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
-                                        {this.props.station.twitter && <p className={Bootstrap.cardText}><a href="#" className="twitter" onMouseDown={this.setTweetUrl} onMouseEnter={this.setTweetUrl} target="_blank"><i className="fab fa-twitter"></i> {this.props.station.twitter}</a></p>}
-                                        {this.props.station.instagram && <p className={Bootstrap.cardText}><a href={`https://instagram.com/${this.props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i> {this.props.station.instagram}</a></p>}
-                                        {this.props.station.facebook && <p className={Bootstrap.cardText}><a href={`https://facebook.com/${this.props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i> {this.props.station.facebook}</a></p>}
-                                        {this.props.station.email && <p className={Bootstrap.cardText}><a href={`mailto:${this.props.station.email}`} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
-                                        {this.props.station.text && <p className={Bootstrap.cardText}><a href={`sms:${this.props.station.text}`}><i className="fas fa-comment"></i> {this.props.station.text}</a></p>}
-                                        {this.props.station.phone && (<p className={Bootstrap.cardText}><a href={`tel:${this.props.station.phone}`}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
-                                        {this.props.station.whatsapp && <p className={Bootstrap.cardText}><a href={`whatsapp://${this.props.station.whatsapp}`}><i className="fab fa-whatsapp"></i> {this.props.station.whatsapp}</a>}</p>}
+                                        {this.props.station.website && <p className={Bootstrap.cardText}><a href={this.props.station.website} onClick={this.logWebsite} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
+                                        {this.props.station.twitter && <p className={Bootstrap.cardText}><a href="#" className="twitter" onMouseDown={this.setTweetUrl} onMouseEnter={this.setTweetUrl} onClick={this.logTweet} target="_blank"><i className="fab fa-twitter"></i> {this.props.station.twitter}</a></p>}
+                                        {this.props.station.instagram && <p className={Bootstrap.cardText}><a href={`https://instagram.com/${this.props.station.instagram}`} onClick={this.logInstagram} target="_blank"><i className="fab fa-instagram"></i> {this.props.station.instagram}</a></p>}
+                                        {this.props.station.facebook && <p className={Bootstrap.cardText}><a href={`https://facebook.com/${this.props.station.facebook}`} onClick={this.logFacebook} target="_blank"><i className="fab fa-facebook"></i> {this.props.station.facebook}</a></p>}
+                                        {this.props.station.email && <p className={Bootstrap.cardText}><a href={`mailto:${this.props.station.email}`} onClick={this.logEmail} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
+                                        {this.props.station.text && <p className={Bootstrap.cardText}><a href={`sms:${this.props.station.text}`} onClick={this.logText}><i className="fas fa-comment"></i> {this.props.station.text}</a></p>}
+                                        {this.props.station.phone && (<p className={Bootstrap.cardText}><a href={`tel:${this.props.station.phone}`} onClick={this.logPhone}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
+                                        {this.props.station.whatsapp && <p className={Bootstrap.cardText}><a href={`whatsapp://${this.props.station.whatsapp}`} onClick={this.logWhatsapp}><i className="fab fa-whatsapp"></i> {this.props.station.whatsapp}</a>}</p>}
                                     </div>
                                 </div>
                             </div>

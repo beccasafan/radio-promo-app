@@ -60,12 +60,37 @@ export function pageview() {
     // console.log("pageview", routeData, dimensions);
 }
 
-export function event(action: any, category: any, label: any, value: any, params: any) {
+export function event(action: any, category: any, label?: any) {
+    const defaultValue = "-";
+    const routeData = parseUrl();
+    const routes = routeData.data;
+
+    const dimensions = {
+        artist: routes.artist || defaultValue,
+        song: routes.song || defaultValue,
+        country: routes.country || defaultValue,
+        location: routes.location || defaultValue,
+        parentNetwork: routes.parentGroup || defaultValue,
+        format: routes.format || defaultValue,
+        name: routes.name || defaultValue,
+        talent: routes.talent || defaultValue,
+        twitter: routes.twitter ? "Y" : defaultValue,
+        instagram: routes.instagram ? "Y" : defaultValue,
+        facebook: routes.facebook ? "Y" : defaultValue,
+        email: routes.email ? "Y" : defaultValue,
+        text: routes.text ? "Y" : defaultValue,
+        phone: routes.phone ? "Y" : defaultValue,
+        whatsapp: routes.whatsapp ? "Y" : defaultValue,
+        stations: routes.stations ? "Y" : defaultValue,
+        page: routes.page || defaultValue
+    };
+
+    
     gtag('event', action, {
         'event_category': category,
         'event_label': label,
-        'value': value,
-        'custom_map': params
-      });
-    console.log("event");
+        ...dimensions
+    });
+    
+    // console.log("event", action, category, label, dimensions);
 }

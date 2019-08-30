@@ -40,14 +40,14 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
         <div className={bs.cardFooter}>
             <div className={`${bs.row} ${bs.noGutters}`}>
-                <div className={bs.col}>{props.station.website && <a href={props.station.website} target="_blank"><i className="fas fa-link"></i></a>}</div>
-                <div className={bs.col}>{props.station.twitter && <a href="#" className="twitter" onMouseDown={props.setTweetUrl} onMouseEnter={props.setTweetUrl} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
-                <div className={bs.col}>{props.station.instagram && <a href={`https://instagram.com/${props.station.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
-                <div className={bs.col}>{props.station.facebook && <a href={`https://facebook.com/${props.station.facebook}`} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
-                <div className={bs.col}>{props.station.email && <a href={props.emailHref} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
-                <div className={bs.col}>{props.station.text && <a href={`sms:${props.station.text}`}><i className="fas fa-comment"></i></a>}</div>
-                <div className={bs.col}>{props.station.phone && <a href={`tel:${props.station.phone}`}><i className="fas fa-phone"></i></a>}</div>
-                <div className={bs.col}>{props.station.whatsapp && <a href={`whatsapp://${props.station.whatsapp}`}><i className="fab fa-whatsapp"></i></a>}</div>
+                <div className={bs.col}>{props.station.website && <a href={props.station.website} onClick={props.logWebsite} target="_blank"><i className="fas fa-link"></i></a>}</div>
+                <div className={bs.col}>{props.station.twitter && <a href="#" className="twitter" onMouseDown={props.setTweetUrl} onMouseEnter={props.setTweetUrl} onClick={props.logTweet} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
+                <div className={bs.col}>{props.station.instagram && <a href={`https://instagram.com/${props.station.instagram}`} onClick={props.logInstagram} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
+                <div className={bs.col}>{props.station.facebook && <a href={`https://facebook.com/${props.station.facebook}`} onClick={props.logFacebook} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
+                <div className={bs.col}>{props.station.email && <a href={props.emailHref} onClick={props.logEmail} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
+                <div className={bs.col}>{props.station.text && <a href={`sms:${props.station.text}`} onClick={props.logText}><i className="fas fa-comment"></i></a>}</div>
+                <div className={bs.col}>{props.station.phone && <a href={`tel:${props.station.phone}`} onClick={props.logPhone}><i className="fas fa-phone"></i></a>}</div>
+                <div className={bs.col}>{props.station.whatsapp && <a href={`whatsapp://${props.station.whatsapp}`} onClick={props.logWhatsapp}><i className="fab fa-whatsapp"></i></a>}</div>
                 <div className={bs.col}>{props.station.note && <a href={props.url} onClick={props.onSelect}><i className="fas fa-sticky-note"></i></a>}</div>
             </div>
         </div>
