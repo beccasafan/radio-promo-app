@@ -113,6 +113,14 @@ class Search extends Component<Props, State> {
         this.onTextChange = this.onTextChange.bind(this);
         this.onPhoneChange = this.onPhoneChange.bind(this);
         this.onWhatsappChange = this.onWhatsappChange.bind(this);        
+
+        this.showGuide = this.showGuide.bind(this);
+    }
+
+
+    showGuide(event: React.MouseEvent<HTMLAnchorElement>) {
+        event.preventDefault();
+        setRouteData({userGuide:true});
     }
 
     componentDidMount() {
@@ -401,14 +409,15 @@ class Search extends Component<Props, State> {
                         
                     </div>
                 </div>
-                <div className={Bootstrap.row}>
-                    <div className={colClass}>
+                <div className={`${Bootstrap.row} ${Bootstrap.pb3}`}>
+                    <div className={colClass.replace("form-group", "")}>
                         <SpecificStationsSelector />
                     </div>
-                    <div className={Bootstrap.col}>
-                        <p>
-                            <a className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} style={{ "paddingLeft": "0" }} href="http://bit.ly/radiorequestform"><i className="fas fa-paper-plane"></i>&nbsp;Something missing or wrong?</a>
-                        </p>
+                    <div className={colClass.replace("form-group", "")}>
+                        <a className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} style={{ "paddingLeft": "0" }} href="http://bit.ly/radiorequestform"><i className="fas fa-paper-plane"></i>&nbsp;Something missing or wrong?</a>
+                    </div>
+                    <div className={colClass.replace("form-group", "")}>
+                        <a className={`${Bootstrap.btn} ${Bootstrap.btnLink} ${Bootstrap.pl0}`} onClick={this.showGuide} href="#"><i className="fas fa-question"></i>&nbsp;How-To Guide</a>
                     </div>
                 </div>
             </>

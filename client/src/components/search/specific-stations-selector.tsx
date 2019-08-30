@@ -89,9 +89,7 @@ class SpecificStationsSelector extends Component<StateProps, State> {
     render() {
         return (
             <>
-                <p>
-                    <button className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} style={{ "paddingLeft": "0" }} onClick={this.openModal}><i className="fas fa-link"></i>&nbsp;Show specific stations</button>
-                </p>
+                <button className={`${Bootstrap.btn} ${Bootstrap.btnLink}`} style={{ "paddingLeft": "0" }} onClick={this.openModal}><i className="fas fa-link"></i>&nbsp;Show specific stations</button>
                 <div ref={el => this.el = el as HTMLElement}>
                     {this.state.show && 
                     <Modal handleClose={this.handleClose} events={{"shown.bs.modal": this.handleOpen}}>

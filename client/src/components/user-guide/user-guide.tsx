@@ -45,8 +45,10 @@ export default class UserGuide extends Component<{}> {
                         </a>
                     </ModalHeader>
                     <ModalBody>
-                        <img className={Bootstrap.imgFluid} src={`${publicUrl}/how-to-search.jpg`} alt="How To Search Guide" />
-                        <a href={`${publicUrl}/how-to-search.jpg`} className={`${Bootstrap.btn} ${Bootstrap.btnLink} ${Bootstrap.pl0}`} target="_blank">Click to view full image</a>
+                        <a href={`${publicUrl}/how-to.jpg`} className={`${Bootstrap.btn} ${Bootstrap.btnLink} ${Bootstrap.pl0}`} target="_blank">
+                            <img className={Bootstrap.imgFluid} src={`${publicUrl}/how-to.jpg`} alt="How To Search Guide" />
+                            <div>Click to view full image</div>
+                        </a>
                     </ModalBody>
                     <ModalFooter>
                         <button type="button" className={`${Bootstrap.btn} ${Bootstrap.btnSecondary}`} data-dismiss="modal">Close</button>
