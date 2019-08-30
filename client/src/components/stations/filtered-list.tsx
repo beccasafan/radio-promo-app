@@ -14,7 +14,6 @@ import { withLogging } from '../LoggingComponent';
 import NormalizedTweetsByLanguage from 'src/logic/tweets/tweet-models';
 
 import isEqual from 'lodash.isequal';
-import { pageview } from 'src/gtag';
 
 interface OwnProps {
     items: NormalizedEntity<StationSummary>;
@@ -166,7 +165,6 @@ const getPageOfStations = x(
             'page_title': 'Search',
             'page_path': `search${location.search}`
         };
-        pageview(params);
         
         return items.slice(((page - 1) * pageSize), (page * pageSize));
     }

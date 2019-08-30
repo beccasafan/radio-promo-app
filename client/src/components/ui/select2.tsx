@@ -26,7 +26,6 @@ interface JQuery<TElement = HTMLElement> {
 
 function getSelectionAdapter(usePlaceholder: boolean, useAllowClear: boolean, multiple: boolean = false) {
     const name = `select2/selection/customSelectionAdapter|${usePlaceholder}|${useAllowClear}|${multiple}`;
-    console.log("getting selection adapter", name);
     if (($.fn.select2.amd.require as any)._defined[name]) {
         return $.fn.select2.amd.require(name);
     }

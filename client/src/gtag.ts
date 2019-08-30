@@ -1,38 +1,15 @@
 import { RouteData, UrlParams } from "./logic/routes/route-models";
+import { parseUrl } from "./route";
 
 declare var gtag: any;
 
 const id = "UA-102964622-1";
 
-function parseUrl(): RouteData {
-    const payload: UrlParams & {[key: string]: string} = {};
-    new URLSearchParams(location.search.replace("#/", "")).forEach((v,k) => payload[k] = v);
-
-    const booleanRegex = new RegExp("true", "i");
-    const routeInfo: RouteData = {
-        //...state,
-        ...payload,
-        country: payload.country,
-        twitter: !!payload.twitter  && booleanRegex.test(payload.twitter!),
-        instagram: !!payload.instagram && booleanRegex.test(payload.instagram!),
-        facebook: !!payload.facebook && booleanRegex.test(payload.facebook!),
-        email: !!payload.email && booleanRegex.test(payload.email!),
-        text: !!payload.text && booleanRegex.test(payload.text!),
-        phone: !!payload.phone && booleanRegex.test(payload.phone!),
-        whatsapp: !!payload.whatsapp && booleanRegex.test(payload.whatsapp!),
-        page: Number(payload.page),
-        pageSize: Number(payload.pageSize),
-        section: payload.section,
-        stations: payload.stations ? payload.stations.split(",").map(s => s.trim()) : undefined,
-        userGuide: !!payload.userGuide && booleanRegex.test(payload.userGuide)
-    };
-
-    return routeInfo;
-}
-
-export function pageview(params: any) {
+export function pageview() {
     const defaultValue = "-";
-    const routes = parseUrl();
+    const routeData = parseUrl();
+    const routes = routeData.data;
+
 
     const dimensions = {
         artist: routes.artist || defaultValue,
@@ -75,10 +52,12 @@ export function pageview(params: any) {
             "dimension17": "page"
             
         },
-        ...params,
-        ...dimensions
+        ...dimensions,
+        'page_title': routeData.title,
+        'page_path': routeData.location
     });
-    console.log("pageview", params, dimensions);
+    
+    // console.log("pageview", routeData, dimensions);
 }
 
 export function event(action: any, category: any, label: any, value: any, params: any) {

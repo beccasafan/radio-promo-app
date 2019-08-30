@@ -6,11 +6,11 @@ import Stations from './pages/stations';
 import { actions, reducer } from 'src/logic/routes/routes-redux';
 import { UrlParams } from './logic/routes/route-models';
 import { setRouteData } from './route';
+import { pageview } from './gtag';
 
 const SetRouteData = (routeParams: RouteComponentProps<UrlParams>) => {
-  const urlParams: UrlParams & {[key: string]: string} = {};
-  new URLSearchParams(routeParams.location.search.replace("#/", "")).forEach((v,k) => urlParams[k] = v);
-  store.dispatch(actions.getFromRoute({...urlParams, history: routeParams.history }));
+  pageview();
+  store.dispatch(actions.getFromRoute(routeParams.history));
 
   if (localStorage.getItem("RadioPromo.Visited") == null) {
     localStorage.setItem("RadioPromo.Visited", "1");
