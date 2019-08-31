@@ -29,7 +29,6 @@ const NoteField = (props: Props) => {
         ? "x"
         : undefined;
 
-    console.log(props.note, props.oldNote, hasNote);
     return (
         <>
             {props.iconOnly && <Field text={hasNote} iconOnly href={props.url!} onClick={props.onSelect!} newTab={false} icon="fas fa-sticky-note" />}

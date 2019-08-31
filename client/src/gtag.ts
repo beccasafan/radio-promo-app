@@ -74,5 +74,5 @@ export function event(action: any, category: any, label?: any) {
         ...dimensions
     });
     
-     // console.log("event", action, category, label, dimensions);
+    // console.log("event", action, category, label, dimensions);
 }
