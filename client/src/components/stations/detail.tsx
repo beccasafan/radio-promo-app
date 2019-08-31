@@ -146,7 +146,7 @@ class Detail extends Component<Props> {
                                 <div id={`${idFragment}_details`} className={`${Bootstrap.collapse} ${section === "detail" ? Bootstrap.show : ""}`} aria-labelledby={`${idFragment}_details_heading`} data-parent={`#${idFragment}`}>
                                     <div className={Bootstrap.cardBody}>
                                         <Display mode="detail" station={this.props.station} selectedArtist={this.props.selectedArtist} />
-                                        <Social iconOnly={false} station={this.props.station} logWebsite={this.logWebsite} logTwitter={this.logTweet} logInstagram={this.logInstagram} logFacebook={this.logFacebook} logEmail={this.logEmail} logText={this.logText} logPhone={this.logPhone} logWhatsapp={this.logWhatsapp} setTweetUrl={this.setTweetUrl} emailHref={emailHref} />
+                                        <Social iconOnly={false} station={this.props.station} logWebsite={this.logWebsite} logTwitter={this.logTweet} logInstagram={this.logInstagram} logFacebook={this.logFacebook} logEmail={this.logEmail} logText={this.logText} logPhone={this.logPhone} logWhatsapp={this.logWhatsapp} setTweetUrl={this.setTweetUrl} emailHref={emailHref} selectedArtist={this.props.selectedArtist} />
                                     </div>
                                 </div>
                             </div>

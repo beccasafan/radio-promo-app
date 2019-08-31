@@ -26,7 +26,7 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
         <div className={bs.cardFooter}>
             <div className={`${bs.row} ${bs.noGutters}`}>
-                <Social iconOnly={true} station={props.station} logWebsite={props.logWebsite} logTwitter={props.logTweet} logInstagram={props.logInstagram} logFacebook={props.logFacebook} logEmail={props.logEmail} logText={props.logText} logPhone={props.logPhone} logWhatsapp={props.logWhatsapp} setTweetUrl={props.setTweetUrl} emailHref={props.emailHref} />
+                <Social iconOnly={true} station={props.station} logWebsite={props.logWebsite} logTwitter={props.logTweet} logInstagram={props.logInstagram} logFacebook={props.logFacebook} logEmail={props.logEmail} logText={props.logText} logPhone={props.logPhone} logWhatsapp={props.logWhatsapp} setTweetUrl={props.setTweetUrl} emailHref={props.emailHref} selectedArtist={props.selectedArtist} />
             </div>
         </div>
         <div className={cs.actions}>

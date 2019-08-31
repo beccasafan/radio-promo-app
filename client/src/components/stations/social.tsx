@@ -8,6 +8,7 @@ import TextField from '../ui/fields/text-field';
 import PhoneField from '../ui/fields/phone-field';
 import WhatsappField from '../ui/fields/whatsapp-field';
 import { StationSummary } from 'radio-app-2-shared';
+import NoteField from '../ui/fields/note-field';
 
 interface Props {
     iconOnly: boolean;
@@ -22,6 +23,7 @@ interface Props {
     logWhatsapp: () => void;
     setTweetUrl: () => void;
     emailHref: string;
+    selectedArtist: string | undefined;
 }
 const Social = (props: Props) => (
     <>
@@ -33,6 +35,7 @@ const Social = (props: Props) => (
         <TextField iconOnly={props.iconOnly} text={props.station.text} log={props.logText} />
         <PhoneField iconOnly={props.iconOnly} phone={props.station.phone} log={props.logPhone} />
         <WhatsappField iconOnly={props.iconOnly} whatsapp={props.station.whatsapp} log={props.logWhatsapp} />
+        <NoteField iconOnly={props.iconOnly} note={props.station.note} oldNote={props.station.oldNote} selectedArtist={props.selectedArtist} />
     </>
 );
 
