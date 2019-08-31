@@ -53,6 +53,8 @@ export function getTweet(element: HTMLElement, station: Station, talent?: Talent
         }
     }
 
+    const baseTweet = tweet;
+
     const target = talent != null ? talent.twitter : station.twitter;
     if (tweet.indexOf("{{target}}") < 0) {
         tweet = `.@${target} ${tweet}`;
@@ -77,9 +79,8 @@ export function getTweet(element: HTMLElement, station: Station, talent?: Talent
         tweet += ` ${station.hashtag.indexOf("#") >= 0 ? "" : "#"}${station.hashtag}`;
     }
 
-    const tweetText = tweet;
     tweet = encodeURIComponent(tweet);
     const url = `https://twitter.com/intent/tweet?text=${tweet}`;
-    $(".twitter", element).attr("href", url).data("tweet", tweetText);
+    $(".twitter", element).attr("href", url).data("tweet", baseTweet);
 }
 
