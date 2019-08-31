@@ -5,6 +5,8 @@ declare var gtag: any;
 
 const id = "UA-102964622-1";
 
+const isLocal = () => location.port;
+
 function getDimensions(routes: RouteData) {
     const defaultValue = "-";
     
@@ -33,46 +35,51 @@ export function pageview() {
     const routeData = parseUrl();
     const routes = routeData.data;
     const dimensions = getDimensions(routes);
-
-    gtag('config', id, {
-        "custom_map": {
-            "dimension1": "artist",
-            "dimension2": "song",
-            "dimension3": "country",
-            "dimension4": "location",
-            "dimension5": "parentNetwork",
-            "dimension6": "format",
-            "dimension7": "name",
-            "dimension8": "talent",
-            "dimension9": "twitter",
-            "dimension10": "instagram",
-            "dimension11": "facebook",
-            "dimension12": "email",
-            "dimension13": "text",
-            "dimension14": "phone",
-            "dimension15": "whatsapp",
-            "dimension16": "stations",
-            "dimension17": "page"
-            
-        },
-        ...dimensions,
-        'page_title': routeData.title,
-        'page_path': routeData.location
-    });
-    
-    // console.log("pageview", routeData, dimensions);
+    if (isLocal()) {
+        console.log("pageview", routeData, dimensions);
+    }
+    else {
+        gtag('config', id, {
+            "custom_map": {
+                "dimension1": "artist",
+                "dimension2": "song",
+                "dimension3": "country",
+                "dimension4": "location",
+                "dimension5": "parentNetwork",
+                "dimension6": "format",
+                "dimension7": "name",
+                "dimension8": "talent",
+                "dimension9": "twitter",
+                "dimension10": "instagram",
+                "dimension11": "facebook",
+                "dimension12": "email",
+                "dimension13": "text",
+                "dimension14": "phone",
+                "dimension15": "whatsapp",
+                "dimension16": "stations",
+                "dimension17": "page"
+                
+            },
+            ...dimensions,
+            'page_title': routeData.title,
+            'page_path': routeData.location
+        });
+    }
 }
 
 export function event(action: any, category: any, label?: any) {
     const routeData = parseUrl();
     const routes = routeData.data;
     const dimensions = getDimensions(routes);
-    
-    gtag('event', action, {
-        'event_category': category,
-        'event_label': label,
-        ...dimensions
-    });
-    
-    // console.log("event", action, category, label, dimensions);
+
+    if (isLocal()) {
+        console.log("event", action, category, label, dimensions);
+    }
+    else {
+        gtag('event', action, {
+            'event_category': category,
+            'event_label': label,
+            ...dimensions
+        });
+    }
 }
