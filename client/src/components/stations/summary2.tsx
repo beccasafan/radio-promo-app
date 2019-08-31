@@ -1,11 +1,11 @@
 import React from 'react';
-import { Station } from 'radio-app-2-shared';
-import { getUrl } from 'src/route';
 import * as cs from './station.module.scss';
 import * as bs from 'src/bootstrap.scss';
 import Time from '../ui/time';
 import { StationSummaryProps } from './summary';
-import NoteContent from '../ui/note-content';
+import Display from './display';
+import Social from './social';
+
 
 const Summary2 = (props: StationSummaryProps) => (
     <div className={`${bs.card} ${bs.h100}`}>
@@ -20,35 +20,13 @@ const Summary2 = (props: StationSummaryProps) => (
         </div>
         <div className={bs.cardBody}>
             <div className={bs.cardGrow}>
-                {!props.station.note && props.station.oldNote && <NoteContent text={props.station.oldNote} />}
-                {props.station.note && <>
-                    {props.station.note.twitterClout && <NoteContent text={`${props.station.note.twitterClout} followers on Twitter`} />}
-                    {props.station.note.instagramClout && <NoteContent text={`${props.station.note.instagramClout} followers on Instagram`} />}
-                    {props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${props.station.note.preferredContact}`} />}
-                    {props.station.note.stationCred && <NoteContent text={props.station.note.stationCred} />}
-                    {props.station.note.programmingTips && <NoteContent text={props.station.note.programmingTips} />}
-                    {props.station.note.app && <NoteContent text="Station has an app" />}
-                    {props.station.note.general && <NoteContent text={props.station.note.general} />}
-                    {props.selectedArtist === "harry" && props.station.note.harry && <NoteContent text={props.station.note.harry} />}
-                    {props.selectedArtist === "liam" && props.station.note.liam && <NoteContent text={props.station.note.liam} />}
-                    {props.selectedArtist === "louis" && props.station.note.louis && <NoteContent text={props.station.note.louis} />}
-                    {props.selectedArtist === "niall" && props.station.note.niall && <NoteContent text={props.station.note.niall} />}
-                    {props.selectedArtist === "zayn" && props.station.note.zayn && <NoteContent text={props.station.note.zayn} />}
-                </>}
+                <Display mode="summary" station={props.station} selectedArtist={props.selectedArtist} />
             </div>
 
         </div>
         <div className={bs.cardFooter}>
             <div className={`${bs.row} ${bs.noGutters}`}>
-                <div className={bs.col}>{props.station.website && <a href={props.station.website} onClick={props.logWebsite} target="_blank"><i className="fas fa-link"></i></a>}</div>
-                <div className={bs.col}>{props.station.twitter && <a href="#" className="twitter" onMouseDown={props.setTweetUrl} onMouseEnter={props.setTweetUrl} onClick={props.logTweet} target="_blank"><i className="fab fa-twitter"></i></a>}</div>
-                <div className={bs.col}>{props.station.instagram && <a href={`https://instagram.com/${props.station.instagram}`} onClick={props.logInstagram} target="_blank"><i className="fab fa-instagram"></i></a>}</div>
-                <div className={bs.col}>{props.station.facebook && <a href={`https://facebook.com/${props.station.facebook}`} onClick={props.logFacebook} target="_blank"><i className="fab fa-facebook"></i></a>}</div>
-                <div className={bs.col}>{props.station.email && <a href={props.emailHref} onClick={props.logEmail} target="_blank"><i className="fas fa-envelope"></i></a>}</div>
-                <div className={bs.col}>{props.station.text && <a href={`sms:${props.station.text}`} onClick={props.logText}><i className="fas fa-comment"></i></a>}</div>
-                <div className={bs.col}>{props.station.phone && <a href={`tel:${props.station.phone}`} onClick={props.logPhone}><i className="fas fa-phone"></i></a>}</div>
-                <div className={bs.col}>{props.station.whatsapp && <a href={`whatsapp://${props.station.whatsapp}`} onClick={props.logWhatsapp}><i className="fab fa-whatsapp"></i></a>}</div>
-                <div className={bs.col}>{props.station.note && <a href={props.url} onClick={props.onSelect}><i className="fas fa-sticky-note"></i></a>}</div>
+                <Social iconOnly={true} station={props.station} logWebsite={props.logWebsite} logTwitter={props.logTweet} logInstagram={props.logInstagram} logFacebook={props.logFacebook} logEmail={props.logEmail} logText={props.logText} logPhone={props.logPhone} logWhatsapp={props.logWhatsapp} setTweetUrl={props.setTweetUrl} emailHref={props.emailHref} />
             </div>
         </div>
         <div className={cs.actions}>

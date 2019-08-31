@@ -14,8 +14,9 @@ import { connect } from "react-redux";
 import * as Bootstrap from 'src/bootstrap.scss';
 import styles from './station.module.scss';
 import Time from '../ui/time';
-import NoteContent from '../ui/note-content';
 import { event } from 'src/gtag';
+import Display from './display';
+import Social from './social';
 
 interface OwnProps {
     id: string;
@@ -115,7 +116,9 @@ class Detail extends Component<Props> {
             }
         }
 
+        const emailHref = this.props.station.email && this.props.station.email.indexOf("@") >= 0 ? `mailto:${this.props.station.email}` : this.props.station.email;
         return (
+            
             <div ref={el => this.el = el as HTMLElement}>
                 <Modal contentKey={this.props.station.id} handleClose={this.handleClose} events={{ "show.bs.modal": this.onModalOpen, "hide.bs.modal": this.onModalClose }}>
                     <ModalHeader>
@@ -142,30 +145,8 @@ class Detail extends Component<Props> {
 
                                 <div id={`${idFragment}_details`} className={`${Bootstrap.collapse} ${section === "detail" ? Bootstrap.show : ""}`} aria-labelledby={`${idFragment}_details_heading`} data-parent={`#${idFragment}`}>
                                     <div className={Bootstrap.cardBody}>
-                                        {this.props.station.parentGroup && <NoteContent text={this.props.station.parentGroup} />}
-                                        {!this.props.station.note && this.props.station.oldNote && <NoteContent text={this.props.station.oldNote} />}
-                                        {this.props.station.note && <>
-                                            {this.props.station.note.twitterClout && <NoteContent text={`${this.props.station.note.twitterClout} followers on Twitter`} />}
-                                            {this.props.station.note.instagramClout && <NoteContent text={`${this.props.station.note.instagramClout} followers on Instagram`} />}
-                                            {this.props.station.note.preferredContact && <NoteContent text={`Preferred Contact is ${this.props.station.note.preferredContact}`} />}
-                                            {this.props.station.note.stationCred && <NoteContent text={`${this.props.station.note.stationCred}`} />}
-                                            {this.props.station.note.programmingTips && <NoteContent text={`${this.props.station.note.programmingTips}`} /> }
-                                            {this.props.station.note.app && <NoteContent text="Station has an app." />}
-                                            {this.props.station.note.general && <NoteContent text={this.props.station.note.general} />}
-                                            {this.props.selectedArtist === "harry" && this.props.station.note.harry && <NoteContent text={this.props.station.note.harry} />}
-                                            {this.props.selectedArtist === "liam" && this.props.station.note.liam && <NoteContent text={this.props.station.note.liam} />}
-                                            {this.props.selectedArtist === "louis" && this.props.station.note.louis && <NoteContent text={this.props.station.note.louis} />}
-                                            {this.props.selectedArtist === "niall" && this.props.station.note.niall && <NoteContent text={this.props.station.note.niall} />}
-                                            {this.props.selectedArtist === "zayn" && this.props.station.note.zayn && <NoteContent text={this.props.station.note.zayn} />}
-                                        </>}
-                                        {this.props.station.website && <p className={Bootstrap.cardText}><a href={this.props.station.website} onClick={this.logWebsite} target="_blank"><i className="fas fa-link"></i> {this.props.station.website}</a></p>}
-                                        {this.props.station.twitter && <p className={Bootstrap.cardText}><a href="#" className="twitter" onMouseDown={this.setTweetUrl} onMouseEnter={this.setTweetUrl} onClick={this.logTweet} target="_blank"><i className="fab fa-twitter"></i> {this.props.station.twitter}</a></p>}
-                                        {this.props.station.instagram && <p className={Bootstrap.cardText}><a href={`https://instagram.com/${this.props.station.instagram}`} onClick={this.logInstagram} target="_blank"><i className="fab fa-instagram"></i> {this.props.station.instagram}</a></p>}
-                                        {this.props.station.facebook && <p className={Bootstrap.cardText}><a href={`https://facebook.com/${this.props.station.facebook}`} onClick={this.logFacebook} target="_blank"><i className="fab fa-facebook"></i> {this.props.station.facebook}</a></p>}
-                                        {this.props.station.email && <p className={Bootstrap.cardText}><a href={`mailto:${this.props.station.email}`} onClick={this.logEmail} target="_blank"><i className="fas fa-envelope"></i> {this.props.station.email}</a></p>}
-                                        {this.props.station.text && <p className={Bootstrap.cardText}><a href={`sms:${this.props.station.text}`} onClick={this.logText}><i className="fas fa-comment"></i> {this.props.station.text}</a></p>}
-                                        {this.props.station.phone && (<p className={Bootstrap.cardText}><a href={`tel:${this.props.station.phone}`} onClick={this.logPhone}><i className="fas fa-phone"></i> {this.props.station.phone}</a></p>)}
-                                        {this.props.station.whatsapp && <p className={Bootstrap.cardText}><a href={`whatsapp://${this.props.station.whatsapp}`} onClick={this.logWhatsapp}><i className="fab fa-whatsapp"></i> {this.props.station.whatsapp}</a>}</p>}
+                                        <Display mode="detail" station={this.props.station} selectedArtist={this.props.selectedArtist} />
+                                        <Social iconOnly={false} station={this.props.station} logWebsite={this.logWebsite} logTwitter={this.logTweet} logInstagram={this.logInstagram} logFacebook={this.logFacebook} logEmail={this.logEmail} logText={this.logText} logPhone={this.logPhone} logWhatsapp={this.logWhatsapp} setTweetUrl={this.setTweetUrl} emailHref={emailHref} />
                                     </div>
                                 </div>
                             </div>

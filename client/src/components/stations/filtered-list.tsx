@@ -145,7 +145,7 @@ const getStations = x(
                 }
             });
         }
-
+        /*
         if (selectedStation != null) {
             const s = stations.findIndex(st => st.id == selectedStation);
             if (s >= 0) {
@@ -153,7 +153,7 @@ const getStations = x(
                 stations.unshift(moveToFront);
             }
         }
-        
+        */
         return stations;
     }
 )
