@@ -68,8 +68,9 @@ class Detail extends Component<Props> {
     }
     onModalClose() {
         var stationElement = $(`#station_${this.props.station.id}`);
-
-        window.scrollTo(0, stationElement.position().top);
+        if (stationElement.length > 0) {
+            window.scrollTo(0, stationElement.position().top);
+        }
     }
     onModalOpen() {
         window.scrollTo(0, 0);
