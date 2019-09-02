@@ -7,7 +7,7 @@ interface Props {
 
 const NoteContent = (props: Props) => (
     <>
-    {props.text.split(';').map((t, i) => {t && <p key={i} className={Bootstrap.cardText}><i className="fas fa-angle-right"></i>{t.trim()}</p>})}
+    {props.text.split(';').map((t, i) => t && <p key={i} className={Bootstrap.cardText}><i className="fas fa-angle-right"></i>{t.trim()}</p>)}
     </>
 );
 
