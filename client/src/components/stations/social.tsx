@@ -35,7 +35,7 @@ const Social = (props: Props) => (
         <TextField iconOnly={props.iconOnly} text={props.station.text} log={props.logText} />
         <PhoneField iconOnly={props.iconOnly} phone={props.station.phone} log={props.logPhone} />
         <WhatsappField iconOnly={props.iconOnly} whatsapp={props.station.whatsapp} log={props.logWhatsapp} />
-        <NoteField iconOnly={props.iconOnly} note={props.station.note} oldNote={props.station.oldNote} selectedArtist={props.selectedArtist} />
+        {props.iconOnly && <NoteField iconOnly={props.iconOnly} note={props.station.note} oldNote={props.station.oldNote} selectedArtist={props.selectedArtist} />}
     </>
 );
 
