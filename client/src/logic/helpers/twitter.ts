@@ -65,8 +65,8 @@ export function getTweet(element: HTMLElement, station: Station, talent?: Talent
     }
     else {
         tweet = tweet
-            .replace("{{username}}", `@${song.twitter}`)
-            .replace("{{artist}}", `@${song.twitter}`)
+            .replace("{{username}}", `${song.twitter}`)
+            .replace("{{artist}}", `${song.twitter}`)
             .replace("{{hashtag}}", `${song.hashtag}`)
             .replace("{{target}}", `@${target}`)
             ;
