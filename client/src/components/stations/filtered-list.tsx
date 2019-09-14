@@ -95,7 +95,7 @@ const matchesArrayText = (stationValues: string[], selectedText: string | undefi
     return !selectedText || (stationValues != null && stationValues.some(i => i.toLowerCase().indexOf(selectedText!.toLowerCase()) >= 0));
 };
 const matchesBool = (stationValue: string, selectedValue: boolean | undefined) => {
-    return !selectedValue || stationValue;
+    return !selectedValue || (stationValue && stationValue != "-");
 };
 
 const x = createSelectorCreator(defaultMemoize, isEqual);
