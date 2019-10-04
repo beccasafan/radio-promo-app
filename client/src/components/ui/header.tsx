@@ -55,8 +55,8 @@ class Header extends Component<Props> {
 const getArtists = (state: AppState) => state.songs.artists;
 const getSelectedArtist = (state: AppState) => state.routes.artist;
 const selectedArtist = createSelector([getArtists, getSelectedArtist], (artists, a) => a != null ? artists.byId[a] : undefined);
-const theme = createSelector(selectedArtist, a => {
-    if (a != null) return a.id;
+const theme = createSelector(getSelectedArtist, a => {
+    if (a != null) return a;
     const number = Math.floor(Math.random() * 8) + 1;
     return "ot5-" + number;
 });
