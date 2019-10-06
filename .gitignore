@@ -3,3 +3,4 @@ dist/
 client/build/
 server/lib
 shared/lib
+data/
