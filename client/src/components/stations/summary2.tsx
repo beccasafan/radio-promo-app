@@ -16,6 +16,7 @@ const Summary2 = (props: StationSummaryProps) => (
         <div className={`${cs.localTime} ${bs.cardFooter}`}>
             <div><i className="far fa-clock"></i>&nbsp;<span>{props.station.utc && <Time utcOffset={props.station.utc} />}</span></div>
             <div><i className="fas fa-map-marker-alt"></i>&nbsp;{props.station.location}</div>
+            <div><i className="fas fa-broadcast-tower"></i>&nbsp;{props.station.code}</div>
             {props.station.format && <div className={bs.fontItalic}><i className="fas fa-music"></i> {props.station.format.name}</div>}
         </div>
         <div className={bs.cardBody}>

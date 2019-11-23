@@ -135,6 +135,7 @@ class Detail extends Component<Props> {
                                 <div className={styles.localTime}>
                                     <div><i className="far fa-clock"></i>&nbsp;<span>{this.props.station.utc && <Time utcOffset={this.props.station.utc} />}</span></div>
                                     <div><i className="fas fa-map-marker-alt"></i>&nbsp;{this.props.station.location}</div>
+                                    <div><i className="fas fa-broadcast-tower"></i>&nbsp;{this.props.station.code}</div>
                                     {this.props.station.format && <div className={Bootstrap.fontItalic}><i className="fas fa-music"></i> {this.props.station.format.name}</div>}
                                  </div>
                                 <div className={Bootstrap.cardHeader} id={`${idFragment}_details_heading`}>
